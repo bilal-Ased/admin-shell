@@ -11,31 +11,52 @@
                     <form method="POST" action="#">
                         @csrf
                         <div class="form-group">
-                            <label class="form-label" for="email">Title:</label>
+                            <label class="form-label" for="customer">Customer:</label>
                             <input type="title" class="form-control" id="title" name="title">
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="pwd">Content:</label>
+                            <label class="form-label" for="issueSource">Issue Source:</label>
                             <input type="content" class="form-control" id="content" name="content">
                         </div>
 
-                    <div class="form-group">
-                    <label for="mention_users">Mention Users:</label>
-                  <input type="text" name="mention_users" id="mention_users" class="form-control" placeholder="Type @ to mention users">
-                  <div id="mentionUsersList"></div>
+                        <div class="form-group">
+                            <label class="form-label" for="issueCategory">Issue Category:</label>
+                            <input type="content" class="form-control" id="content" name="content">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="disposition">Disposition:</label>
+                            <input type="content" class="form-control" id="content" name="content">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="department">Department:</label>
+                            <input type="content" class="form-control" id="content" name="content">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="assignedto">Assigned to:</label>
+                            <input type="content" class="form-control" id="content" name="content">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="ticketStatus">Ticket Status:</label>
+                            <input type="content" class="form-control" id="content" name="content">
+                        </div>
 
 
-                  <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                        <label class="form-check-label" for="flexCheckDefault1">
-                            All Users
-                        </label>
-                    </div>
+                        <div class="form-group">
+                            <label class="form-label" for="comments">Comments:</label>
+                            <input type="content" class="form-control" id="content" name="content">
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary">Create Ticket</button>
+                        <button type="submit" class="btn btn-danger">cancel</button>
+
                 </div>
             </div>
-                        <button type="submit" class="btn btn-primary">Create Announcment</button>
-                        <button type="submit" class="btn btn-danger">cancel</button>
+
                     </form>
                 </div>
             </div>

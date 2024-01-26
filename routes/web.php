@@ -3,7 +3,6 @@
 // Controllers
 
 use App\Http\Controllers\Announcements;
-use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\HomeController;
@@ -81,7 +80,11 @@ Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('cus
 Route::post('/customers/change-status/{id}', [CustomerController::class, 'changeStatus'])->name('customers.change-status');
 
 
+Route::get('/test', function () {
+    return 'Hello, this is a test route!';
+});
 
+Route::get('/tickets/index',[HelpDeskController::class,'index'])->name('tickets.index');
 
 Route::get('/products/index', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
@@ -98,9 +101,9 @@ Route::get('/announcements/{announcement}', [Announcements::class, 'show'])->nam
 Route::get('/chat', [WebChatController::class, 'index']);
 Route::post('/broadcast', [WebChatController::class, 'brodcast']);
 Route::post('/receive', [WebChatController::class, 'receive']);
-
-
 Route::get('/send-message', [WhatsAppController::class, 'sendMessage']);
+
+
 
 
 

@@ -70,22 +70,6 @@
                         <label class="form-label">User Role: <span class="text-danger">*</span></label>
                         {{Form::select('user_role', $roles , old('user_role') ? old('user_role') : $data->user_type ?? 'user', ['class' => 'form-control', 'placeholder' => 'Select User Role'])}}
                      </div>
-                     <div class="form-group">
-                        <label class="form-label" for="furl">Facebook Url:</label>
-                        {{ Form::text('userProfile[facebook_url]', old('userProfile[facebook_url]'), ['class' => 'form-control', 'id' => 'furl', 'placeholder' => 'Facebook Url']) }}
-                     </div>
-                     <div class="form-group">
-                        <label class="form-label" for="turl">Twitter Url:</label>
-                        {{ Form::text('userProfile[twitter_url]', old('userProfile[twitter_url]'), ['class' => 'form-control', 'id' => 'turl', 'placeholder' => 'Twitter Url']) }}
-                     </div>
-                     <div class="form-group">
-                        <label class="form-label" for="instaurl">Instagram Url:</label>
-                        {{ Form::text('userProfile[instagram_url]', old('userProfile[instagram_url]'), ['class' => 'form-control', 'id' => 'instaurl', 'placeholder' => 'Instagram Url']) }}
-                     </div>
-                     <div class="form-group mb-0">
-                        <label class="form-label" for="lurl">Linkedin Url:</label>
-                        {{ Form::text('userProfile[linkdin_url]', old('userProfile[linkdin_url]'), ['class' => 'form-control', 'id' => 'lurl', 'placeholder' => 'Linkedin Url']) }}
-                     </div>
                </div>
             </div>
          </div>
