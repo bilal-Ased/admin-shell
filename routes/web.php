@@ -3,6 +3,7 @@
 // Controllers
 
 use App\Http\Controllers\Announcements;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\HomeController;
@@ -85,6 +86,18 @@ Route::get('/test', function () {
 });
 
 Route::get('/tickets/index',[HelpDeskController::class,'index'])->name('tickets.index');
+
+
+Route::get('/appointments/index',[AppointmentController::class,'index'])->name('appointments.index');
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::get('/appointments/list', [AppointmentController::class, 'list'])->name('appointments.list');
+
+
+Route::get('/search/customers', [AppointmentController::class, 'searchCustomers']);
+
+Route::get('/search/doctors', [AppointmentController::class, 'searchDoctors']);
+
+
 
 Route::get('/products/index', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');

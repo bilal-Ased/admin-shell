@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Helpers\AuthHelper;
 use Illuminate\Http\Request;
 use App\DataTables\CustomerDataTable;
-use App\Helpers\AuthHelper;
+use Spatie\Newsletter\Facades\Newsletter;
 
 class CustomerController extends Controller
 {
@@ -26,7 +27,6 @@ class CustomerController extends Controller
             'alternate_number'=>'nullable',
             'email' => 'nullable|email',
         ]);
-
         Customer::create($request->all());
 
         return redirect()->route('customers.index')->with('success', 'Customer added successfully!');

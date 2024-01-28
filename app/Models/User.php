@@ -71,4 +71,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return $this->hasMany(chatMessages::class);
     }
+
+
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class, 'user_id');
+    }
 }
