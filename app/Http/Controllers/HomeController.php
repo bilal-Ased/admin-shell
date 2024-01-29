@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,8 +20,10 @@ class HomeController extends Controller
         $newCustomerCount =  DB::table('customers')
         ->whereDate('created_at', '>=', now()->subDays(30))
         ->count();
+        $appointmentsCount = Appointment::count();
+
         $assets = ['chart', 'animation'];
-        return view('dashboards.dashboard', compact('assets','userCount','customerCount','newCustomerCount'));
+        return view('dashboards.dashboard', compact('assets','userCount','customerCount','newCustomerCount','appointmentsCount'));
     }
 
     /*

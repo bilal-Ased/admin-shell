@@ -6,6 +6,7 @@ use App\Models\Announcements as ModelsAnnouncements;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Announcements extends Controller
 {
@@ -20,47 +21,30 @@ class Announcements extends Controller
   public function store(Request $request)
 {
 
-    // Validate request data
     $request->validate([
         'title' => 'required',
         'content' => 'required',
-        'mention_users' => 'required|exists:users,id', // Add validation for the tagged user ID
+        'mention_users' => 'required',
     ]);
 
-
-
-    // Get the currently authenticated user ID
-    $taggingUserId = auth()->id();
-
-    // Get the tagged user ID from the request
-    $taggedUserId = $request->input('mention_users');
-
-    // Use a database transaction to ensure data integrity
-    DB::beginTransaction();
-
     try {
-        // Create the announcement
         $announcement = ModelsAnnouncements::create([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
+            'title' => $request->title,
+            'content' => $request->content,
         ]);
 
-        // Attach the currently authenticated user to the announcement as the tagger
-        $announcement->users()->attach($taggingUserId, ['tagged_by' => $taggingUserId]);
+        $userId = auth()->id();
 
-        // Attach the tagged user to the announcement
-        $announcement->users()->attach($taggedUserId, ['tagged_by' => $taggingUserId]);
+        $announcement->users()->attach($userId, ['tagged_by' => $userId]);
+        $announcement->users()->attach($request->mention_users, ['tagged_by' => $userId]);
 
-        // Commit the transaction
-        DB::commit();
-
-        return response()->json(['message' => 'Announcement created successfully'], 201);
+        return redirect()->back()->with('success', 'Announcement created successfully');
     } catch (\Exception $e) {
-        // Rollback the transaction in case of an error
-        DB::rollBack();
+        Log::error('Failed to create announcement: ' . $e->getMessage());
 
-        return response()->json(['error' => 'Failed to create announcement'], 500);
+        return redirect()->back()->with('error', 'Failed to create announcement');
     }
+
 }
 
 

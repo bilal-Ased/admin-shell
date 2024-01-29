@@ -43,8 +43,8 @@
                               </svg>
                            </div>
                            <div class="progress-detail">
-                              <p  class="mb-2">Total Cost</p>
-                              <h4 class="counter">$375K</h4>
+                              <p  class="mb-2">Total Appointments</p>
+                              <h4 class="counter">{{ $appointmentsCount }}</h4>
                            </div>
                         </div>
                      </div>

@@ -105,7 +105,6 @@ Route::post('/products', [ProductController::class, 'save'])->name('products.sav
 
 
 Route::get('/announcements/index', [Announcements::class, 'index'])->name('announcements.index');
-Route::get('/announcements/create', [Announcements::class, 'create'])->name('announcements.create');
 Route::post('/announcements', [Announcements::class, 'store'])->name('announcements.store');
 Route::get('/announcements/{announcement}', [Announcements::class, 'show'])->name('announcements.show');
 

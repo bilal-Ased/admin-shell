@@ -78,7 +78,6 @@ class AppointmentsDataTable extends DataTable
 
 
 
-
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
