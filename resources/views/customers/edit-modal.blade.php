@@ -1,8 +1,4 @@
 
-
-<div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editCustomerModalLabel">Edit Customer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -21,7 +17,3 @@
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
-        </div>
-    </div>
-</div>
-
