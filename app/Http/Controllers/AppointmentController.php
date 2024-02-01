@@ -70,4 +70,24 @@ class AppointmentController extends Controller
         return $dataTable->render('appointments.appointments-list');
     }
 
+
+    public function getAppointments(Request $request)
+    {
+        $appointments = Appointment::with(['customer', 'user'])->get();
+
+        $formattedAppointments = $appointments->map(function ($appointment) {
+            return [
+                'title'   => $appointment->customer->first_name . ' - ' . $appointment->reason,
+                'start'   => $appointment->appointment_datetime,
+                'end'     => $appointment->appointment_datetime, // Optional: If appointments have an end time
+                'doctor'  => $appointment->user->name,
+                'tooltip' => 'Doctor: ' . $appointment->user->name, // Optional: Additional information in a tooltip
+            ];
+        });
+
+        return response()->json($formattedAppointments);
+    }
+
+
+
 }

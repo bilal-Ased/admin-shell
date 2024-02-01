@@ -4,6 +4,7 @@
 
 use App\Http\Controllers\Announcements;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\HomeController;
@@ -91,8 +92,10 @@ Route::get('/tickets/index',[HelpDeskController::class,'index'])->name('tickets.
 Route::get('/appointments/index',[AppointmentController::class,'index'])->name('appointments.index');
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 Route::get('/appointments/list', [AppointmentController::class, 'list'])->name('appointments.list');
+Route::get('/appointments/get', [AppointmentController::class, 'getAppointments']);
 
 
+Route::get('/calendar',[CalendarController::class,'showCalendar']);
 Route::get('/search/customers', [AppointmentController::class, 'searchCustomers']);
 
 Route::get('/search/doctors', [AppointmentController::class, 'searchDoctors']);

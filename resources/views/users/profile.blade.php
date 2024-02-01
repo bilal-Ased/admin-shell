@@ -25,9 +25,7 @@
                      <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#profile-activity" role="tab" aria-selected="false">Activity</a>
                      </li>
-                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#profile-friends" role="tab" aria-selected="false">Friends</a>
-                     </li>
+
                      <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#profile-profile" role="tab" aria-selected="false">Profile</a>
                      </li>
@@ -65,7 +63,7 @@
          </div>
          </div>
          <div class="card">
-  
+
 
       </div>
       </div>
@@ -211,146 +209,7 @@
                </div>
             </div>
          </div>
-         <div id="profile-friends" class="tab-pane fade">
-            <div class="card">
-               <div class="card-header">
-                  <div class="header-title">
-                     <h4 class="card-title">Friends</h4>
-                  </div>
-               </div>
-               <div class="card-body">
-                  <ul class="list-inline m-0 p-0">
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/01.png')}}" alt="story-img" class="rounded-pill avatar-40">
-                        <div class="ms-3 flex-grow-1">
-                           <h6>Paul Molive</h6>
-                           <p class="mb-0">Web Designer</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton9" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton9">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/05.png')}}" alt="story-img" class="rounded-pill avatar-40">
-                        <div class="ms-3 flex-grow-1">
-                           <h6>Paul Molive</h6>
-                           <p class="mb-0">trainee</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton10" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton10">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/02.png')}}" alt="story-img" class="rounded-pill avatar-40">
-                        <div class="ms-3 flex-grow-1">
-                           <h6>Anna Mull</h6>
-                           <p class="mb-0">Web Developer</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton11" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton11">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/03.png')}}" alt="story-img" class="rounded-pill avatar-40">
-                        <div class="ms-3 flex-grow-1">
-                           <h6>Paige Turner</h6>
-                           <p class="mb-0">trainee</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton12" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton12">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/04.png')}}" alt="story-img" class="rounded-pill avatar-40">
-                        <div class="ms-3 flex-grow-1">
-                           <h6>Barb Ackue</h6>
-                           <p class="mb-0">Web Designer</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton13" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton13">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/05.png')}}" alt="story-img" class="rounded-pill avatar-40">
-                        <div class="ms-3 flex-grow-1">
-                           <h6>Greta Life</h6>
-                           <p class="mb-0">Tester</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton14" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton14">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/03.png')}}" alt="story-img" class="rounded-pill avatar-40">                              <div class="ms-3 flex-grow-1">
-                           <h6>Ira Membrit</h6>
-                           <p class="mb-0">Android Developer</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton15" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton15">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                     <li class="d-flex mb-4 align-items-center">
-                        <img src="{{asset('images/avatars/02.png')}}" alt="story-img" class="rounded-pill avatar-40">
-                        <div class="ms-3 flex-grow-1">
-                           <h6>Pete Sariya</h6>
-                           <p class="mb-0">Web Designer</p>
-                        </div>
-                        <div class="dropdown">
-                           <span class="dropdown-toggle" id="dropdownMenuButton16" data-bs-toggle="dropdown" aria-expanded="false" role="button">
-                           </span>
-                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton16">
-                              <a class="dropdown-item " href="javascript:void(0);">Unfollow</a>
-                              <a class="dropdown-item " href="javascript:void(0);">Unfriend</a>
-                              <a class="dropdown-item " href="javascript:void(0);">block</a>
-                           </div>
-                        </div>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-         </div>
+
          <div id="profile-profile" class="tab-pane fade">
             <div class="card">
                <div class="card-header">
@@ -371,38 +230,7 @@
                   </div>
                </div>
             </div>
-            <div class="card">
-               <div class="card-header">
-                  <div class="header-title">
-                     <h4 class="card-title">About User</h4>
-                  </div>
-               </div>
-               <div class="card-body">
-                  <div class="user-bio">
-                     <p>Tart I love sugar plum I love oat cake. Sweet roll caramels I love jujubes. Topping cake wafer.</p>
-                  </div>
-                  <div class="mt-2">
-                  <h6 class="mb-1">Joined:</h6>
-                  <p>Feb 15, 2021</p>
-                  </div>
-                  <div class="mt-2">
-                  <h6 class="mb-1">Lives:</h6>
-                  <p>United States of America</p>
-                  </div>
-                  <div class="mt-2">
-                  <h6 class="mb-1">Email:</h6>
-                  <p><a href="#" class="text-body"> austin@gmail.com</a></p>
-                  </div>
-                  <div class="mt-2">
-                  <h6 class="mb-1">Url:</h6>
-                  <p><a href="#" class="text-body" target="_blank"> www.bootstrap.com </a></p>
-                  </div>
-                  <div class="mt-2">
-                  <h6 class="mb-1">Contact:</h6>
-                  <p><a href="#" class="text-body">(001) 4544 565 456</a></p>
-                  </div>
-               </div>
-            </div>
+     
          </div>
       </div>
       </div>
