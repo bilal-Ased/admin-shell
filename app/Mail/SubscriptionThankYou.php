@@ -18,6 +18,6 @@ class SubscriptionThankYou extends Mailable
      */
     public function build()
     {
-        return $this->subject('Thank You')->view('emails.thank-you-email');
+        return $this->subject('Thank You')->markdown('emails.thank-you-email');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Appointment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,19 +10,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserInvitation extends Mailable
+class AppointmentCreated extends Mailable
 {
+    public $appointment;
     use Queueable, SerializesModels;
 
-    public $user;
-    public $password;
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $password)
+    public function __construct(Appointment $appointment)
     {
-        $this->user = $user;
-        $this->password = $password;
+        $this->appointment = $appointment;
+
     }
 
     /**
@@ -29,9 +29,16 @@ class UserInvitation extends Mailable
      */
     public function build()
     {
-        return $this
-            ->subject('User Invitation')
-            ->markdown('emails.user-invitation');
+
+
+
+
+        return $this->markdown('emails.appointment-created')
+        ->subject('New Appointment Created');
+        
+        // return $this->view('emails.appointment-created')
+        // ->subject('New Appointment Created');
+
     }
 
     /**

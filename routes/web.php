@@ -95,7 +95,7 @@ Route::get('/appointments/list', [AppointmentController::class, 'list'])->name('
 Route::get('/appointments/get', [AppointmentController::class, 'getAppointments']);
 
 
-Route::get('/calendar',[CalendarController::class,'showCalendar']);
+Route::get('/calendar',[CalendarController::class,'showCalendar'])->name('appointments.calendar');
 Route::get('/search/customers', [AppointmentController::class, 'searchCustomers']);
 
 Route::get('/search/doctors', [AppointmentController::class, 'searchDoctors']);

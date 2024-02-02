@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\AppointmentsDataTable;
+use App\Mail\AppointmentCreated;
 use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AppointmentController extends Controller
 {
@@ -29,10 +31,16 @@ class AppointmentController extends Controller
 
         $validatedData['created_by'] = Auth::id();
 
-
-
         // Create appointment in the database
-        Appointment::create($validatedData);
+        $appointment = Appointment::create($validatedData);
+
+        // Send email to the assigned user
+        $user = User::find($validatedData['user_id']);
+
+        if ($user) {
+            Mail::to($user->email)->send(new AppointmentCreated($appointment));
+        }
+
 
         // Redirect to appointment listing or show a success message
         return redirect()->route('appointments.index')->with('success', 'Appointment created successfully');
