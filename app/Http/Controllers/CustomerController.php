@@ -23,10 +23,16 @@ class CustomerController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'phone_number' => 'required',
-            'alternate_number'=>'nullable',
-            'email' => 'nullable|email',
+            'phone_number' => 'required|unique:customers,phone_number', 
+            'alternate_number' => 'nullable',
+            'email' => 'nullable|email|unique:customers,email',
+            'date_of_birth' => 'nullable',
+            'gender' => 'nullable',
+        ], [
+            'phone_number.unique' => 'The phone number has already been taken.',
+            'email.unique' => 'The email has already been taken.',
         ]);
+
         Customer::create($request->all());
 
         return redirect()->route('customers.index')->with('success', 'Customer added successfully!');
@@ -36,7 +42,6 @@ class CustomerController extends Controller
     public function editCustomer($customerId)
 {
     $customer = Customer::findOrFail($customerId);
-
     return view('customers.edit-modal', ['customer' => $customer]);
 }
 

@@ -16,6 +16,8 @@ class Customer extends Model
     'alternate_number',
         'email',
         'status',
+        'date_of_birth',
+        'gender',
     ];
 
 
