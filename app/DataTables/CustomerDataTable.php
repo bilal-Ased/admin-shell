@@ -101,7 +101,6 @@ class CustomerDataTable extends DataTable
     {
 
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'id'],
             ['data' => 'first_name', 'name' => 'first_name', 'title' => 'FULL NAME', 'orderable' => true],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],

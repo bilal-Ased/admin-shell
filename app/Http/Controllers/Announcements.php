@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Announcements as ModelsAnnouncements;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -20,16 +21,19 @@ class Announcements extends Controller
 
   public function store(Request $request)
 {
-
-    
-
     $request->validate([
         'title' => 'required',
         'content' => 'required',
         'mention_users' => 'required',
     ]);
 
-    try {
+    $mention_users = request()->mention_users;
+
+    $users = Str::after($mention_users, '@');
+
+    $users = User::where('username', $users)->get();
+
+   try {
         $announcement = ModelsAnnouncements::create([
             'title' => $request->title,
             'content' => $request->content,
@@ -38,14 +42,16 @@ class Announcements extends Controller
         $userId = auth()->id();
 
         $announcement->users()->attach($userId, ['tagged_by' => $userId]);
-        $announcement->users()->attach($request->mention_users, ['tagged_by' => $userId]);
+        $announcement->users()->attach($users->pluck('id'), ['tagged_by' => $userId]);
 
         return redirect()->back()->with('success', 'Announcement created successfully');
     } catch (\Exception $e) {
         Log::error('Failed to create announcement: ' . $e->getMessage());
 
         return redirect()->back()->with('error', 'Failed to create announcement');
+
     }
+
 
 }
 

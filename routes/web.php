@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\PermissionController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebChatController;
@@ -82,9 +83,7 @@ Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('cus
 Route::post('/customers/change-status/{id}', [CustomerController::class, 'changeStatus'])->name('customers.change-status');
 
 
-Route::get('/test', function () {
-    return 'Hello, this is a test route!';
-});
+
 
 Route::get('/tickets/index',[HelpDeskController::class,'index'])->name('tickets.index');
 
@@ -93,6 +92,7 @@ Route::get('/appointments/index',[AppointmentController::class,'index'])->name('
 Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
 Route::get('/appointments/list', [AppointmentController::class, 'list'])->name('appointments.list');
 Route::get('/appointments/get', [AppointmentController::class, 'getAppointments']);
+Route::post('/appointments/check-availability', [AppointmentController::class, 'checkAvailability']);
 
 
 Route::get('/calendar',[CalendarController::class,'showCalendar'])->name('appointments.calendar');
@@ -111,6 +111,9 @@ Route::get('/announcements/index', [Announcements::class, 'index'])->name('annou
 Route::post('/announcements', [Announcements::class, 'store'])->name('announcements.store');
 Route::get('/announcements/{announcement}', [Announcements::class, 'show'])->name('announcements.show');
 
+
+Route::get('/settings/services',[ServicesController::class,'index'])->name('services.index');
+Route::post('/services',[ServicesController::class,'store'])->name('services.store');
 
 
 Route::get('/chat', [WebChatController::class, 'index']);

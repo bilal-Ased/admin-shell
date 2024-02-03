@@ -201,7 +201,6 @@
                               <tr>
                                  <td>
                                     <div class="d-flex align-items-center">
-                                       <img class="bg-soft-primary rounded img-fluid avatar-40 me-3" src="{{asset('images/shapes/01.png')}}" alt="profile">
                                        <h6>Addidis Sportwear</h6>
                                     </div>
                                  </td>

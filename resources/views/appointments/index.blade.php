@@ -9,6 +9,9 @@
     <!-- Include Select2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+    <!-- Include Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <div class="row">
         <div class="col-sm-12 col-lg-6">
             <div class="card">
@@ -31,6 +34,7 @@
                         <div class="form-group">
                             <label class="form-label" for="appointment_datetime">Date Time:</label>
                             <input type="datetime-local" class="form-control" id="appointment_datetime" name="appointment_datetime">
+                            <span id="availability-message" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
@@ -45,9 +49,7 @@
                             </select>
                         </div>
 
-
-
-                        <button type="submit" class="btn btn-primary">Create Appointment</button>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">Create Appointment</button>
                         <button type="button" class="btn btn-danger">Cancel</button>
                     </form>
                 </div>
@@ -56,14 +58,40 @@
     </div>
 
     <script>
-        $.noConflict(); // Use noConflict to avoid conflicts with other libraries
-
         jQuery(document).ready(function($) {
-            // Function to update the result count
-            function updateResultCount(count, term) {
-                var message = (count > 0) ? 'Showing results ' + ((term) ? 'for \'' + term + '\' ' : '') + 'out of ' + count + ' results' : 'No results found ' + ((term) ? 'for \'' + term + '\'' : '');
-                $('#result-count').text(message);
+            // Elements
+            var availabilityMessage = $('#availability-message');
+            var submitButton = $('#submit-btn');
+
+            // Live validation for appointment availability
+            function checkAvailability() {
+                var doctorId = $('#user_id').val();
+                var appointmentDatetime = $('#appointment_datetime').val();
+
+                if (doctorId) { // Only check if a doctor is selected
+                    axios.post('/appointments/check-availability', {
+                        user_id: doctorId,
+                        appointment_datetime: appointmentDatetime
+                    })
+                    .then(function(response) {
+                        var message = 'The selected doctor is ' + (response.data.isAvailable ? 'available' : 'not available') + ' at the specified time.';
+                        availabilityMessage.text(message).show(); // Show the message
+                        submitButton.prop('disabled', !response.data.isAvailable);
+                    })
+                    .catch(function(error) {
+                        console.error('Error:', error);
+                    });
+                } else {
+                    availabilityMessage.hide(); // Hide the message if no doctor is selected
+                }
             }
+
+            // Attach change event listeners
+            $('#user_id, #appointment_datetime').on('change', function() {
+                availabilityMessage.text(''); // Clear the message
+                submitButton.prop('disabled', false); // Enable the submit button
+                checkAvailability();
+            });
 
             // Customer search
             $('#customer').select2({
@@ -77,10 +105,8 @@
                         };
                     },
                     processResults: function(data) {
-                        // Update the result count
                         var term = $('#customer').val();
                         var count = data.length;
-                        updateResultCount(count, term);
 
                         return {
                             results: data
@@ -135,7 +161,13 @@
                 placeholder: 'Search for a doctor',
                 minimumInputLength: 3
             });
+
+            // Initial hide of the message
+            availabilityMessage.hide();
+
+            // Initial check on page load
+            checkAvailability();
         });
     </script>
 
-    </x-app-layout>
+</x-app-layout>

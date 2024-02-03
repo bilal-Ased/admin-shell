@@ -97,5 +97,19 @@ class AppointmentController extends Controller
     }
 
 
+    public function checkAvailability(Request $request)
+    {
+        $doctorId = $request->input('user_id');
+        $appointmentDatetime = $request->input('appointment_datetime');
+
+        $isAvailable = !Appointment::where('user_id', $doctorId)
+            ->where('appointment_datetime', $appointmentDatetime)
+            ->exists();
+
+        return response()->json(['isAvailable' => $isAvailable]);
+    }
+
+
+
 
 }
