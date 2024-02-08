@@ -33,7 +33,8 @@
 
                         <div class="form-group">
                             <label class="form-label" for="appointment_datetime">Date Time:</label>
-                            <input type="datetime-local" class="form-control" id="appointment_datetime" name="appointment_datetime">
+                            <input type="datetime-local" class="form-control" id="appointment_datetime"
+                                name="appointment_datetime">
                             <span id="availability-message" class="text-danger"></span>
                         </div>
 
@@ -55,8 +56,13 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-sm-12 col-lg-6">
+            <div class="card">
+                <img src="{{ asset('images/brands/appointment.jpg') }}" alt="Example Image">
 
+            </div>
+        </div>
+    </div>
     <script>
         jQuery(document).ready(function($) {
             // Elements
@@ -70,17 +76,18 @@
 
                 if (doctorId) { // Only check if a doctor is selected
                     axios.post('/appointments/check-availability', {
-                        user_id: doctorId,
-                        appointment_datetime: appointmentDatetime
-                    })
-                    .then(function(response) {
-                        var message = 'The selected doctor is ' + (response.data.isAvailable ? 'available' : 'not available') + ' at the specified time.';
-                        availabilityMessage.text(message).show(); // Show the message
-                        submitButton.prop('disabled', !response.data.isAvailable);
-                    })
-                    .catch(function(error) {
-                        console.error('Error:', error);
-                    });
+                            user_id: doctorId,
+                            appointment_datetime: appointmentDatetime
+                        })
+                        .then(function(response) {
+                            var message = 'The selected doctor is ' + (response.data.isAvailable ? 'available' :
+                                'not available') + ' at the specified time.';
+                            availabilityMessage.text(message).show(); // Show the message
+                            submitButton.prop('disabled', !response.data.isAvailable);
+                        })
+                        .catch(function(error) {
+                            console.error('Error:', error);
+                        });
                 } else {
                     availabilityMessage.hide(); // Hide the message if no doctor is selected
                 }

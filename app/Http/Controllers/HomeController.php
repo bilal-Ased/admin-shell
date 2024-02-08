@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -17,14 +17,13 @@ class HomeController extends Controller
     {
         $userCount = User::count();
         $customerCount = Customer::getTotalCount();
-        $newCustomerCount = DB::table('customers')
-            ->whereDate('created_at', '>=', now()->subDays(30))
-            ->count();
+        $newCustomerCount = Customer::where('created_at', '>=', Carbon::now()->subDays(30))->count();
         $appointmentsCount = Appointment::count();
         $upcomingAppointments = Appointment::where('appointment_datetime', '>', now())
             ->orderBy('appointment_datetime')
             ->take(5)
             ->get();
+
         $assets = ['chart', 'animation'];
 
         return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'appointmentsCount', 'upcomingAppointments'));

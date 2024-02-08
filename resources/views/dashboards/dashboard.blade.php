@@ -305,7 +305,7 @@
                             </div>
                             <hr class="hr-vertial">
                             <div>
-                                <h2 class="mb-2">700</h2>
+                                <h2 class="mb-2">{{ $newCustomerCount }}</h2>
                                 <p class="mb-0 text-gray">New Customers</p>
                             </div>
                         </div>
