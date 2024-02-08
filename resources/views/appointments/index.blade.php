@@ -58,8 +58,9 @@
         </div>
         <div class="col-sm-12 col-lg-6">
             <div class="card">
+                {{-- <div class="card-body"> --}}
                 <img src="{{ asset('images/brands/appointment.jpg') }}" alt="Example Image">
-
+                {{-- </div> --}}
             </div>
         </div>
     </div>
