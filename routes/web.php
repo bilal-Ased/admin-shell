@@ -16,6 +16,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebChatController;
 use App\Http\Controllers\WhatsAppController;
+use App\Models\DoctorSchedule;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -105,6 +106,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/broadcast', [WebChatController::class, 'brodcast']);
     Route::post('/receive', [WebChatController::class, 'receive']);
     Route::get('/send-message', [WhatsAppController::class, 'sendMessage']);
+
+    Route::get('/settings/doctor-shedule', [DoctorSchedule::class, 'index'])->name('shedule.index');
+    Route::get('/settings/doctor-shedule/post', [DoctorSchedule::class, 'store'])->name('doctor-schedules.store');
 
 });
 

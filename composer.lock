@@ -4,8 +4,79 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8998311e74ede6d413d614d1c138b590",
+    "content-hash": "286face4cb4bc6149169f1720b87835a",
     "packages": [
+        {
+            "name": "binafy/laravel-user-monitoring",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/binafy/laravel-user-monitoring.git",
+                "reference": "00033966f3c4a0d8ef509fd20ac1d2edf6bd51b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/binafy/laravel-user-monitoring/zipball/00033966f3c4a0d8ef509fd20ac1d2edf6bd51b7",
+                "reference": "00033966f3c4a0d8ef509fd20ac1d2edf6bd51b7",
+                "shasum": ""
+            },
+            "require": {
+                "jenssegers/agent": "^2.6.4",
+                "laravel/framework": "^9.0|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^7.0|^8.0",
+                "pestphp/pest-plugin-laravel": "^1.4.0|^2.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Binafy\\LaravelUserMonitoring\\Providers\\LaravelUserMonitoringServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Binafy\\LaravelUserMonitoring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "miladev-ent",
+                    "email": "milwad.dev@gmail.com",
+                    "role": "author"
+                }
+            ],
+            "description": "Monitor your user and all activity on your application",
+            "homepage": "https://github.com/binafy/laravel-user-monitoring",
+            "keywords": [
+                "analysis",
+                "binafy",
+                "framework",
+                "laravel",
+                "laravel middleware",
+                "laravel package",
+                "laravel tracking",
+                "laravel user monitoring",
+                "laravel user monitoring package",
+                "laravel-monitoring",
+                "laravel-tracking",
+                "milwad",
+                "monitoring",
+                "tracking"
+            ],
+            "support": {
+                "issues": "https://github.com/binafy/laravel-user-monitoring/issues",
+                "source": "https://github.com/binafy/laravel-user-monitoring/tree/v1.0"
+            },
+            "time": "2023-08-07T09:38:24+00:00"
+        },
         {
             "name": "botman/botman",
             "version": "v2.8.2",
@@ -1511,6 +1582,286 @@
                 }
             ],
             "time": "2022-05-21T17:30:32+00:00"
+        },
+        {
+            "name": "ipinfo/ipinfo",
+            "version": "v3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ipinfo/php.git",
+                "reference": "6832701a5ecb9e3b17864d122cb201a7e7e8ec02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ipinfo/php/zipball/6832701a5ecb9e3b17864d122cb201a7e7e8ec02",
+                "reference": "6832701a5ecb9e3b17864d122cb201a7e7e8ec02",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.3||^7.0",
+                "php": ">=8.0",
+                "symfony/cache": "^6.3",
+                "symfony/http-foundation": "^6.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.0.0",
+                "squizlabs/php_codesniffer": "^3.5.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ipinfo\\ipinfo\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "James Timmins",
+                    "email": "jameshtimmins@gmail.com",
+                    "homepage": "https://github.com/jhtimmins",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Uman Shahzad",
+                    "email": "uman@mslm.io",
+                    "homepage": "https://github.com/UmanShahzad",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Umar Farooq",
+                    "email": "umar@ipinfo.io",
+                    "homepage": "https://github.com/rm-Umar",
+                    "role": "Developer"
+                }
+            ],
+            "description": "The official PHP library for IPinfo, the most reliable, accurate, and in-depth source of IP address data available anywhere. We process terabytes of data to produce our custom IP geolocation, company, carrier and IP type data sets. Visit our developer docs at https://ipinfo.io/developers.",
+            "homepage": "https://github.com/ipinfo/php",
+            "keywords": [
+                "ipinfo"
+            ],
+            "support": {
+                "issues": "https://github.com/ipinfo/php/issues",
+                "source": "https://github.com/ipinfo/php/tree/v3.1.2"
+            },
+            "time": "2023-10-02T12:42:34+00:00"
+        },
+        {
+            "name": "ipinfo/ipinfolaravel",
+            "version": "v2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ipinfo/laravel.git",
+                "reference": "77f184337229e38ffe29de5f2640b52554c04c9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ipinfo/laravel/zipball/77f184337229e38ffe29de5f2640b52554c04c9c",
+                "reference": "77f184337229e38ffe29de5f2640b52554c04c9c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": ">=7 <11",
+                "ipinfo/ipinfo": "^3.1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4.2",
+                "orchestra/testbench": ">=6.4.0",
+                "phpunit/phpunit": ">=8 <10",
+                "sempro/phpunit-pretty-print": "^1.3.0",
+                "squizlabs/php_codesniffer": "^3.5.8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ipinfo\\ipinfolaravel\\ipinfolaravelServiceProvider"
+                    ],
+                    "aliases": {
+                        "ipinfolaravel": "ipinfo\\ipinfolaravel\\Facades\\ipinfolaravel"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ipinfo\\ipinfolaravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "James Timmins",
+                    "email": "jameshtimmins@gmail.com",
+                    "homepage": "https://www.ipinfo.io"
+                },
+                {
+                    "name": "Uman Shahzad",
+                    "email": "uman@mslm.io",
+                    "homepage": "https://github.com/UmanShahzad"
+                },
+                {
+                    "name": "Soban Mahmood",
+                    "email": "soban.mahmood@mslm.io",
+                    "homepage": "https://github.com/SobanMahmood"
+                }
+            ],
+            "description": "The official Laravel library for IPinfo, the most reliable, accurate, and in-depth source of IP address data available anywhere. We process terabytes of data to produce our custom IP geolocation, company, carrier and IP type data sets. Visit our developer docs at https://ipinfo.io/developers.",
+            "homepage": "https://github.com/ipinfo/ipinfolaravel",
+            "keywords": [
+                "ipinfolaravel",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/ipinfo/laravel/issues",
+                "source": "https://github.com/ipinfo/laravel/tree/v2.6.0"
+            },
+            "time": "2023-07-31T07:26:00+00:00"
+        },
+        {
+            "name": "jaybizzle/crawler-detect",
+            "version": "v1.2.116",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JayBizzle/Crawler-Detect.git",
+                "reference": "97e9fe30219e60092e107651abb379a38b342921"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/97e9fe30219e60092e107651abb379a38b342921",
+                "reference": "97e9fe30219e60092e107651abb379a38b342921",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8|^5.5|^6.5|^9.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jaybizzle\\CrawlerDetect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Beech",
+                    "email": "m@rkbee.ch",
+                    "role": "Developer"
+                }
+            ],
+            "description": "CrawlerDetect is a PHP class for detecting bots/crawlers/spiders via the user agent",
+            "homepage": "https://github.com/JayBizzle/Crawler-Detect/",
+            "keywords": [
+                "crawler",
+                "crawler detect",
+                "crawler detector",
+                "crawlerdetect",
+                "php crawler detect"
+            ],
+            "support": {
+                "issues": "https://github.com/JayBizzle/Crawler-Detect/issues",
+                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.116"
+            },
+            "time": "2023-07-21T15:49:49+00:00"
+        },
+        {
+            "name": "jenssegers/agent",
+            "version": "v2.6.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jenssegers/agent.git",
+                "reference": "daa11c43729510b3700bc34d414664966b03bffe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jenssegers/agent/zipball/daa11c43729510b3700bc34d414664966b03bffe",
+                "reference": "daa11c43729510b3700bc34d414664966b03bffe",
+                "shasum": ""
+            },
+            "require": {
+                "jaybizzle/crawler-detect": "^1.2",
+                "mobiledetect/mobiledetectlib": "^2.7.6",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5.0|^6.0|^7.0"
+            },
+            "suggest": {
+                "illuminate/support": "Required for laravel service providers"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Jenssegers\\Agent\\AgentServiceProvider"
+                    ],
+                    "aliases": {
+                        "Agent": "Jenssegers\\Agent\\Facades\\Agent"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jenssegers\\Agent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens Segers",
+                    "homepage": "https://jenssegers.com"
+                }
+            ],
+            "description": "Desktop/mobile user agent parser with support for Laravel, based on Mobiledetect",
+            "homepage": "https://github.com/jenssegers/agent",
+            "keywords": [
+                "Agent",
+                "browser",
+                "desktop",
+                "laravel",
+                "mobile",
+                "platform",
+                "user agent",
+                "useragent"
+            ],
+            "support": {
+                "issues": "https://github.com/jenssegers/agent/issues",
+                "source": "https://github.com/jenssegers/agent/tree/v2.6.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jenssegers",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/jenssegers/agent",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-06-13T08:05:20+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -3198,6 +3549,68 @@
             "time": "2022-12-02T22:17:43+00:00"
         },
         {
+            "name": "mobiledetect/mobiledetectlib",
+            "version": "2.8.45",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/serbanghita/Mobile-Detect.git",
+                "reference": "96aaebcf4f50d3d2692ab81d2c5132e425bca266"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/96aaebcf4f50d3d2692ab81d2c5132e425bca266",
+                "reference": "96aaebcf4f50d3d2692ab81d2c5132e425bca266",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8.36"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Detection": "namespaced/"
+                },
+                "classmap": [
+                    "Mobile_Detect.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Serban Ghita",
+                    "email": "serbanghita@gmail.com",
+                    "homepage": "http://mobiledetect.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mobile_Detect is a lightweight PHP class for detecting mobile devices. It uses the User-Agent string combined with specific HTTP headers to detect the mobile environment.",
+            "homepage": "https://github.com/serbanghita/Mobile-Detect",
+            "keywords": [
+                "detect mobile devices",
+                "mobile",
+                "mobile detect",
+                "mobile detector",
+                "php mobile detect"
+            ],
+            "support": {
+                "issues": "https://github.com/serbanghita/Mobile-Detect/issues",
+                "source": "https://github.com/serbanghita/Mobile-Detect/tree/2.8.45"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/serbanghita",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-11-07T21:57:25+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "3.5.0",
             "source": {
@@ -4145,6 +4558,55 @@
                 }
             ],
             "time": "2023-11-12T21:59:55+00:00"
+        },
+        {
+            "name": "psr/cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/cache.git",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "reference": "aa5030cfa5405eccfdcb1083ce040c2cb8d253bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Cache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for caching libraries",
+            "keywords": [
+                "cache",
+                "psr",
+                "psr-6"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/cache/tree/3.0.0"
+            },
+            "time": "2021-02-03T23:26:27+00:00"
         },
         {
             "name": "psr/clock",
@@ -6003,6 +6465,178 @@
                 }
             ],
             "time": "2023-12-25T11:46:58+00:00"
+        },
+        {
+            "name": "symfony/cache",
+            "version": "v6.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/cache.git",
+                "reference": "49f8cdee544a621a621cd21b6cda32a38926d310"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/49f8cdee544a621a621cd21b6cda32a38926d310",
+                "reference": "49f8cdee544a621a621cd21b6cda32a38926d310",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/cache": "^2.0|^3.0",
+                "psr/log": "^1.1|^2|^3",
+                "symfony/cache-contracts": "^2.5|^3",
+                "symfony/service-contracts": "^2.5|^3",
+                "symfony/var-exporter": "^6.3.6|^7.0"
+            },
+            "conflict": {
+                "doctrine/dbal": "<2.13.1",
+                "symfony/dependency-injection": "<5.4",
+                "symfony/http-kernel": "<5.4",
+                "symfony/var-dumper": "<5.4"
+            },
+            "provide": {
+                "psr/cache-implementation": "2.0|3.0",
+                "psr/simple-cache-implementation": "1.0|2.0|3.0",
+                "symfony/cache-implementation": "1.1|2.0|3.0"
+            },
+            "require-dev": {
+                "cache/integration-tests": "dev-master",
+                "doctrine/dbal": "^2.13.1|^3|^4",
+                "predis/predis": "^1.1|^2.0",
+                "psr/simple-cache": "^1.0|^2.0|^3.0",
+                "symfony/config": "^5.4|^6.0|^7.0",
+                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
+                "symfony/filesystem": "^5.4|^6.0|^7.0",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/messenger": "^5.4|^6.0|^7.0",
+                "symfony/var-dumper": "^5.4|^6.0|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Cache\\": ""
+                },
+                "classmap": [
+                    "Traits/ValueWrapper.php"
+                ],
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides extended PSR-6, PSR-16 (and tags) implementations",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "caching",
+                "psr6"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/cache/tree/v6.4.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-01-23T14:51:35+00:00"
+        },
+        {
+            "name": "symfony/cache-contracts",
+            "version": "v3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/cache-contracts.git",
+                "reference": "1d74b127da04ffa87aa940abe15446fa89653778"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/cache-contracts/zipball/1d74b127da04ffa87aa940abe15446fa89653778",
+                "reference": "1d74b127da04ffa87aa940abe15446fa89653778",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/cache": "^3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.4-dev"
+                },
+                "thanks": {
+                    "name": "symfony/contracts",
+                    "url": "https://github.com/symfony/contracts"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\Cache\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to caching",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/cache-contracts/tree/v3.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-09-25T12:52:38+00:00"
         },
         {
             "name": "symfony/console",
@@ -8260,6 +8894,80 @@
                 }
             ],
             "time": "2023-12-28T19:16:56+00:00"
+        },
+        {
+            "name": "symfony/var-exporter",
+            "version": "v7.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-exporter.git",
+                "reference": "1fb79308cb5fc2b44bff6e8af10a5af6812e05b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/1fb79308cb5fc2b44bff6e8af10a5af6812e05b8",
+                "reference": "1fb79308cb5fc2b44bff6e8af10a5af6812e05b8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "require-dev": {
+                "symfony/var-dumper": "^6.4|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\VarExporter\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Allows exporting any serializable PHP data structure to plain PHP code",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "clone",
+                "construct",
+                "export",
+                "hydrate",
+                "instantiate",
+                "lazy-loading",
+                "proxy",
+                "serialize"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/var-exporter/tree/v7.0.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-01-23T15:02:46+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
