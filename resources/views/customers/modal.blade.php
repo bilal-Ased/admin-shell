@@ -36,21 +36,6 @@
                 name="alternate_number">
         </div>
 
-        <div class="col"><br>
-            <label for="date_of_birth" class="form-label">Date of Birth</label>
-            <input type="date" class="form-control" id="" placeholder="date_of_birth" name="date_of_birth">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col"><br>
-            <label for="gender" class="form-label">Gender</label>
-            <select class="form-select form-select-sm " aria-label=".form-select-sm" id="gender" name="gender">
-                <option selected>Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-        </div>
     </div>
 
     <div class="modal-footer">

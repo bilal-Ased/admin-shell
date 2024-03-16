@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use App\Helpers\AuthHelper;
-use Illuminate\Http\Request;
 use App\DataTables\CustomerDataTable;
-use Spatie\Newsletter\Facades\Newsletter;
+use App\Models\Customer;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
@@ -15,19 +13,15 @@ class CustomerController extends Controller
         return $dataTable->render('customers.index');
     }
 
-
-
     public function store(Request $request)
     {
 
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'phone_number' => 'required|unique:customers,phone_number', 
+            'phone_number' => 'required|unique:customers,phone_number',
             'alternate_number' => 'nullable',
             'email' => 'nullable|email|unique:customers,email',
-            'date_of_birth' => 'nullable',
-            'gender' => 'nullable',
         ], [
             'phone_number.unique' => 'The phone number has already been taken.',
             'email.unique' => 'The email has already been taken.',
@@ -38,12 +32,12 @@ class CustomerController extends Controller
         return redirect()->route('customers.index')->with('success', 'Customer added successfully!');
     }
 
-
     public function editCustomer($customerId)
-{
-    $customer = Customer::findOrFail($customerId);
-    return view('customers.edit-modal', ['customer' => $customer]);
-}
+    {
+        $customer = Customer::findOrFail($customerId);
+
+        return view('customers.edit-modal', ['customer' => $customer]);
+    }
 
     public function update(Request $request, $customerId)
     {
@@ -62,12 +56,12 @@ class CustomerController extends Controller
         return redirect()->back()->with('success', 'Customer updated successfully');
     }
 
-
     public function changeStatus($id)
     {
         $customer = Customer::findOrFail($id);
-        $customer->status = !$customer->status;
+        $customer->status = ! $customer->status;
         $customer->save();
+
         return redirect()->back()->with('success', 'Status changed successfully!');
 
     }

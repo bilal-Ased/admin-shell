@@ -13,25 +13,23 @@ class Customer extends Model
         'first_name',
         'last_name',
         'phone_number',
-    'alternate_number',
+        'alternate_number',
         'email',
         'status',
-        'date_of_birth',
-        'gender',
     ];
-
 
     public static function getTotalCount()
     {
         return self::count();
     }
 
-
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
     }
 
-
-
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

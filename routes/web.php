@@ -7,6 +7,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Materialscontroller;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
@@ -109,6 +110,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/settings/doctor-shedule', [DoctorSchedule::class, 'index'])->name('shedule.index');
     Route::get('/settings/doctor-shedule/post', [DoctorSchedule::class, 'store'])->name('doctor-schedules.store');
+
+    Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
+    Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');
 
 });
 
