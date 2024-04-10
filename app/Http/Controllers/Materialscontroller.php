@@ -22,6 +22,7 @@ class Materialscontroller extends Controller
             'unit_price' => 'sometimes|required|numeric|min:0',
             'quantity_on_hand' => 'required|integer|min:0',
             'supplier_id' => 'required|exists:suppliers,id',
+            'serial_number' => 'required',
 
         ], [
             'name.required' => 'Material name is required.',
@@ -31,6 +32,7 @@ class Materialscontroller extends Controller
             'quantity_on_hand.required' => 'Quantity on hand is required.',
             'quantity_on_hand.integer' => 'Quantity on hand must be an integer.',
             'quantity_on_hand.min' => 'Quantity on hand must be greater than or equal to 0.',
+            'serial_number.required' => 'serial Number is Required',
         ]);
 
         // Ensure that 'unit_price' is present in the validated data

@@ -141,8 +141,9 @@
     </li>
 
 
-
-
+    <li>
+        <hr class="hr-horizontal">
+    </li>
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Inventory Managment</span>
@@ -186,7 +187,24 @@
                     <span class="item-name">All Materials</span>
                 </a>
             </li>
-            <li class="nav-item">
+
+            <li class=" nav-item">
+                <a class="nav-link {{ activeRoute(route('suppliers.index')) }}"
+                    href="{{ route('suppliers.index') }}">
+                    <i class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <g>
+                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon"> C </i>
+                    <span class="item-name">All Suppliers</span>
+                </a>
+            </li>
+
+            {{-- <li class="nav-item">
                 <a class="nav-link  {{ activeRoute(route('special-pages.calender')) }}"
                     href="{{ route('special-pages.calender') }}">
                     <i class="icon">
@@ -200,7 +218,7 @@
                     <i class="sidenav-mini-icon"> C </i>
                     <span class="item-name">Suppliers</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </li>
     <li>
@@ -208,12 +226,12 @@
     </li>
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
-            <span class="default-icon">Appointments</span>
+            <span class="default-icon">Projects</span>
             <span class="mini-icon">-</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#appointments" role="button" aria-expanded="false"
+        <a class="nav-link" data-bs-toggle="collapse" href="#projects" role="button" aria-expanded="false"
             aria-controls="sidebar-special-pages">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -225,7 +243,7 @@
                         fill="currentColor"></path>
                 </svg>
             </i>
-            <span class="item-name">Appointments</span>
+            <span class="item-name">Projects</span>
             <i class="right-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -234,10 +252,9 @@
             </i>
         </a>
 
-        <ul class="sub-nav collapse" id="appointments" data-bs-parent="#appointments">
+        <ul class="sub-nav collapse" id="projects" data-bs-parent="#projects">
             <li class=" nav-item">
-                <a class="nav-link {{ activeRoute(route('appointments.index')) }}"
-                    href="{{ route('appointments.index') }}">
+                <a class="nav-link {{ activeRoute(route('projects.index')) }}" href="{{ route('projects.index') }}">
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -247,7 +264,7 @@
                         </svg>
                     </i>
                     <i class="sidenav-mini-icon"> B </i>
-                    <span class="item-name">Create Appointment</span>
+                    <span class="item-name">View Projects</span>
                 </a>
             </li>
 
@@ -290,21 +307,7 @@
         </ul>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link {{ activeRoute(route('appointments.list')) }}" href="{{ route('appointments.list') }}">
-            <i class="icon">
-                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M7.7688 8.71387H16.2312C18.5886 8.71387 20.5 10.5831 20.5 12.8885V17.8254C20.5 20.1308 18.5886 22 16.2312 22H7.7688C5.41136 22 3.5 20.1308 3.5 17.8254V12.8885C3.5 10.5831 5.41136 8.71387 7.7688 8.71387ZM11.9949 17.3295C12.4928 17.3295 12.8891 16.9419 12.8891 16.455V14.2489C12.8891 13.772 12.4928 13.3844 11.9949 13.3844C11.5072 13.3844 11.1109 13.772 11.1109 14.2489V16.455C11.1109 16.9419 11.5072 17.3295 11.9949 17.3295Z"
-                        fill="currentColor"></path>
-                    <path opacity="0.4"
-                        d="M17.523 7.39595V8.86667C17.1673 8.7673 16.7913 8.71761 16.4052 8.71761H15.7447V7.39595C15.7447 5.37868 14.0681 3.73903 12.0053 3.73903C9.94257 3.73903 8.26594 5.36874 8.25578 7.37608V8.71761H7.60545C7.20916 8.71761 6.83319 8.7673 6.47754 8.87661V7.39595C6.4877 4.41476 8.95692 2 11.985 2C15.0537 2 17.523 4.41476 17.523 7.39595Z"
-                        fill="currentColor"></path>
-                </svg>
-            </i>
-            <span class="item-name">All Appointments</span>
-        </a>
-    </li>
+
     <li>
         <hr class="hr-horizontal">
     </li>
@@ -365,12 +368,12 @@
                             </g>
                         </svg>
                     </i>
-                    <i class="sidenav-mini-icon"> G </i>
+                    <i class="sidenav-mini-icon"> S </i>
                     <span class="item-name">Services</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('maps.vector')) }}" href="{{ route('maps.vector') }}">
+                <a class="nav-link {{ activeRoute(route('brands.index')) }}" href="{{ route('brands.index') }}">
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -379,8 +382,23 @@
                             </g>
                         </svg>
                     </i>
-                    <i class="sidenav-mini-icon"> V </i>
-                    <span class="item-name">Insurance</span>
+                    <i class="sidenav-mini-icon"></i>
+                    <span class="item-name">Brands</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ activeRoute(route('location.index')) }}" href="{{ route('location.index') }}">
+                    <i class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <g>
+                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon"></i>
+                    <span class="item-name">Locations</span>
                 </a>
             </li>
         </ul>

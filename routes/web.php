@@ -4,16 +4,20 @@
 
 use App\Http\Controllers\Announcements;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\brandController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\locationController;
 use App\Http\Controllers\Materialscontroller;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebChatController;
 use App\Http\Controllers\WhatsAppController;
@@ -88,7 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/appointments/check-availability', [AppointmentController::class, 'checkAvailability']);
 
     Route::get('/calendar', [CalendarController::class, 'showCalendar'])->name('appointments.calendar');
-    Route::get('/search/customers', [AppointmentController::class, 'searchCustomers']);
+    Route::get('/search/customers', [AppointmentController::class, 'searchCustomers'])->name('customers.search');
 
     Route::get('/search/doctors', [AppointmentController::class, 'searchDoctors']);
 
@@ -113,6 +117,24 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
     Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');
+
+    Route::get('/suppliers/index', [SupplierController::class, 'index'])->name('suppliers.index');
+    Route::post('/suppliers/store', [SupplierController::class, 'store'])->name('suppliers.store');
+
+    Route::get('/search/suppliers', [SupplierController::class, 'search'])->name('suppliers.search');
+
+    Route::get('/projects/index', [ProjectController::class, 'index'])->name('projects.index');
+    Route::post('/projects/store', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/projects/calendar', [ProjectController::class, 'calendar'])->name('projects.calendar');
+
+    Route::get('/search/materials', [ProjectController::class, 'searchMaterials'])->name('materials.search');
+
+    Route::get('/settings/configurations/brands', [brandController::class, 'index'])->name('brands.index');
+    Route::post('/settings/configurations/brands/store', [brandController::class, 'store'])->name('brands.store');
+    Route::post('/settings/configurations/brands/edit', [brandController::class, 'edit'])->name('brands.edit');
+
+    Route::get('/settings/configurations/locations', [locationController::class, 'index'])->name('location.index');
+    Route::post('/settings/configurations/locations/store', [locationController::class, 'store'])->name('locations.store');
 
 });
 

@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'customer_id'];
+    protected $fillable = ['name', 'customer_id', 'description', 'start_date', 'end_date', 'material_id', 'budget'];
 
     public function customer()
     {
@@ -21,8 +21,10 @@ class Project extends Model
         return $this->belongsToMany(Material::class)->withPivot('quantity');
     }
 
-    public function quote()
+    public function getTotalCostAttribute()
     {
-        return $this->hasOne(Quote::class);
+        return $this->materials->sum(function ($material) {
+            return $material->unit_price * $material->pivot->quantity;
+        });
     }
 }

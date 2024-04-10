@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
 use App\Models\Customer;
+use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,15 +18,16 @@ class HomeController extends Controller
         $userCount = User::count();
         $customerCount = Customer::getTotalCount();
         $newCustomerCount = Customer::where('created_at', '>=', Carbon::now()->subDays(30))->count();
-        $appointmentsCount = Appointment::count();
-        $upcomingAppointments = Appointment::where('appointment_datetime', '>', now())
-            ->orderBy('appointment_datetime')
-            ->take(5)
+        $projectsCount = Project::count();
+        $upcomingProjects = Project::with('customer')
+            ->where('end_date', '>', now()) // Assuming end_date is the deadline
+            ->orderBy('end_date') // You can change the sorting as per your requirement
+            ->take(5) // Limit the results to 5
             ->get();
 
         $assets = ['chart', 'animation'];
 
-        return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'appointmentsCount', 'upcomingAppointments'));
+        return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'projectsCount', 'upcomingProjects'));
     }
 
     /*

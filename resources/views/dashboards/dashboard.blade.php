@@ -52,8 +52,8 @@
                                         </svg>
                                     </div>
                                     <div class="progress-detail">
-                                        <p class="mb-2">Total Appointments</p>
-                                        <h4 class="counter">{{ $appointmentsCount }}</h4>
+                                        <p class="mb-2">Total Projects</p>
+                                        <h4 class="counter">{{ $projectsCount }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +194,7 @@
                     <div class="card overflow-hidden" data-aos="fade-up" data-aos-delay="400">
                         <div class="card-header d-flex justify-content-between flex-wrap">
                             <div class="header-title">
-                                <h4 class="card-title mb-2">Upcoming appointments</h4>
+                                <h4 class="card-title mb-2">Upcoming Projects</h4>
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -203,34 +203,25 @@
                                     <thead>
                                         <tr>
                                             <th>Customer Name</th>
-                                            <th>Phone Number</th>
-                                            <th>Reason</th>
-                                            <th>Appointment time</th>
+                                            <th>Cost</th>
+                                            <th>Created At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($upcomingAppointments as $appointment)
+                                        @foreach ($upcomingProjects as $project)
                                             <tr>
                                                 <td>
                                                     <div class="d-flex align-items-center">
-                                                        <h6>{{ $appointment->customer->first_name }}
-                                                            {{ $appointment->customer->last_name }}</h6>
+                                                        <h6>{{ $project->customer->first_name }}
+                                                            {{ $project->customer->last_name }}</h6>
                                                     </div>
                                                 </td>
-                                                <td>{{ $appointment->customer->phone_number }}</td>
-
-
-                                                <td>
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <h6>{{ $appointment->reason }}</h6>
-                                                    </div>
-                                                </td>
-
+                                                <td>{{ $project->budget }}</td>
                                                 <td>
                                                     @php
-                                                        $appointmentDateTime = new DateTime($appointment->appointment_datetime);
+                                                        $projectCreatedAt = new DateTime($project->project_created_at);
                                                         $now = new DateTime();
-                                                        $interval = $appointmentDateTime->diff($now);
+                                                        $interval = $projectCreatedAt->diff($now);
 
                                                         $days = $interval->days;
                                                         $hours = $interval->h;

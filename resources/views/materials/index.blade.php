@@ -1,4 +1,8 @@
 <x-app-layout :assets="$assets ?? []">
+    <!-- Include jQuery -->
+
+    <!-- Include Select2 JS -->
+
     <div>
         <div class="row">
             <div class="col-sm-12">
@@ -55,47 +59,6 @@
         {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
     @endpush
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
 
-            setTimeout(() => {
-
-                document.querySelectorAll('.list-customer-action .list-customer-btn').forEach(element => {
-                    element.addEventListener('click', function() {
-                        getCustomerModal(element.getAttribute('data-href'));
-                    });
-                });
-
-            }, 3000);
-        });
-
-        function getCustomerModal(url) {
-            var xhr = new XMLHttpRequest();
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        // Successful response
-                        var modal = document.getElementById('editCustomerModal');
-
-                        // Assuming the modal content is supposed to be inserted into a specific element inside the modal.
-                        var modalContentElement = modal.querySelector('.modal-content');
-
-                        // Set the content of the modal
-                        modalContentElement.innerHTML = xhr.responseText;
-
-                        // Show the modal (assuming it's a Bootstrap modal)
-                        $(modal).modal('show');
-                    } else {
-                        // Error handling
-                        console.error("Error: " + xhr.status);
-                    }
-                }
-            };
-
-            xhr.open("GET", url, true);
-            xhr.send();
-        }
-    </script>
 
 </x-app-layout>

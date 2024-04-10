@@ -60,11 +60,11 @@
 
             setTimeout(() => {
 
-                document.querySelectorAll('.list-customer-action .list-customer-btn').forEach(element => {
-                    element.addEventListener('click', function() {
-                        getCustomerModal(element.getAttribute('data-href'));
-                    });
-                });
+                // document.querySelectorAll('.list-customer-action .list-customer-btn').forEach(element => {
+                //     element.addEventListener('click', function() {
+                //         getCustomerModal(element.getAttribute('data-href'));
+                //     });
+                // });
 
             }, 3000);
         });

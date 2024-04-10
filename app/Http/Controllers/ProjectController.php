@@ -2,88 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ProjectDataTable;
 use App\Models\Material;
 use App\Models\Project;
-use App\Models\Quote;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(ProjectDataTable $dataTable)
     {
-        $projects = Project::all();
-
-        return view('projects.index', compact('projects'));
-    }
-
-    public function create()
-    {
-        $materials = Material::all();
-
-        return view('projects.create', compact('materials'));
+        return $dataTable->render('projects.index');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+
+        $validatedData = $request->validate([
             'name' => 'required',
+            'description' => 'nullable',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'customer_id' => 'required|exists:customers,id',
-            'materials' => 'required|array',
-            'materials.*.id' => 'exists:materials,id',
-            'materials.*.quantity' => 'required|integer|min:1',
+            'material_id' => 'required|array',
+            'material_id.*' => 'exists:materials,id', // Validate each material ID in the array
+            'budget' => 'required|numeric', // Ensure budget is numeric
         ]);
 
-        $project = Project::create($request->only('name', 'customer_id'));
+        // Serialize the array of material IDs
+        $materialIds = json_encode($validatedData['material_id']);
 
-        foreach ($request->materials as $material) {
-            $project->materials()->attach($material['id'], ['quantity' => $material['quantity']]);
-        }
-
-        // Automatically generate quote
-        $totalPrice = $this->calculateTotalPrice($project);
-        Quote::create(['total_price' => $totalPrice, 'project_id' => $project->id]);
+        // Create the project and store the serialized material IDs
+        $project = Project::create([
+            'name' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'start_date' => $validatedData['start_date'],
+            'end_date' => $validatedData['end_date'],
+            'customer_id' => $validatedData['customer_id'],
+            'material_id' => $materialIds,
+            'budget' => $validatedData['budget'],
+        ]);
 
         return redirect()->route('projects.index')->with('success', 'Project created successfully.');
     }
 
-    private function calculateTotalPrice($project)
+    public function calendar()
     {
-        $totalPrice = 0;
-        foreach ($project->materials as $material) {
-            $totalPrice += $material->pivot->quantity * $material->price; // Assuming each material has a price attribute
-        }
+        $projects = Project::all();
 
-        return $totalPrice;
-    }
-
-    public function show(Project $project)
-    {
-        $quote = Quote::where('project_id', $project->id)->first();
-        $totalPriceKsh = $quote ? $this->convertToKsh($quote->total_price) : null;
-
-        return view('projects.show', compact('project', 'quote', 'totalPriceKsh'));
-    }
-
-    private function convertToKsh($amount)
-    {
-        // Convert amount to Ksh (assuming 1 USD = 100 Ksh)
-        return $amount * 100;
-    }
-
-    public function edit(Project $project)
-    {
-        $materials = Material::all();
-
-        return view('projects.edit', compact('project', 'materials'));
-    }
-
-    public function update(Request $request, Project $project)
-    {
-        // Implement update logic
+        return view('projects.calendar', compact('projects'));
     }
 
     public function destroy(Project $project)
     {
         // Implement destroy logic
+    }
+
+    public function searchMaterials(Request $request)
+    {
+        $query = $request->input('q');
+
+        $materials = Material::where('name', 'like', '%'.$query.'%')->get();
+
+        return response()->json($materials);
     }
 }
