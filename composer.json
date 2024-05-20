@@ -16,6 +16,8 @@
         "bosunski/todo": "dev-master",
         "botman/driver-facebook": "^1.11",
         "drewm/mailchimp-api": "^2.5",
+        "fabpot/goutte": "^4.0",
+        "facebook/graph-sdk": "^5.1",
         "guzzlehttp/guzzle": "^7.8",
         "ipinfo/ipinfolaravel": "^2.6",
         "jinoantony/laravel-kanban": "^1.0",

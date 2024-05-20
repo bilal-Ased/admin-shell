@@ -35,9 +35,7 @@ class MaterialsDataTable extends DataTable
      */
     public function query(Material $model): QueryBuilder
     {
-        return $model->newQuery()
-            ->leftJoin('suppliers', 'materials.supplier_id', '=', 'suppliers.id')
-            ->select('materials.*', 'suppliers.name as supplier_name')->orderBy('id', 'asc');
+        return $model->newQuery()->orderBy('id', 'asc');
     }
 
     /**
@@ -71,7 +69,6 @@ class MaterialsDataTable extends DataTable
             ['data' => 'name', 'name' => 'name', 'title' => 'Name', 'orderable' => true],
             ['data' => 'unit_price', 'name' => 'unit_price', 'title' => 'Price per Unit'],
             ['data' => 'quantity_on_hand', 'name' => 'quantity_on_hand', 'title' => 'Quantity In hand'],
-            ['data' => 'supplier_name', 'name' => 'supplier_name', 'title' => 'Supplier'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
 
             Column::computed('action')

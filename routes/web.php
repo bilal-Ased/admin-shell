@@ -2,16 +2,21 @@
 
 // Controllers
 
+use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Announcements;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\brandController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\chatwootController;
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\locationController;
 use App\Http\Controllers\Materialscontroller;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
@@ -22,6 +27,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebChatController;
 use App\Http\Controllers\WhatsAppController;
 use App\Models\DoctorSchedule;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -84,6 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customers/{id}/edit', [CustomerController::class, 'editCustomer'])->name('customers.edit');
     Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
     Route::post('/customers/change-status/{id}', [CustomerController::class, 'changeStatus'])->name('customers.change-status');
+    Route::get('/companies/index', [CompaniesController::class, 'index'])->name('companies.index');
+    Route::post('/companies', [CompaniesController::class, 'store'])->name('companies.store');
 
     Route::get('/appointments/index', [AppointmentController::class, 'index'])->name('appointments.index');
     Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
@@ -117,6 +125,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
     Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');
+    Route::get('materials/export/', [Materialscontroller::class, 'export']);
+    Route::get('all/brands', [Materialscontroller::class, 'getBrands']);
+    Route::get('all/locations', [Materialscontroller::class, 'getLocations']);
+    Route::get('all/accounts', [Materialscontroller::class, 'getAccounts']);
 
     Route::get('/suppliers/index', [SupplierController::class, 'index'])->name('suppliers.index');
     Route::post('/suppliers/store', [SupplierController::class, 'store'])->name('suppliers.store');
@@ -136,7 +148,35 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/configurations/locations', [locationController::class, 'index'])->name('location.index');
     Route::post('/settings/configurations/locations/store', [locationController::class, 'store'])->name('locations.store');
 
+    Route::get('/settings/configurations/accounts', [AccountsController::class, 'index'])->name('accounts.index');
+    Route::post('/settings/configurations/accounts/store', [AccountsController::class, 'store'])->name('accounts.store');
+
 });
+
+Route::any('/chatwoot/webhook', [chatwootController::class, 'getResponse']);
+Route::any('/facebook/index', [FacebookController::class, 'index']);
+Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);
+Route::any('/facebook/webhook', [FacebookController::class, 'getResponse']);
+Route::any('/whatsapp/response', [WhatsAppController::class, 'getResponse']);
+
+// Route::get('/facebook/response', function (Request $request) {
+//     $hubVerifyToken = '1234'; // Your verify token
+
+//     $hubChallenge = $request->input('hub_challenge');
+//     $hubMode = $request->input('hub_mode');
+//     $hubVerifyTokenReceived = $request->input('hub_verify_token');
+
+//     if ($hubMode === 'subscribe' && $hubVerifyTokenReceived === $hubVerifyToken) {
+//         return response($hubChallenge, 200);
+//     }
+
+//     return response('Invalid verify token', 403);
+// });
+
+Route::get('/kati', [ScriptController::class, 'index']);
+
+// Route for scraping the content
+Route::get('/scrape', [ScriptController::class, 'scrape']);
 
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {

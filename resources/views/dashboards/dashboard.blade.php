@@ -1,4 +1,24 @@
 <x-app-layout :assets="$assets ?? []">
+
+    <script>
+        (function(d, t) {
+            var BASE_URL = "https://app.chatwoot.com";
+            var g = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            g.src = BASE_URL + "/packs/js/sdk.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g, s);
+            g.onload = function() {
+                window.chatwootSDK.run({
+                    websiteToken: '2bNAyGASPiBstFgDaqy1R8Km',
+                    baseUrl: BASE_URL
+                })
+            }
+        })(document, "script");
+    </script>
+
+
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="row row-cols-1">
@@ -52,8 +72,8 @@
                                         </svg>
                                     </div>
                                     <div class="progress-detail">
-                                        <p class="mb-2">Total Projects</p>
-                                        <h4 class="counter">{{ $projectsCount }}</h4>
+                                        <p class="mb-2">Total Items</p>
+                                        <h4 class="counter">{{ $itemsCount }}</h4>
                                     </div>
                                 </div>
                             </div>

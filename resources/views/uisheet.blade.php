@@ -1,4 +1,23 @@
 <x-app-layout layout="landing" :isHeader1=true>
+
+    <script>
+        (function(d, t) {
+            var BASE_URL = "https://app.chatwoot.com";
+            var g = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            g.src = BASE_URL + "/packs/js/sdk.js";
+            g.defer = true;
+            g.async = true;
+            s.parentNode.insertBefore(g, s);
+            g.onload = function() {
+                window.chatwootSDK.run({
+                    websiteToken: 'EKay5PshPuU4hw6zqg4SYgCr',
+                    baseUrl: BASE_URL
+                })
+            }
+        })(document, "script");
+    </script>
+
     <div class="banner-one-app">
         <div class="container">
             <div class="row align-items-center">
@@ -7,7 +26,9 @@
                             Problems</span> </h1>
                 </div>
                 <div class="col-lg-4">
-                    <p>Embark on a journey of unparalleled solutions crafted just for you. Our commitment to cutting-edge innovation ensures your experience is nothing short of extraordinary. Ready to elevate your endeavors? Join us on this transformative ride! </p>
+                    <p>Embark on a journey of unparalleled solutions crafted just for you. Our commitment to
+                        cutting-edge innovation ensures your experience is nothing short of extraordinary. Ready to
+                        elevate your endeavors? Join us on this transformative ride! </p>
                     <div class="d-flex align-items-center">
                         <a hrer="javascript" class="btn btn-primary">Try It For Free</a>
                         <a hrer="javascript" class="btn btn-secondary ms-3">Download Pro</a>
@@ -28,7 +49,9 @@
                         about us
                     </p>
                     <h2 class=" mb-4">What are <span class="text-primary">we</span></h2>
-                    <p class="mb-5">Welcome to Mughal Tech, where managing your inventory becomes seamless and efficient. Our inventory system is designed to empower your business by providing real-time insights, streamlining operations, and ensuring optimal stock levels.</p>
+                    <p class="mb-5">Welcome to Mughal Tech, where managing your inventory becomes seamless and
+                        efficient. Our inventory system is designed to empower your business by providing real-time
+                        insights, streamlining operations, and ensuring optimal stock levels.</p>
                     <div class="d-flex align-items-center">
                         <div>
                             <h5 class="text-primary mb-2">100%</h5>

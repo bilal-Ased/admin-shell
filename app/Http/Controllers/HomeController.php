@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Material;
 use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
@@ -18,7 +19,7 @@ class HomeController extends Controller
         $userCount = User::count();
         $customerCount = Customer::getTotalCount();
         $newCustomerCount = Customer::where('created_at', '>=', Carbon::now()->subDays(30))->count();
-        $projectsCount = Project::count();
+        $itemsCount = Material::count();
         $upcomingProjects = Project::with('customer')
             ->where('end_date', '>', now()) // Assuming end_date is the deadline
             ->orderBy('end_date') // You can change the sorting as per your requirement
@@ -27,7 +28,7 @@ class HomeController extends Controller
 
         $assets = ['chart', 'animation'];
 
-        return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'projectsCount', 'upcomingProjects'));
+        return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'itemsCount', 'upcomingProjects'));
     }
 
     /*

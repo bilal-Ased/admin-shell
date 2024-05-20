@@ -9,7 +9,7 @@ class Material extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'quantity_on_hand', 'unit_price', 'supplier_id', 'serial_number'];
+    protected $fillable = ['name', 'description', 'quantity_on_hand', 'unit_price', 'supplier_id', 'serial_number', 'brand_id', 'location_id', 'account_id'];
 
     public function projects()
     {

@@ -1,20 +1,14 @@
-<form action="{{ route('locations.store') }}" method="POST">
+<form action="{{ route('locations.store') }}" method="POST" class="row g-3 needs-validation" novalidate>
     @csrf
-    <div class="mb-3">
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <label for="locationName" class="form-label">Location</label>
-            <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
+    <div class="col">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter Brand Name" name="name" required>
+        <div class="valid-feedback">
+            Looks good!
         </div>
     </div>
 
-
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit</button>
     </div>
-
 </form>

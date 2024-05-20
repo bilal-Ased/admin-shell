@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('phone_number');
             $table->string('email')->nullable();
-            $table->string('allergies')->nullable();
             $table->string('alternate_number')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();

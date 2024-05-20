@@ -1,6 +1,31 @@
-<!-- Add the CDN link for Select2 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-dropdown {
+        z-index: 1060 !important;
+        /* Adjust the z-index value as needed */
 
+    }
+
+    .select2er .selection {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #8A92A6;
+        background-color: #ffffff;
+        background-clip: padding-box;
+        border: 1px solid #eee;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 0 0;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+</style>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
 <form action="{{ route('materials.store') }}" method="POST">
     @csrf
     <div class="mb-3"></div>
@@ -19,9 +44,11 @@
 
     <div class="row">
         <div class="col"><br>
-            <label for="unit_price" class="form-label">Unit price</label>
-            <input type="number" class="form-control" placeholder="Unit price" id="unit_price" min="0"
-                step="0.01" name="unit_price">
+            <label for="brand">Brand</label>
+            <br>
+            <select name="brand_id" id="brand_id" class="brand  form-control" style="width:250px;">
+                <option value="">Select Brand</option>
+            </select>
         </div>
         <div class="col"><br>
             <label for="quantity_on_hand" class="form-label">Quantity on Hand</label>
@@ -32,17 +59,25 @@
 
     <div class="row">
         <div class="col"><br>
-            <label for="supplier">Supplier</label>
+            <label for="location">Location</label>
             <br>
-            <select name="supplier_id" id="supplier">
-                <option value="">Select Supplier</option>
+            <select name="location_id" id="location_id" class="location form-control" style="width:250px;">
+                <option value="">Select location</option>
             </select>
         </div>
 
         <div class="col"><br>
-            <label for="serial_number" class="form-label">Serial Number</label>
+            <label for="serial" class="form-label">Serial Number</label>
             <input type="text" class="form-control" id="serial_number" name="serial_number"
                 placeholder="Serial Number">
+        </div>
+
+        <div class="col"><br>
+            <label for="account">Account</label>
+            <br>
+            <select name="account_id" id="account_id" class="account form-control" style="width:250px;">
+                <option value="">Select account</option>
+            </select>
         </div>
     </div>
 
@@ -53,32 +88,14 @@
     </div>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
 
 <script>
     $(document).ready(function() {
-        $('#supplier').select2({
-            ajax: {
-                url: '{{ route('suppliers.search') }}',
-                dataType: 'json',
-                delay: 250,
-                processResults: function(data) {
-                    return {
-                        results: $.map(data, function(supplier) {
-                            return {
-                                id: supplier.id,
-                                text: supplier.name
-                            };
-                        })
-                    };
-                },
-                cache: true
-            },
-            placeholder: 'Search for a supplier',
-            minimumInputLength: 3,
-            dropdownParent: $('#supplier').parent() // Ensure dropdown appears above modal
-        });
+        dropdown('/all/brands', 'brand', 'addMaterialModal', 'Select a brand');
+        dropdown('/all/locations', 'location', 'addMaterialModal', 'Select a location');
+        dropdown('/all/accounts', 'account', 'addMaterialModal', 'Select an Account');
+
     });
 </script>

@@ -12,13 +12,13 @@
                             <h4 class="card-title">Locations List</h4>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#addLocation">
+                                data-bs-target="#addLocationModal">
                                 Add Location
                             </button>
 
                             <!-- Modal -->
                             <!-- Your index file -->
-                            <div class="modal fade" id="addLocation" tabindex="-1"
+                            <div class="modal fade" id="addLocationModal" tabindex="-1"
                                 aria-labelledby="addLocationModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

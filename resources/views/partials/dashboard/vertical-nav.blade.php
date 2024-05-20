@@ -61,7 +61,20 @@
                         </svg>
                     </i>
                     <i class="sidenav-mini-icon"> B </i>
-                    <span class="item-name">All Customers</span>
+                    <span class="item-name">Customers</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  {{ activeRoute(route('companies.index')) }}" href="{{ route('companies.index') }}">
+                    <i class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                            <g>
+                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon"> C </i>
+                    <span class="item-name">Companies</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -82,7 +95,8 @@
                 <a class="nav-link {{ activeRoute(route('special-pages.kanban')) }}"
                     href="{{ route('special-pages.kanban') }}">
                     <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
+                            fill="currentColor">
                             <g>
                                 <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
                             </g>
@@ -359,20 +373,6 @@
         </a>
         <ul class="sub-nav collapse" id="sidebar-maps" data-bs-parent="#sidebar">
             <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('services.index')) }}" href="{{ route('services.index') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"> S </i>
-                    <span class="item-name">Services</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link {{ activeRoute(route('brands.index')) }}" href="{{ route('brands.index') }}">
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
@@ -399,6 +399,22 @@
                     </i>
                     <i class="sidenav-mini-icon"></i>
                     <span class="item-name">Locations</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link {{ activeRoute(route('accounts.index')) }}" href="{{ route('accounts.index') }}">
+                    <i class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <g>
+                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon"></i>
+                    <span class="item-name">Accounts</span>
                 </a>
             </li>
         </ul>
