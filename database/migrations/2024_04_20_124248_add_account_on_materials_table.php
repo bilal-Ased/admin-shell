@@ -17,7 +17,7 @@ return new class extends Migration
                 $table->foreign('location_id')->references('id')->on('locations');
             }
 
-            if (! Schema::hasColumn('materials', 'brand_id')) {
+            if (! Schema::hasColumn('materials.id', 'brand_id')) {
 
                 $table->unsignedSmallInteger('brand_id');
                 $table->foreign('brand_id')->references('id')->on('brands');
@@ -32,7 +32,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('materials', function (Blueprint $table) {
-            //
+            $table->foreignId('brand_id');
         });
     }
 };

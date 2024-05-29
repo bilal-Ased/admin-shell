@@ -23,6 +23,7 @@ use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebChatController;
 use App\Http\Controllers\WhatsAppController;
@@ -101,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/calendar', [CalendarController::class, 'showCalendar'])->name('appointments.calendar');
     Route::get('/search/customers', [AppointmentController::class, 'searchCustomers'])->name('customers.search');
+    Route::get('/create/ticket', [TicketsController::class, 'index']);
 
     Route::get('/search/doctors', [AppointmentController::class, 'searchDoctors']);
 
@@ -157,6 +159,7 @@ Route::any('/chatwoot/webhook', [chatwootController::class, 'getResponse']);
 Route::any('/facebook/index', [FacebookController::class, 'index']);
 Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);
 Route::any('/facebook/webhook', [FacebookController::class, 'getResponse']);
+Route::any('/whatsapp/index', [WhatsAppController::class, 'index']);
 Route::any('/whatsapp/response', [WhatsAppController::class, 'getResponse']);
 
 // Route::get('/facebook/response', function (Request $request) {

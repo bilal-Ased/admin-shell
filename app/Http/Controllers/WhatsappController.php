@@ -13,14 +13,5 @@ class WhatsappController extends Controller
         $data = $request->all();
 
         Log::info('All Request', $data);
-
-        // if (isset($data['messages']) && is_array($data['messages'])) {
-        //     foreach ($data['messages'] as $message) {
-        //         Log::info('whatsApp Message'.$message['text']);
-
-        //     }
-
-        // }
-
     }
 }

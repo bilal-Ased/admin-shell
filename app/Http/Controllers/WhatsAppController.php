@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Log;
 
 class WhatsAppController extends Controller
 {
+    public function index()
+    {
+        return view('whatsapp.index');
+    }
+
     public function getResponse(Request $request)
     {
         $data = $request->all();
