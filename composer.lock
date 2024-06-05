@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fcac91078cb83c5e77390a619f4fc45b",
+    "content-hash": "7ac9cd78d4bc7c4526d318a2365a0025",
     "packages": [
         {
             "name": "beyondcode/laravel-ask-database",
@@ -478,6 +478,65 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "bryceandy/laravel-beem",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bryceandy/laravel-beem.git",
+                "reference": "45adb939b711d4ad6ef9f0e1be86d1b16dde7af1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bryceandy/laravel-beem/zipball/45adb939b711d4ad6ef9f0e1be86d1b16dde7af1",
+                "reference": "45adb939b711d4ad6ef9f0e1be86d1b16dde7af1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "guzzlehttp/guzzle": "^7.3",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "orchestra/testbench": "^6.19"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Bryceandy\\Beem\\BeemBaseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bryceandy\\Beem\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "bryceandy",
+                    "email": "hello@bryceandy.com"
+                }
+            ],
+            "description": "A package to integrate your Laravel app with Beem API services(SMS, Contacts, USSD, Airtime, Payment Collections, Payment Checkout, Disbursements and OTP).",
+            "support": {
+                "issues": "https://github.com/bryceandy/laravel-beem/issues",
+                "source": "https://github.com/bryceandy/laravel-beem/tree/v1.0.4"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/bryceandy",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2022-06-23T18:20:54+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",

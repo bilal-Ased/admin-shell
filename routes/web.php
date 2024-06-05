@@ -28,7 +28,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebChatController;
 use App\Http\Controllers\WhatsAppController;
 use App\Models\DoctorSchedule;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 // Packages
 use Illuminate\Support\Facades\Route;
@@ -161,20 +160,6 @@ Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);
 Route::any('/facebook/webhook', [FacebookController::class, 'getResponse']);
 Route::any('/whatsapp/index', [WhatsAppController::class, 'index']);
 Route::any('/whatsapp/response', [WhatsAppController::class, 'getResponse']);
-
-// Route::get('/facebook/response', function (Request $request) {
-//     $hubVerifyToken = '1234'; // Your verify token
-
-//     $hubChallenge = $request->input('hub_challenge');
-//     $hubMode = $request->input('hub_mode');
-//     $hubVerifyTokenReceived = $request->input('hub_verify_token');
-
-//     if ($hubMode === 'subscribe' && $hubVerifyTokenReceived === $hubVerifyToken) {
-//         return response($hubChallenge, 200);
-//     }
-
-//     return response('Invalid verify token', 403);
-// });
 
 Route::get('/kati', [ScriptController::class, 'index']);
 

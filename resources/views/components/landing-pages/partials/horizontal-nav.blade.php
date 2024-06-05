@@ -20,26 +20,11 @@
         </div>
         <ul class="navbar-nav iq-nav-menu  list-unstyled" id="header-menu">
             <li class="nav-item ">
-                <a class="nav-link menu-arrow justify-content-start"
-                    data-bs-toggle="collapse" href="#homeData" role="button" aria-expanded="false"
-                    aria-controls="homeData">
+                <a class="nav-link menu-arrow justify-content-start" data-bs-toggle="collapse" href="#homeData"
+                    role="button" aria-expanded="false" aria-controls="homeData">
                     <span class="item-name">Home</span>
-                    <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-18" width="18" height="18"
-                        viewBox="0 0 24 24">
-                        <path d="M19 8.5L12 15.5L5 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                    </svg>
                 </a>
-                <ul class="iq-header-sub-menu list-unstyled collapse" id="homeData">
-                    <li class="nav-item">
-                        <a class="nav-link {{ activeRoute(route('landing-pages.index')) }}"
-                            href="{{ route('landing-pages.index') }}">
-                            App Landing Page
-                        </a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.software')) }}"
-                            href="{{ route('landing-pages.software') }}">Software Landing Page</a></li>
-                </ul>
+
             </li>
             <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.about')) }}"
                     href="{{ route('landing-pages.about') }}">About Us</a></li>

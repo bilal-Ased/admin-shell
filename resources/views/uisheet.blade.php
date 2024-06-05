@@ -1,23 +1,4 @@
 <x-app-layout layout="landing" :isHeader1=true>
-
-    <script>
-        (function(d, t) {
-            var BASE_URL = "https://app.chatwoot.com";
-            var g = d.createElement(t),
-                s = d.getElementsByTagName(t)[0];
-            g.src = BASE_URL + "/packs/js/sdk.js";
-            g.defer = true;
-            g.async = true;
-            s.parentNode.insertBefore(g, s);
-            g.onload = function() {
-                window.chatwootSDK.run({
-                    websiteToken: 'EKay5PshPuU4hw6zqg4SYgCr',
-                    baseUrl: BASE_URL
-                })
-            }
-        })(document, "script");
-    </script>
-
     <div class="banner-one-app">
         <div class="container">
             <div class="row align-items-center">
@@ -95,7 +76,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12 text-center">
                     <p class="mb-2 text-white">
-                        Download now
+                        Get in Touch Now
                     </p>
                     <h2 class="mb-5 text-white">Fast, easy, and <span class="text-primary">Affordable</span> </h2>
                     <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet at diam vivamus
@@ -202,18 +183,7 @@
                     </p>
                     <h2 class="text-secondary mb-4">Expert <span class="text-primary">Teams</span></h2>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card team-image mb-4 mb-lg-0">
-                        <x-landing-pages.widgets.team teamImage="team1.webp" teamTitle="Darlene Robertson"
-                            teamText="Founder" />
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card team-image mb-4 mb-lg-0">
-                        <x-landing-pages.widgets.team teamImage="team2.webp" teamTitle="Floyd Miles"
-                            teamText="UI designer" />
-                    </div>
-                </div>
+
                 <div class="col-md-6 col-lg-3">
                     <div class="card team-image mb-4 mb-lg-0">
                         <x-landing-pages.widgets.team teamImage="team-3.webp" teamTitle="Arlene McCoy"
@@ -306,52 +276,7 @@
             </div>
         </div>
     </div>
-    <div class="section-card-padding bg-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12 text-center">
-                    <p class="mb-2 text-uppercase text-primary">
-                        Blog
-                    </p>
-                    <h2 class="text-secondary mb-4">All the <span class="text-primary">Support you Need</span></h2>
-                </div>
-                <div class="overflow-hidden slider-circle-btn mt-5" id="app-slider">
-                    <ul class="p-0 m-0 swiper-wrapper list-inline">
-                        <li class="swiper-slide  card-slide card overflow-hidde">
-                            <x-landing-pages.widgets.blog blogImage="home-3/02.webp"
-                                blogTitle="The
-                        Shaping the futures, part by part."
-                                blogText="Video" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.blog blogImage="home-3/03.webp"
-                                blogTitle="Technology that unwinds your potential." blogText="Video" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.blog blogImage="home-3/04.webp"
-                                blogTitle="Generating the best online environment." blogText="Video" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.blog blogImage="home-3/02.webp"
-                                blogTitle="The
-                        Shaping the futures, part by part."
-                                blogText="Video" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.blog blogImage="home-3/03.webp"
-                                blogTitle="Technology that unwinds your potential." blogText="Video" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.blog blogImage="home-3/04.webp"
-                                blogTitle="Generating the best online environment." blogText="Video" />
-                        </li>
-                    </ul>
-                    <div class="swiper-button swiper-button-next"></div>
-                    <div class="swiper-button swiper-button-prev"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="section-card-padding">
         <div class="container">
             <div class="row">
