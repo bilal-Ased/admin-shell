@@ -17,7 +17,7 @@ class WhatsAppController extends Controller
     {
 
         $data = $request->all();
-        //Log::info(response()->json($request->all()));
+        Log::info('Received data: ', $data);
 
         return $this->sendMessage($data['from_phone'], $data['from_name']);
 
