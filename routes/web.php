@@ -2,7 +2,6 @@
 
 // Controllers
 
-use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Announcements;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\brandController;
@@ -16,16 +15,13 @@ use App\Http\Controllers\locationController;
 use App\Http\Controllers\Materialscontroller;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ScriptController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SubscriptionController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WebChatController;
 use App\Http\Controllers\WhatsAppController;
 use App\Models\DoctorSchedule;
 use Illuminate\Support\Facades\Artisan;
@@ -116,9 +112,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/services', [ServicesController::class, 'index'])->name('services.index');
     Route::post('/services', [ServicesController::class, 'store'])->name('services.store');
 
-    Route::get('/chat', [WebChatController::class, 'index']);
-    Route::post('/broadcast', [WebChatController::class, 'brodcast']);
-    Route::post('/receive', [WebChatController::class, 'receive']);
     Route::get('/send-message', [WhatsAppController::class, 'sendMessage']);
 
     Route::get('/settings/doctor-shedule', [DoctorSchedule::class, 'index'])->name('shedule.index');
@@ -130,11 +123,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('all/brands', [Materialscontroller::class, 'getBrands']);
     Route::get('all/locations', [Materialscontroller::class, 'getLocations']);
     Route::get('all/accounts', [Materialscontroller::class, 'getAccounts']);
-
-    Route::get('/suppliers/index', [SupplierController::class, 'index'])->name('suppliers.index');
-    Route::post('/suppliers/store', [SupplierController::class, 'store'])->name('suppliers.store');
-
-    Route::get('/search/suppliers', [SupplierController::class, 'search'])->name('suppliers.search');
 
     Route::get('/projects/index', [ProjectController::class, 'index'])->name('projects.index');
     Route::post('/projects/store', [ProjectController::class, 'store'])->name('projects.store');
@@ -149,22 +137,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/configurations/locations', [locationController::class, 'index'])->name('location.index');
     Route::post('/settings/configurations/locations/store', [locationController::class, 'store'])->name('locations.store');
 
-    Route::get('/settings/configurations/accounts', [AccountsController::class, 'index'])->name('accounts.index');
-    Route::post('/settings/configurations/accounts/store', [AccountsController::class, 'store'])->name('accounts.store');
-
 });
 
 Route::any('/chatwoot/webhook', [chatwootController::class, 'getResponse']);
 Route::any('/facebook/index', [FacebookController::class, 'index']);
 Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);
 Route::any('/facebook/webhook', [FacebookController::class, 'getResponse']);
-Route::any('/whatsapp/index', [WhatsAppController::class, 'index']);
+Route::any('/whatsapp/index', [WhatsAppController::class, 'index'])->name('whatsapp.index');
 Route::any('/whatsapp/response', [WhatsAppController::class, 'getResponse']);
-
-Route::get('/kati', [ScriptController::class, 'index']);
-
-// Route for scraping the content
-Route::get('/scrape', [ScriptController::class, 'scrape']);
 
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {

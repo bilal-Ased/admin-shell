@@ -30,9 +30,11 @@
                         about us
                     </p>
                     <h2 class=" mb-4">What are <span class="text-primary">we</span></h2>
-                    <p class="mb-5">Welcome to Mughal Tech, where managing your inventory becomes seamless and
-                        efficient. Our inventory system is designed to empower your business by providing real-time
-                        insights, streamlining operations, and ensuring optimal stock levels.</p>
+                    <p class="mb-5">Welcome to Tidal Wave Technologies! We specialize in building cutting-edge ERP,
+                        CRM, websites, mobile apps, and integrating payments and social channels. Our innovative
+                        solutions provide real-time insights, streamline operations, and enhance business performance.
+                        At Tidal Wave Technologies, we bring your software dreams to life. Dive into the future with us!
+                    </p>
                     <div class="d-flex align-items-center">
                         <div>
                             <h5 class="text-primary mb-2">100%</h5>
@@ -40,7 +42,7 @@
                         </div>
                         <div class="ms-4">
                             <h5 class="text-primary mb-2">15k</h5>
-                            <p class="mb-0">Downloads</p>
+                            <p class="mb-0">Deployments</p>
                         </div>
                         <div class="ms-4">
                             <h5 class="text-primary mb-2">24/7</h5>
@@ -83,8 +85,8 @@
                         sodales magna
                         suspendisse. Mi volutpat vel convallis sed risus egestas.</p>
                     <div class="d-flex align-items-center justify-content-center">
-                        <a href="#" class="btn btn-primary">Try It For Free</a>
-                        <a href="#" class="btn btn-light ms-2">Download Pro</a>
+                        <a href="#" class="btn btn-primary">Book a Consultation</a>
+                        <a href="#" class="btn btn-light ms-2">Get In Touch on WhatsApp</a>
                     </div>
                 </div>
             </div>
@@ -174,31 +176,7 @@
             </div>
         </div>
     </div>
-    <div class="section-padding bg-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-12 text-center">
-                    <p class="mb-2 text-uppercase text-primary">
-                        Team
-                    </p>
-                    <h2 class="text-secondary mb-4">Expert <span class="text-primary">Teams</span></h2>
-                </div>
 
-                <div class="col-md-6 col-lg-3">
-                    <div class="card team-image mb-4 mb-lg-0">
-                        <x-landing-pages.widgets.team teamImage="team-3.webp" teamTitle="Arlene McCoy"
-                            teamText="Researcher" />
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card team-image mb-4 mb-lg-0">
-                        <x-landing-pages.widgets.team teamImage="team-4.webp" teamTitle="Darlene Robertson"
-                            teamText="Founder" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="section-card-padding">
         <div class="container">
             <div class="row align-items-center">
@@ -389,4 +367,9 @@
             </div>
         </div>
     </div>
+
+
+
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/40b4e916-6182-4c6d-abdc-a70a935c6543/webchat/config.js" defer></script>
 </x-app-layout>

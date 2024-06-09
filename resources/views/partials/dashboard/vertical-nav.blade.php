@@ -160,13 +160,13 @@
     </li>
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
-            <span class="default-icon">Inventory Managment</span>
+            <span class="default-icon">Social Media</span>
             <span class="mini-icon">-</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-inventory-pages" role="button"
-            aria-expanded="false" aria-controls="sidebar-inventory-pages">
+        <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-social-pages" role="button"
+            aria-expanded="false" aria-controls="sidebar-social-pages">
             <i class="icon">
                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path opacity="0.4"
@@ -177,7 +177,7 @@
                         fill="currentColor"></path>
                 </svg>
             </i>
-            <span class="item-name">Materials</span>
+            <span class="item-name">Social Channels</span>
             <i class="right-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -185,10 +185,9 @@
                 </svg>
             </i>
         </a>
-        <ul class="sub-nav collapse" id="sidebar-inventory-pages" data-bs-parent="#sidebar">
+        <ul class="sub-nav collapse" id="sidebar-social-pages" data-bs-parent="#sidebar">
             <li class=" nav-item">
-                <a class="nav-link {{ activeRoute(route('materials.index')) }}"
-                    href="{{ route('materials.index') }}">
+                <a class="nav-link {{ activeRoute(route('whatsapp.index')) }}" href="{{ route('whatsapp.index') }}">
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
                             fill="currentColor">
@@ -198,43 +197,12 @@
                         </svg>
                     </i>
                     <i class="sidenav-mini-icon"> B </i>
-                    <span class="item-name">All Materials</span>
+                    <span class="item-name">Whats App</span>
                 </a>
             </li>
-
-            <li class=" nav-item">
-                <a class="nav-link {{ activeRoute(route('suppliers.index')) }}"
-                    href="{{ route('suppliers.index') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"> C </i>
-                    <span class="item-name">All Suppliers</span>
-                </a>
-            </li>
-
-            {{-- <li class="nav-item">
-                <a class="nav-link  {{ activeRoute(route('special-pages.calender')) }}"
-                    href="{{ route('special-pages.calender') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"> C </i>
-                    <span class="item-name">Suppliers</span>
-                </a>
-            </li> --}}
         </ul>
     </li>
+
 
     <li>
         <hr class="hr-horizontal">
@@ -402,74 +370,7 @@
             <span class="item-name">Announcements</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-maps" role="button" aria-expanded="false"
-            aria-controls="sidebar-maps">
-            <i class="icon">
-                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M8.53162 2.93677C10.7165 1.66727 13.402 1.68946 15.5664 2.99489C17.7095 4.32691 19.012 6.70418 18.9998 9.26144C18.95 11.8019 17.5533 14.19 15.8075 16.0361C14.7998 17.1064 13.6726 18.0528 12.4488 18.856C12.3228 18.9289 12.1848 18.9777 12.0415 19C11.9036 18.9941 11.7693 18.9534 11.6508 18.8814C9.78243 17.6746 8.14334 16.134 6.81233 14.334C5.69859 12.8314 5.06584 11.016 5 9.13442C4.99856 6.57225 6.34677 4.20627 8.53162 2.93677ZM9.79416 10.1948C10.1617 11.1008 11.0292 11.6918 11.9916 11.6918C12.6221 11.6964 13.2282 11.4438 13.6748 10.9905C14.1214 10.5371 14.3715 9.92064 14.3692 9.27838C14.3726 8.29804 13.7955 7.41231 12.9073 7.03477C12.0191 6.65723 10.995 6.86235 10.3133 7.55435C9.63159 8.24635 9.42664 9.28872 9.79416 10.1948Z"
-                        fill="currentColor"></path>
-                    <ellipse opacity="0.4" cx="12" cy="21" rx="5" ry="1"
-                        fill="currentColor"></ellipse>
-                </svg>
-            </i>
-            <span class="item-name">Configurations</span>
-            <i class="right-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </i>
-        </a>
-        <ul class="sub-nav collapse" id="sidebar-maps" data-bs-parent="#sidebar">
-            <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('brands.index')) }}" href="{{ route('brands.index') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"></i>
-                    <span class="item-name">Brands</span>
-                </a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('location.index')) }}" href="{{ route('location.index') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"></i>
-                    <span class="item-name">Locations</span>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('accounts.index')) }}" href="{{ route('accounts.index') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24"
-                            fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"></i>
-                    <span class="item-name">Accounts</span>
-                </a>
-            </li>
-        </ul>
-    </li>
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-form" role="button" aria-expanded="false"
             aria-controls="sidebar-form">

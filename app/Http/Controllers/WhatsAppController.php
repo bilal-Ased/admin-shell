@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WhatsappMessages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -10,13 +11,34 @@ class WhatsAppController extends Controller
 {
     public function index()
     {
-        return view('whatsapp.index');
+        $whatsAppMessages = WhatsappMessages::all();
+
+        return view('whatsapp.index', compact('whatsAppMessages'));
+    }
+
+    public function show($id)
+    {
+        $whatsApp = WhatsappMessages::find($id);
+
+        return view('whatsapp.show', compact('whatsApp'));
     }
 
     public function getResponse(Request $request)
     {
 
         $data = $request->all();
+        $message = new WhatsappMessages();
+        $message->company_id = $data['company_id'];
+        $message->company_name = $data['company_name'];
+        $message->message_id = $data['message_id'];
+        $message->from_number = $data['from_number'];
+        $message->from_username = $data['from_username'];
+        $message->from_id = $data['from_id'];
+        $message->text_body = $data['text_body'];
+        $message->type = $data['type'];
+        $message->message = $data['message'];
+        $message->save();
+
         Log::info('Received data: ', $data);
 
         return $this->sendMessage($data['from_phone'], $data['from_name']);
