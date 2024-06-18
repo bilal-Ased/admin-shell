@@ -143,8 +143,12 @@ Route::any('/chatwoot/webhook', [chatwootController::class, 'getResponse']);
 Route::any('/facebook/index', [FacebookController::class, 'index']);
 Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);
 Route::any('/facebook/webhook', [FacebookController::class, 'getResponse']);
-Route::any('/whatsapp/index', [WhatsAppController::class, 'index'])->name('whatsapp.index');
-Route::any('/whatsapp/response', [WhatsAppController::class, 'getResponse']);
+
+Route::prefix('whatsapp')->group(function () {
+    Route::any('/index', [WhatsAppController::class, 'index'])->name('whatsapp.index');
+    Route::any('/response', [WhatsAppController::class, 'getResponse']);
+    Route::get('/contacts/{contact_id}/messages', [WhatsAppController::class, 'getContactMessages']);
+});
 
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {

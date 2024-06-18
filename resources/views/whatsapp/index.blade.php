@@ -509,30 +509,21 @@
                     </div>
                 </div>
                 <ul class="people">
-                    @foreach ($whatsAppMessages as $whatsAppMessage)
-                        <li class="person" data-chat="{{ $whatsAppMessage->id }}">
-                            <img src="{{ asset('images/avatars/whatsapp_profile_pic.jpg') }}" alt="" />
-                            <span class="name">{{ $whatsAppMessage->from_username }}</span>
-                            <span class="time">{{ $whatsAppMessage->created_at }}</span>
-                            <span class="preview">{{ $whatsAppMessage->text_body }}</span>
+                    @foreach ($whatsappContacts as $whatsappContact)
+                        @php
+                            $latestMessage = $whatsappContact->latestMessage;
+                        @endphp
+                        <li class="person" onclick="getContactMessages(`{{ $whatsappContact->id }}`)">
+                            <img src="{{ asset('images/avatars/whatsapp_profile_pic.jpg') }}" alt="Profile Picture" />
+                            <span class="name">{{ $whatsappContact->from_username }}</span>
+                            <span class="time">{{ $latestMessage->created_at }}</span>
+                            <span class="preview">{{ $latestMessage->text_body }}</span>
                         </li>
                     @endforeach
                 </ul>
-
-
             </div>
             <div class="right">
-                <div class="top"><span>To: <span class="name">Dog Woofson</span></span></div>
-                @foreach ($whatsAppMessages as $whatsAppMessage)
-                    <div class="chat" data-chat="{{ $whatsAppMessage->id }}">
-                        <div class="conversation-start">
-                            <span>{{ $whatsAppMessage->created_at }}</span>
-                        </div>
-                        <div class="bubble you">
-                            {{ $whatsAppMessage->text_body }}
-                        </div>
-                    </div>
-                @endforeach
+                <div id="whatsappConversation"></div>
                 <div class="write d-flex">
                     <a href="javascript:;" class="write-link attach col-1"></a>
                     <input type="text" class="col-9" />
@@ -548,8 +539,8 @@
     </div>
 
     <script>
-        document.querySelector('.chat[data-chat="{{ $whatsAppMessages[0]->id }}"]').classList.add('active-chat');
-        document.querySelector('.person[data-chat="{{ $whatsAppMessages[0]->id }}"]').classList.add('active');
+        document.querySelector('.chat[data-chat="{{ $whatsappContacts[0]->id }}"]').classList.add('active-chat');
+        document.querySelector('.person[data-chat="{{ $whatsappContacts[0]->id }}"]').classList.add('active');
 
         let friends = {
                 list: document.querySelector('ul.people'),
@@ -580,6 +571,24 @@
             chat.wcContainer.querySelector('[data-chat="' + chat.person + '"]').classList.add('active-chat');
             friends.name = f.querySelector('.name').innerText;
             chat.name.innerHTML = friends.name;
+        }
+
+        function getContactMessages(contact_id) {
+            const url = `{{ url('') }}/whatsapp/contacts/${contact_id}/messages`
+            console.log('url:::', url)
+            console.log('contact_id:', contact_id)
+            // whatsappConversation
+            fetch(url).then((resp) => {
+                return resp.text()
+            }).then((text) => {
+
+                $('.right').prepend(text)
+
+                console.log(text)
+            })
+
+
+
         }
     </script>
 </x-app-layout>

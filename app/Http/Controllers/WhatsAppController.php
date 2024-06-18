@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WhatsappMessages;
+use App\Models\WhatsappContact;
+use App\Models\WhatsappMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -11,14 +12,19 @@ class WhatsAppController extends Controller
 {
     public function index()
     {
-        $whatsAppMessages = WhatsappMessages::all();
 
-        return view('whatsapp.index', compact('whatsAppMessages'));
+        // $whatsAppMessages = WhatsappMessage::with('contact')->get();
+
+        $whatsappContacts = WhatsappContact::all();
+        // dd($whatsappContacts[1]->latestMessage);
+        // $whatsAppMessages = WhatsappContact::all();
+
+        return view('whatsapp.index', compact('whatsappContacts'));
     }
 
     public function show($id)
     {
-        $whatsApp = WhatsappMessages::find($id);
+        $whatsApp = WhatsappMessage::find($id);
 
         return view('whatsapp.show', compact('whatsApp'));
     }
@@ -26,22 +32,45 @@ class WhatsAppController extends Controller
     public function getResponse(Request $request)
     {
 
+        // Extract all data from the webhook request
         $data = $request->all();
-        $message = new WhatsappMessages();
-        $message->company_id = $data['company_id'];
-        $message->company_name = $data['company_name'];
-        $message->message_id = $data['message_id'];
-        $message->from_number = $data['from_number'];
-        $message->from_username = $data['from_username'];
-        $message->from_id = $data['from_id'];
-        $message->text_body = $data['text_body'];
-        $message->type = $data['type'];
-        $message->message = $data['message'];
+
+        // Assign the values directly
+        $company_id = $data['company_id'];
+        $company_name = $data['company_name'];
+        $from_phone = $data['from_phone'];
+        $from_username = $data['from_username'];
+        $message_id = $data['message_id'];
+        $from_id = $data['from_id'];
+        $text_body = $data['text_body'];
+        $type = $data['type'];
+
+        // Check if we already have this customer
+        $whatsapp_contact = WhatsappContact::where('from_phone', $from_phone)->first();
+        if (! $whatsapp_contact) {
+            $whatsapp_contact = WhatsappContact::create([
+                'from_phone' => $from_phone,
+                'from_username' => $from_username,
+                'company_id' => $company_id,
+                'company_name' => $company_name,
+            ]);
+        }
+
+        // Create a new WhatsappMessage instance with the data
+        $message = new WhatsappMessage([
+            'whatsapp_contact_id' => $whatsapp_contact->id,
+            'message_id' => $message_id,
+            'from_id' => $from_id,
+            'text_body' => $text_body,
+            'type' => $type,
+        ]);
+
+        // Save the message to the database
         $message->save();
 
         Log::info('Received data: ', $data);
 
-        return $this->sendMessage($data['from_phone'], $data['from_name']);
+        return $this->sendMessage($data['from_phone'], $data['from_name']);  // Change to 'from_phone'
 
     }
 
@@ -94,5 +123,13 @@ class WhatsAppController extends Controller
 
             return null;
         }
+    }
+
+    public function getContactMessages($contact_id)
+    {
+        $contact = WhatsappContact::find($contact_id);
+        $whatsAppMessages = WhatsappMessage::all();
+
+        return view('whatsapp.messages', ['whatsAppMessages' => $whatsAppMessages, 'contact' => $contact]);
     }
 }

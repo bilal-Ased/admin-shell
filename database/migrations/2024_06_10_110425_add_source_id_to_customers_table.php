@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('whatsapp_messages', function (Blueprint $table) {
-            $table->string('messages')->nullable();
+        Schema::table('customers', function (Blueprint $table) {
+
+            $table->unsignedBigInteger('source_id')->nullable()->default(1);
         });
     }
 
@@ -21,8 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('whatsapp_messages', function (Blueprint $table) {
-            $table->dropColumn('messages');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropColumn('source_id');
         });
     }
 };

@@ -370,6 +370,117 @@
 
 
 
-    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-    <script src="https://mediafiles.botpress.cloud/40b4e916-6182-4c6d-abdc-a70a935c6543/webchat/config.js" defer></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import {
+            getAnalytics
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyAdYC4caf6YIPqKBPM-IeZ81saSRPjSRXo",
+            authDomain: "kati-crm-test.firebaseapp.com",
+            projectId: "kati-crm-test",
+            storageBucket: "kati-crm-test.appspot.com",
+            messagingSenderId: "164843034020",
+            appId: "1:164843034020:web:7f05ca96dd04ff57c69d31",
+            measurementId: "G-58E2MD82CX"
+        };
+
+
+
+        <
+        script type = "text/javascript" >
+            (function(c, l, a, r, i, t, y) {
+                c[a] = c[a] || function() {
+                    (c[a].q = c[a].q || []).push(arguments)
+                };
+                t = l.createElement(r);
+                t.async = 1;
+                t.src = "https://www.clarity.ms/tag/" + i;
+                y = l.getElementsByTagName(r)[0];
+                y.parentNode.insertBefore(t, y);
+            })(window, document, "clarity", "script", "mpvf3dqnxz");
+    </script>
+
+
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    </script>
+
+
+    <a href="https://wa.me/254797686905" class="wa-float-img-circle" target="_blank">
+        <img src="https://cdn.sendpulse.com/img/messengers/sp-i-small-forms-wa.svg" alt="WhatsApp" />
+    </a>
+    <style type="text/css">
+        .wa-float-img-circle {
+            width: 56px;
+            height: 56px;
+            bottom: 20px;
+            right: 20px;
+            border-radius: 100%;
+            position: fixed;
+            z-index: 99999;
+            display: flex;
+            transition: all .3s;
+            align-items: center;
+            justify-content: center;
+            background: #25D366;
+        }
+
+        .wa-float-img-circle img {
+            position: relative;
+        }
+
+        .wa-float-img-circle:before {
+            position: absolute;
+            content: '';
+            background-color: #25D366;
+            width: 70px;
+            height: 70px;
+            bottom: -7px;
+            right: -7px;
+            border-radius: 100%;
+            animation: wa-float-circle-fill-anim 2.3s infinite ease-in-out;
+            transform-origin: center;
+            opacity: .2;
+        }
+
+        .wa-float-img-circle:hover {
+            box-shadow: 0px 3px 16px #24af588a;
+        }
+
+        .wa-float-img-circle:focus {
+            box-shadow: 0px 0 0 3px #25d36645;
+        }
+
+        .wa-float-img-circle:hover:before,
+        .wa-float-img-circle:focus:before {
+            display: none;
+        }
+
+        @keyframes wa-float-circle-fill-anim {
+            0% {
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+
+            50% {
+                transform: rotate(0deg) scale(1) skew(1deg);
+            }
+
+            100% {
+                transform: rotate(0deg) scale(0.7) skew(1deg);
+            }
+        }
+    </style>
+
+
 </x-app-layout>
