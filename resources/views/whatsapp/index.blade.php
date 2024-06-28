@@ -512,6 +512,22 @@
                     @foreach ($whatsappContacts as $whatsappContact)
                         @php
                             $latestMessage = $whatsappContact->latestMessage;
+                            if ($latestMessage) {
+                                $timestamp = Carbon\Carbon::parse($latestMessage->created_at);
+                                $formattedTime = '';
+
+                                if ($timestamp->isToday()) {
+                                    $formattedTime = $timestamp->format('H:i');
+                                } elseif ($timestamp->isYesterday()) {
+                                    $formattedTime = 'Yesterday';
+                                } elseif ($timestamp->greaterThan(Carbon\Carbon::now()->subWeek())) {
+                                    $formattedTime = $timestamp->format('l'); // Day of the week (e.g., Monday)
+                                } else {
+                                    $formattedTime = $timestamp->format('d M Y'); // Day, Month, Year (e.g., 10 Jun 2024)
+                                }
+                            } else {
+                                $formattedTime = 'No messages';
+                            }
                         @endphp
                         <li class="person" onclick="getContactMessages(`{{ $whatsappContact->id }}`)">
                             <img src="{{ asset('images/avatars/whatsapp_profile_pic.jpg') }}" alt="Profile Picture" />
@@ -522,15 +538,28 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="right">
-                <div id="whatsappConversation"></div>
+            <div class="right px-3">
+
+                {{-- <div class="top"><span>To: <span class="name">from_username</span></span></div>
+                <div class="chat" data-chat="1">
+                    @foreach ([1, 2, 3, 4.5, 6, 7] as $whatsAppMessage)
+                        <div class="conversation-start">
+                            <span>{{ $whatsAppMessage }}. created_at</span>
+                        </div>
+                        <div class="bubble you">
+                            text_body
+                        </div>
+                    @endforeach
+                </div> --}}
+
+                <div id="whatsappConversation" class="chat-old"></div>
                 <div class="write d-flex">
                     <a href="javascript:;" class="write-link attach col-1"></a>
                     <input type="text" class="col-9" />
                     <div class="col-2">
                         <div class="d-flex justify-content-center">
                             <a href="javascript:;" class="write-link smiley"></a>
-                            <a href="javascript:;" class="write-link send"></a>
+                            <a href="javascript:;" id="sendMessageButton" class="write-link send">Send Message</a>
                         </div>
                     </div>
                 </div>
@@ -582,13 +611,58 @@
                 return resp.text()
             }).then((text) => {
 
-                $('.right').prepend(text)
+                $('#whatsappConversation').html(text)
 
                 console.log(text)
             })
 
 
 
+
+        }
+
+
+
+
+
+        document.getElementById('sendMessageButton').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default link behavior (optional)
+
+            // Example: Fetch phone and sender name dynamically (you can replace with your actual data retrieval logic)
+            var phone = document.getElementById('phoneInput')
+                .value; // Assuming you have an input field with id="phoneInput"
+            var senderName = document.getElementById('senderNameInput')
+                .value; // Assuming you have an input field with id="senderNameInput"
+
+            // Call sendMessage function with dynamic values
+            sendMessage(phone, senderName);
+        });
+
+        // Define the sendMessage function (you might already have this in your PHP)
+        function sendMessage(phone, senderName) {
+            var postParams = {
+                'phone': phone,
+                'sender_name': senderName
+            };
+
+            // Assuming you're using AJAX to call the PHP function
+            fetch('YOUR_PHP_ENDPOINT_URL', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postParams)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response from PHP (data)
+                    console.log('Message sent:', data);
+                    // You can update UI or show success message here
+                })
+                .catch(error => {
+                    console.error('Error sending message:', error);
+                    // Handle errors here
+                });
         }
     </script>
 </x-app-layout>

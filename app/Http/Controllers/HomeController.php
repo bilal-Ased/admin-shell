@@ -8,6 +8,8 @@ use App\Models\Project;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 class HomeController extends Controller
 {
@@ -16,6 +18,13 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
+        $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(6));
+
+        $selectedItem = isset($analyticsData[0]) ? $analyticsData[0] : null;
+
+        dd($analyticsData);
+
         $userCount = User::count();
         $customerCount = Customer::getTotalCount();
         $newCustomerCount = Customer::where('created_at', '>=', Carbon::now()->subDays(30))->count();
@@ -28,7 +37,7 @@ class HomeController extends Controller
 
         $assets = ['chart', 'animation'];
 
-        return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'itemsCount', 'upcomingProjects'));
+        return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'itemsCount', 'upcomingProjects', 'analyticsData'));
     }
 
     /*

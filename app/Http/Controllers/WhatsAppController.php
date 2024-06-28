@@ -16,8 +16,6 @@ class WhatsAppController extends Controller
         // $whatsAppMessages = WhatsappMessage::with('contact')->get();
 
         $whatsappContacts = WhatsappContact::all();
-        // dd($whatsappContacts[1]->latestMessage);
-        // $whatsAppMessages = WhatsappContact::all();
 
         return view('whatsapp.index', compact('whatsappContacts'));
     }
@@ -128,7 +126,7 @@ class WhatsAppController extends Controller
     public function getContactMessages($contact_id)
     {
         $contact = WhatsappContact::find($contact_id);
-        $whatsAppMessages = WhatsappMessage::all();
+        $whatsAppMessages = WhatsappMessage::where('whatsapp_contact_id', $contact->id)->get();
 
         return view('whatsapp.messages', ['whatsAppMessages' => $whatsAppMessages, 'contact' => $contact]);
     }

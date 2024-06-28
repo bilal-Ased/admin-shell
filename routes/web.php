@@ -6,6 +6,7 @@ use App\Http\Controllers\Announcements;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\brandController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\chatwootController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
@@ -150,6 +151,8 @@ Route::prefix('whatsapp')->group(function () {
     Route::get('/contacts/{contact_id}/messages', [WhatsAppController::class, 'getContactMessages']);
 });
 
+Route::get('/chatbot/session', [ChatbotController::class, 'createSession']);
+Route::get('/chatbot/index', [ChatbotController::class, 'index ']);
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {
     //MenuStyle Page Routs
