@@ -11,8 +11,8 @@
                         cutting-edge innovation ensures your experience is nothing short of extraordinary. Ready to
                         elevate your endeavors? Join us on this transformative ride! </p>
                     <div class="d-flex align-items-center">
-                        <a hrer="javascript" class="btn btn-primary">Try It For Free</a>
-                        <a hrer="javascript" class="btn btn-secondary ms-3">Download Pro</a>
+                        <a hrer="javascript" class="btn btn-primary">Book Demo</a>
+                        <a hrer="javascript" class="btn btn-secondary ms-3">Get Qoute</a>
                     </div>
                 </div>
                 <div class="col-lg-12 mt-4 mt-lg-0">
@@ -52,8 +52,7 @@
                     <a hrer="#" class="btn btn-primary mt-4">Get Started</a>
                 </div>
                 <div class="col-md-6 mt-4 mt-md-0">
-                    <img src="{{ asset('images/landing-pages/images/home-5/about-5.webp') }}" alt=""
-                        class="img-fluid ">
+                    <img src="{{ asset('images/landing-pages/images/home-5/about-5.webp') }}" alt="" class="img-fluid ">
                 </div>
             </div>
         </div>
@@ -81,8 +80,9 @@
                         Get in Touch Now
                     </p>
                     <h2 class="mb-5 text-white">Fast, easy, and <span class="text-primary">Affordable</span> </h2>
-                    <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet at diam vivamus
-                        sodales magna
+                    <p class="">Ready to transform your business with cutting-edge software solutions? Our team of
+                        experts is here to help you every step of the way. Whether you need custom software development,
+                        IT consulting, or seamless integration services, we've got you covered.
                         suspendisse. Mi volutpat vel convallis sed risus egestas.</p>
                     <div class="d-flex align-items-center justify-content-center">
                         <a href="#" class="btn btn-primary">Book a Consultation</a>
@@ -111,11 +111,12 @@
                             <a href="#" class="btn btn-primary mt-3">Get Started</a>
                         </div>
                         <div class="card-body ">
-                            <p>10 users included</p>
+                            <p>1-page website </p>
+                            <p>Basic template </p>
                             <p class="text-decoration-line-through">2GB of storage</p>
                             <p class="text-decoration-line-through">Email support</p>
                             <p class="text-decoration-line-through">Help center access</p>
-                            <p class="text-decoration-line-through mb-0">Help center access</p>
+                            <p class="text-decoration-line-through">Limited customization options</p>
                         </div>
                     </div>
                 </div>
@@ -129,11 +130,12 @@
                             <a href="#" class="btn btn-primary mt-3">Get Started</a>
                         </div>
                         <div class="card-body ">
-                            <p>10 users included</p>
-                            <p>10GB of storage</p>
-                            <p>Priority Email support</p>
+                            <p>Up to 5-page website</p>
+                            <p>Standard templates </p>
+                            <p>Basic customization options </p>
+                            <p class="text-decoration-line-through">Priority Email support</p>
+                            <p>2GB of Storage</p>
                             <p>Help center access</p>
-                            <p class=" mb-0">Help center access</p>
                         </div>
                     </div>
                 </div>
@@ -147,11 +149,14 @@
                             <a href="#" class="btn btn-outline-light mt-3">Get Started</a>
                         </div>
                         <div class="card-body ">
-                            <p>30 users included</p>
-                            <p>15GB of storage</p>
-                            <p>Help center access</p>
+                            <p>Custom-designed website
+                            </p>
+                            <p>Unlimited pages </p>
+                            <p>Advanced customization options </p>
+                            <p>Call and email support
+                            </p>
+                            <p>15GB Access</p>
                             <p class="text-decoration-line-through">Help center access</p>
-                            <p class="mb-0 text-decoration-line-through">Call and email support</p>
                         </div>
                     </div>
                 </div>
@@ -165,11 +170,18 @@
                             <a href="#" class="btn btn-primary mt-3">Get Started</a>
                         </div>
                         <div class="card-body ">
-                            <p>50 users included</p>
-                            <p>60GB of storage</p>
-                            <p>24 x 7 call support</p>
-                            <p class="text-decoration-line-through">Help center access</p>
-                            <p class="mb-0 text-decoration-line-through">Help center access</p>
+                            <p>Highly customized solutions
+
+                            </p>
+                            <p>Scalable architecture
+                            </p>
+                            <p>Advanced customization </p>
+                            <p>Dedicated support team
+                            </p>
+                            <p>24/7 support availability
+                            </p>
+                            <p>Unlimited Access
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -187,42 +199,34 @@
                 <div class="overflow-hidden slider-circle-btn" id="testimonial-one-slider">
                     <ul class="p-0 m-0 swiper-wrapper list-inline">
                         <li class="swiper-slide card-slide card overflow-hidden mb-0">
-                            <x-landing-pages.widgets.testimonial-one testTitle="A true game changer."
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
+                            <x-landing-pages.widgets.testimonial-one testTitle="A true game changer." testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
                         luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
                                 testUser="user-1.webp" userTitle="Eleen Rogers" Id="01" />
                         </li>
                         <li class="swiper-slide card-slide card overflow-hidden mb-0">
-                            <x-landing-pages.widgets.testimonial-one testTitle="Best you can Get"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
+                            <x-landing-pages.widgets.testimonial-one testTitle="Best you can Get" testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
                         luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
                                 testUser="user-2.webp" userTitle="Brooklyn Simmons" Id="02" />
                         </li>
                         <li class="swiper-slide card-slide card overflow-hidden mb-0">
-                            <x-landing-pages.widgets.testimonial-one
-                                testTitle="Perfect poduct for your
-                        business"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget
+                            <x-landing-pages.widgets.testimonial-one testTitle="Perfect poduct for your
+                        business" testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget
                         condimentum luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
                                 testUser="user-3.webp" userTitle="Jenny Wilson" Id="03" />
                         </li>
                         <li class="swiper-slide card-slide card overflow-hidden mb-0">
-                            <x-landing-pages.widgets.testimonial-one testTitle="A true game changer."
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
+                            <x-landing-pages.widgets.testimonial-one testTitle="A true game changer." testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
                         luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
                                 testUser="user-1.webp" userTitle="Eleen Rogers" Id="01" />
                         </li>
                         <li class="swiper-slide card-slide card overflow-hidden mb-0">
-                            <x-landing-pages.widgets.testimonial-one testTitle="Best you can Get"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
+                            <x-landing-pages.widgets.testimonial-one testTitle="Best you can Get" testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
                         luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
                                 testUser="user-2.webp" userTitle="Brooklyn Simmons" Id="02" />
                         </li>
                         <li class="swiper-slide card-slide card overflow-hidden mb-0">
-                            <x-landing-pages.widgets.testimonial-one
-                                testTitle="Perfect poduct for your
-                        business"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget
+                            <x-landing-pages.widgets.testimonial-one testTitle="Perfect poduct for your
+                        business" testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget
                         condimentum luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
                                 testUser="user-3.webp" userTitle="Jenny Wilson" Id="03" />
                         </li>
@@ -276,8 +280,8 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit?
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show"
-                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <p class="mb-0">Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                                         amet
@@ -308,13 +312,12 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false"
-                                    aria-controls="collapseThree">
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit?
                                 </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse"
-                                aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <p class="mb-0">Amet minim mollit non deserunt ullamco est sit aliqua dolor do
                                         amet
@@ -327,8 +330,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFour">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false"
-                                    aria-controls="collapseFour">
+                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit?
                                 </button>
                             </h2>
@@ -346,8 +348,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFive">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFive" aria-expanded="false"
-                                    aria-controls="collapseFive">
+                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit?
                                 </button>
                             </h2>

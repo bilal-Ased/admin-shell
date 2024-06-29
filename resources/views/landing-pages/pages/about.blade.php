@@ -166,8 +166,8 @@
                         </div>
                         <div class="col mb-4">
                             <div class="d-flex align-items-center">
-                                <svg width="24" class="me-2" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="24" class="me-2" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path opacity="0.4"
                                         d="M16.3402 1.99976H7.67024C4.28024 1.99976 2.00024 4.37976 2.00024 7.91976V16.0898C2.00024 19.6198 4.28024 21.9998 7.67024 21.9998H16.3402C19.7302 21.9998 22.0002 19.6198 22.0002 16.0898V7.91976C22.0002 4.37976 19.7302 1.99976 16.3402 1.99976Z"
                                         fill="#3A57E8" />
@@ -180,8 +180,8 @@
                         </div>
                         <div class="col mb-4">
                             <div class="d-flex align-items-center">
-                                <svg width="24" class="me-2" height="24" viewBox="0 0 24 24"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="24" class="me-2" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path opacity="0.4"
                                         d="M16.3402 1.99976H7.67024C4.28024 1.99976 2.00024 4.37976 2.00024 7.91976V16.0898C2.00024 19.6198 4.28024 21.9998 7.67024 21.9998H16.3402C19.7302 21.9998 22.0002 19.6198 22.0002 16.0898V7.91976C22.0002 4.37976 19.7302 1.99976 16.3402 1.99976Z"
                                         fill="#3A57E8" />
@@ -196,8 +196,7 @@
                     <a hrer="#" class="btn btn-primary">Know More</a>
                 </div>
                 <div class="col-md-6 mt-4 mt-md-0">
-                    <img src="{{ asset('images/landing-pages/images/home-4/Image-1.webp') }}" alt=""
-                        class="img-fluid ">
+                    <img src="{{ asset('images/landing-pages/images/home-4/Image-1.webp') }}" alt="" class="img-fluid ">
                 </div>
             </div>
         </div>
@@ -224,60 +223,6 @@
         </div>
     </div>
     <div class="section-card-padding">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12 text-center">
-                    <p class="mb-3 text-primary">Reviews</p>
-                    <h2 class="mb-5 text-secondary">What our <span class="text-primary">Customer’s are saying</span>
-                    </h2>
-                </div>
-                <div class="overflow-hidden slider-circle-btn" id="testimonial-one-slider">
-                    <ul class="p-0 m-0 swiper-wrapper list-inline">
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.testimonial-one testTitle="A true game changer."
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
-                        luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
-                                testUser="user-1.webp" userTitle="Eleen Rogers" Id="01" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.testimonial-one testTitle="Best you can Get"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
-                        luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
-                                testUser="user-2.webp" userTitle="Brooklyn Simmons" Id="02" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.testimonial-one
-                                testTitle="Perfect poduct for your
-                        business"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget
-                        condimentum luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
-                                testUser="user-3.webp" userTitle="Jenny Wilson" Id="03" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.testimonial-one testTitle="A true game changer."
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
-                        luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
-                                testUser="user-1.webp" userTitle="Eleen Rogers" Id="01" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.testimonial-one testTitle="Best you can Get"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget condimentum
-                        luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
-                                testUser="user-2.webp" userTitle="Brooklyn Simmons" Id="02" />
-                        </li>
-                        <li class="swiper-slide card-slide card overflow-hidden">
-                            <x-landing-pages.widgets.testimonial-one
-                                testTitle="Perfect poduct for your
-                        business"
-                                testText="“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae, eget
-                        condimentum luctus nec nec tellus sem sed. Diam elementum tellus posuere ipsum tortor.”"
-                                testUser="user-3.webp" userTitle="Jenny Wilson" Id="03" />
-                        </li>
-                    </ul>
-                    <div class="swiper-button swiper-button-next"></div>
-                    <div class="swiper-button swiper-button-prev"></div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </x-app-layout>

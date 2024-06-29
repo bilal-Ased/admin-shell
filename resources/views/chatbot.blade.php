@@ -1,41 +1,103 @@
-<!DOCTYPE html>
-<html>
+<x-app-layout :assets="$assets ?? []">
 
-<head>
-    <title>Chatbot</title>
-</head>
 
-<body>
-    <div id="chatbot-container"></div>
+    <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Ask Me anything</h4>
+
+                        </div>
+                        <div class="card-body">
+                            <div id="chatbot-container">
+
+
+                                <form method="POST" id="newSessionForm">
+                                    <input type="text" name="name" />
+                                    <input type="text" name="email" />
+                                    <button>
+                                        Save
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch("/chatbot/session", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({
-                        name: "John Doe",
-                        email: "john@gmail.com"
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.url) {
-                        const iframe = document.createElement('iframe');
-                        iframe.src = data.url;
-                        iframe.style.height = '640px';
-                        iframe.style.width = '400px';
-                        document.getElementById('chatbot-container').appendChild(iframe);
-                    } else {
-                        console.error('Failed to retrieve the session URL.');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        });
-    </script>
-</body>
+        const newSessionForm = document.querySelector('#newSessionForm')
+    newSessionForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+        handleSubmit(e)
+    })
+        function handleSubmit(e){
 
-</html>
+            const target = e.target
+            const name = target.name.value
+            const email = target.email.value
+
+            if (name == '' )
+            {
+                alert('Name is empty')
+                return 
+            }
+
+            if (email == '' )
+            {
+                alert( 'Email is empty')
+                return
+            }
+
+            const iframe = document.createElement("iframe");
+            iframe.style.height = "660px";
+            iframe.style.width = "800px";
+            iframe.className = "mx-auto";
+
+            const url = `{{url('chatbot/session')}}`
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name,
+                    email
+                }),
+            })
+                .then((res) => res.json())
+                .then((results) => {
+                    console.log(results)
+
+                    const url = results.url
+
+                    iframe.src = url;
+                    newSessionForm.style.display = 'none'
+                });
+
+            document.getElementById("chatbot-container").appendChild(iframe);
+        
+        }
+    </script>
+
+</x-app-layout>

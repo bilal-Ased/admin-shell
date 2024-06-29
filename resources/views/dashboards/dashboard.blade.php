@@ -1,22 +1,6 @@
 <x-app-layout :assets="$assets ?? []">
 
-    <script>
-        (function(d, t) {
-            var BASE_URL = "https://app.chatwoot.com";
-            var g = d.createElement(t),
-                s = d.getElementsByTagName(t)[0];
-            g.src = BASE_URL + "/packs/js/sdk.js";
-            g.defer = true;
-            g.async = true;
-            s.parentNode.insertBefore(g, s);
-            g.onload = function() {
-                window.chatwootSDK.run({
-                    websiteToken: '2bNAyGASPiBstFgDaqy1R8Km',
-                    baseUrl: BASE_URL
-                })
-            }
-        })(document, "script");
-    </script>
+
 
 
     <div class="row">
@@ -170,8 +154,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24"
                                         fill="currentColor">
                                         <g id="Solid dot2">
-                                            <circle id="Ellipse 65" cx="12" cy="12" r="8"
-                                                fill="currentColor"></circle>
+                                            <circle id="Ellipse 65" cx="12" cy="12" r="8" fill="currentColor"></circle>
                                         </g>
                                     </svg>
                                     <div class="ms-2">
@@ -182,8 +165,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24"
                                         fill="currentColor">
                                         <g id="Solid dot3">
-                                            <circle id="Ellipse 66" cx="12" cy="12" r="8"
-                                                fill="currentColor"></circle>
+                                            <circle id="Ellipse 66" cx="12" cy="12" r="8" fill="currentColor"></circle>
                                         </g>
                                     </svg>
                                     <div class="ms-2">
@@ -229,49 +211,49 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($upcomingProjects as $project)
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <h6>{{ $project->customer->first_name }}
-                                                            {{ $project->customer->last_name }}</h6>
-                                                    </div>
-                                                </td>
-                                                <td>{{ $project->budget }}</td>
-                                                <td>
-                                                    @php
-                                                        $projectCreatedAt = new DateTime($project->project_created_at);
-                                                        $now = new DateTime();
-                                                        $interval = $projectCreatedAt->diff($now);
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <h6>{{ $project->customer->first_name }}
+                                                        {{ $project->customer->last_name }}</h6>
+                                                </div>
+                                            </td>
+                                            <td>{{ $project->budget }}</td>
+                                            <td>
+                                                @php
+                                                $projectCreatedAt = new DateTime($project->project_created_at);
+                                                $now = new DateTime();
+                                                $interval = $projectCreatedAt->diff($now);
 
-                                                        $days = $interval->days;
-                                                        $hours = $interval->h;
-                                                        $minutes = $interval->i;
-                                                        $seconds = $interval->s;
+                                                $days = $interval->days;
+                                                $hours = $interval->h;
+                                                $minutes = $interval->i;
+                                                $seconds = $interval->s;
 
-                                                        $countdown = '';
+                                                $countdown = '';
 
-                                                        if ($days > 0) {
-                                                            $countdown .= $days . ' days ';
-                                                        }
+                                                if ($days > 0) {
+                                                $countdown .= $days . ' days ';
+                                                }
 
-                                                        if ($hours > 0) {
-                                                            $countdown .= $hours . ' hours ';
-                                                        }
+                                                if ($hours > 0) {
+                                                $countdown .= $hours . ' hours ';
+                                                }
 
-                                                        if ($minutes > 0) {
-                                                            $countdown .= $minutes . ' minutes ';
-                                                        }
+                                                if ($minutes > 0) {
+                                                $countdown .= $minutes . ' minutes ';
+                                                }
 
-                                                        if ($seconds > 0) {
-                                                            $countdown .= $seconds . ' seconds ';
-                                                        }
+                                                if ($seconds > 0) {
+                                                $countdown .= $seconds . ' seconds ';
+                                                }
 
-                                                        echo rtrim($countdown);
-                                                    @endphp
-                                                </td>
+                                                echo rtrim($countdown);
+                                                @endphp
+                                            </td>
 
 
-                                            </tr>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -285,7 +267,7 @@
         <div class="col-md-12 col-lg-4">
             <div class="row">
                 <div class="col-md-6 col-lg-12">
-                    {{-- add new chart here  --}}
+                    {{-- add new chart here --}}
 
                     <div class="card" data-aos="fade-up" data-aos-delay="1200">
                         <div class="card-header d-flex justify-content-between flex-wrap">
@@ -328,7 +310,7 @@
                             <div class="header-title">
                                 <h4 class="card-title mb-2">Activity overview</h4>
                                 <p class="mb-0">
-                                    <svg class ="me-2" width="24" height="24" viewBox="0 0 24 24">
+                                    <svg class="me-2" width="24" height="24" viewBox="0 0 24 24">
                                         <path fill="#17904b"
                                             d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" />
                                     </svg>

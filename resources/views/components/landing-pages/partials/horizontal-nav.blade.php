@@ -7,10 +7,10 @@
                     xmlns="http://www.w3.org/2000/svg">
                     <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2"
                         transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"></rect>
-                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2"
-                        transform="rotate(-45 7.72803 27.728)" fill="currentColor"></rect>
-                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2"
-                        transform="rotate(45 10.5366 16.3945)" fill="currentColor"></rect>
+                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)"
+                        fill="currentColor"></rect>
+                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)"
+                        fill="currentColor"></rect>
                     <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2"
                         transform="rotate(45 10.5562 -0.556152)" fill="currentColor"></rect>
                 </svg>
@@ -28,8 +28,6 @@
             </li>
             <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.about')) }}"
                     href="{{ route('landing-pages.about') }}">About Us</a></li>
-            <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.feature')) }}"
-                    href="{{ route('landing-pages.feature') }}">Features</a></li>
             <li class="nav-item"><a class="nav-link {{ activeRoute(route('landing-pages.pricing')) }}"
                     href="{{ route('landing-pages.pricing') }}">Pricing</a></li>
             <li class="nav-item d-xl-none"><a class="nav-link {{ activeRoute(route('landing-pages.blog')) }}"

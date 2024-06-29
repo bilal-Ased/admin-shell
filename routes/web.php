@@ -11,6 +11,7 @@ use App\Http\Controllers\chatwootController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\feedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\locationController;
 use App\Http\Controllers\Materialscontroller;
@@ -52,16 +53,11 @@ Route::group(['prefix' => 'landing-pages'], function () {
     Route::get('blog', [HomeController::class, 'landing_blog'])->name('landing-pages.blog');
     Route::get('blog-detail', [HomeController::class, 'landing_blog_detail'])->name('landing-pages.blog-detail');
     Route::get('about', [HomeController::class, 'landing_about'])->name('landing-pages.about');
-    Route::get('contact', [HomeController::class, 'landing_contact'])->name('landing-pages.contact');
+    Route::get('contact', [feedbackController::class, 'index'])->name('landing-pages.contact');
+    Route::post('contact/feedback', [feedbackController::class, 'store'])->name('feedback.store');
     Route::get('ecommerce', [HomeController::class, 'landing_ecommerce'])->name('landing-pages.ecommerce');
     Route::get('faq', [HomeController::class, 'landing_faq'])->name('landing-pages.faq');
-    Route::get('feature', [HomeController::class, 'landing_feature'])->name('landing-pages.feature');
     Route::get('pricing', [HomeController::class, 'landing_pricing'])->name('landing-pages.pricing');
-    Route::get('saas', [HomeController::class, 'landing_saas'])->name('landing-pages.saas');
-    Route::get('shop', [HomeController::class, 'landing_shop'])->name('landing-pages.shop');
-    Route::get('shop-detail', [HomeController::class, 'landing_shop_detail'])->name('landing-pages.shop-detail');
-    Route::get('software', [HomeController::class, 'landing_software'])->name('landing-pages.software');
-    Route::get('startup', [HomeController::class, 'landing_startup'])->name('landing-pages.startup');
 
     Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 
@@ -90,33 +86,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/companies/index', [CompaniesController::class, 'index'])->name('companies.index');
     Route::post('/companies', [CompaniesController::class, 'store'])->name('companies.store');
 
-    Route::get('/appointments/index', [AppointmentController::class, 'index'])->name('appointments.index');
-    Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
-    Route::get('/appointments/list', [AppointmentController::class, 'list'])->name('appointments.list');
-    Route::get('/appointments/get', [AppointmentController::class, 'getAppointments']);
-    Route::post('/appointments/check-availability', [AppointmentController::class, 'checkAvailability']);
 
     Route::get('/calendar', [CalendarController::class, 'showCalendar'])->name('appointments.calendar');
-    Route::get('/search/customers', [AppointmentController::class, 'searchCustomers'])->name('customers.search');
-    Route::get('/create/ticket', [TicketsController::class, 'index']);
+ 
 
-    Route::get('/search/doctors', [AppointmentController::class, 'searchDoctors']);
 
     Route::get('/products/index', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'save'])->name('products.save');
 
-    Route::get('/announcements/index', [Announcements::class, 'index'])->name('announcements.index');
-    Route::post('/announcements', [Announcements::class, 'store'])->name('announcements.store');
-    Route::get('/announcements/{announcement}', [Announcements::class, 'show'])->name('announcements.show');
-
+ 
     Route::get('/settings/services', [ServicesController::class, 'index'])->name('services.index');
     Route::post('/services', [ServicesController::class, 'store'])->name('services.store');
 
     Route::get('/send-message', [WhatsAppController::class, 'sendMessage']);
-
-    Route::get('/settings/doctor-shedule', [DoctorSchedule::class, 'index'])->name('shedule.index');
-    Route::get('/settings/doctor-shedule/post', [DoctorSchedule::class, 'store'])->name('doctor-schedules.store');
 
     Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
     Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');
@@ -140,7 +123,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::any('/chatwoot/webhook', [chatwootController::class, 'getResponse']);
 Route::any('/facebook/index', [FacebookController::class, 'index']);
 Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);
 Route::any('/facebook/webhook', [FacebookController::class, 'getResponse']);
@@ -151,8 +133,8 @@ Route::prefix('whatsapp')->group(function () {
     Route::get('/contacts/{contact_id}/messages', [WhatsAppController::class, 'getContactMessages']);
 });
 
-Route::get('/chatbot/session', [ChatbotController::class, 'createSession']);
-Route::get('/chatbot/index', [ChatbotController::class, 'index ']);
+Route::post('/chatbot/session', [ChatbotController::class, 'createSession']);
+Route::get('/chatbot/index', [ChatbotController::class, 'index']);
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {
     //MenuStyle Page Routs

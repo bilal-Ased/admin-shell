@@ -7,15 +7,14 @@ use Illuminate\Support\Facades\Http;
 
 class ChatbotController extends Controller
 {
+
+    public function index(){
+
+        return view('chatbot');
+    }
+
     public function createSession(Request $request)
     {
-
-        curl --location 'https://www.askyourdatabase.com/api/chatbot/session' --header 'Accept: application/json, text/plain, */*' --header 'Accept-Language: en' --header 'Content-Type: application/json' --data-raw '{
-            "secretKey": "6057699c1596533b8ea77d9d172887a0",
-            "name": "John Doe",
-            "email": "john@gmail.com"
-        }'
-
 
         $response = Http::withHeaders([
             'Accept' => 'application/json, text/plain, */*',

@@ -20,6 +20,25 @@
             --green: #25D366;
         }
 
+        @charset "UTF-8";
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box !important;
+        }
+
+        :root {
+            --white: #fff;
+            --black: #000;
+            --bg: #f8f8f8;
+            --grey: #999;
+            --dark: #1a1a1a;
+            --light: #e6e6e6;
+            --wrapper: 1000px;
+            --green: #25D366;
+        }
+
         body {
             background-color: var(--bg);
             -webkit-font-smoothing: antialiased;
@@ -55,6 +74,41 @@
             height: 100%;
             border: 1px solid var(--light);
             background-color: var(--white);
+        }
+
+        .wc-container .left .top {
+            position: relative;
+            width: 100%;
+            height: 96px;
+            padding: 29px;
+        }
+
+        .wc-container .left .top:after {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            display: block;
+            width: 80%;
+            height: 1px;
+            content: "";
+            background-color: var(--light);
+            transform: translate(-50%, 0);
+        }
+
+        .wc-container .left input {
+            float: left;
+            width: 100%;
+            height: 42px;
+            padding: 0 15px;
+            border: 1px solid var(--light);
+            background-color: #eceff1;
+            border-radius: 21px;
+            font-family: "Source Sans Pro", sans-serif;
+            font-weight: 400;
+        }
+
+        .wc-container .left input:focus {
+            outline: none;
         }
 
         .wc-container .left .top {
@@ -481,12 +535,10 @@
         }
 
         .right {
-            background-image: url('{{ asset('images/avatars/background.jpg') }}');
+            background-image: url('{{ asset(' images/avatars/background.jpg') }}');
             background-size: cover;
             background-position: center;
             opacity: 0.5;
-
-
         }
     </style>
 
@@ -510,31 +562,31 @@
                 </div>
                 <ul class="people">
                     @foreach ($whatsappContacts as $whatsappContact)
-                        @php
-                            $latestMessage = $whatsappContact->latestMessage;
-                            if ($latestMessage) {
-                                $timestamp = Carbon\Carbon::parse($latestMessage->created_at);
-                                $formattedTime = '';
+                    @php
+                    $latestMessage = $whatsappContact->latestMessage;
+                    if ($latestMessage) {
+                    $timestamp = Carbon\Carbon::parse($latestMessage->created_at);
+                    $formattedTime = '';
 
-                                if ($timestamp->isToday()) {
-                                    $formattedTime = $timestamp->format('H:i');
-                                } elseif ($timestamp->isYesterday()) {
-                                    $formattedTime = 'Yesterday';
-                                } elseif ($timestamp->greaterThan(Carbon\Carbon::now()->subWeek())) {
-                                    $formattedTime = $timestamp->format('l'); // Day of the week (e.g., Monday)
-                                } else {
-                                    $formattedTime = $timestamp->format('d M Y'); // Day, Month, Year (e.g., 10 Jun 2024)
-                                }
-                            } else {
-                                $formattedTime = 'No messages';
-                            }
-                        @endphp
-                        <li class="person" onclick="getContactMessages(`{{ $whatsappContact->id }}`)">
-                            <img src="{{ asset('images/avatars/whatsapp_profile_pic.jpg') }}" alt="Profile Picture" />
-                            <span class="name">{{ $whatsappContact->from_username }}</span>
-                            <span class="time">{{ $latestMessage->created_at }}</span>
-                            <span class="preview">{{ $latestMessage->text_body }}</span>
-                        </li>
+                    if ($timestamp->isToday()) {
+                    $formattedTime = $timestamp->format('H:i');
+                    } elseif ($timestamp->isYesterday()) {
+                    $formattedTime = 'Yesterday';
+                    } elseif ($timestamp->greaterThan(Carbon\Carbon::now()->subWeek())) {
+                    $formattedTime = $timestamp->format('l'); // Day of the week (e.g., Monday)
+                    } else {
+                    $formattedTime = $timestamp->format('d M Y'); // Day, Month, Year (e.g., 10 Jun 2024)
+                    }
+                    } else {
+                    $formattedTime = 'No messages';
+                    }
+                    @endphp
+                    <li class="person" onclick="getContactMessages(`{{ $whatsappContact->id }}`)">
+                        <img src="{{ asset('images/avatars/whatsapp_profile_pic.jpg') }}" alt="Profile Picture" />
+                        <span class="name">{{ $whatsappContact->from_username }}</span>
+                        <span class="time">{{ $latestMessage->created_at }}</span>
+                        <span class="preview">{{ $latestMessage->text_body }}</span>
+                    </li>
                     @endforeach
                 </ul>
             </div>
@@ -543,12 +595,12 @@
                 {{-- <div class="top"><span>To: <span class="name">from_username</span></span></div>
                 <div class="chat" data-chat="1">
                     @foreach ([1, 2, 3, 4.5, 6, 7] as $whatsAppMessage)
-                        <div class="conversation-start">
-                            <span>{{ $whatsAppMessage }}. created_at</span>
-                        </div>
-                        <div class="bubble you">
-                            text_body
-                        </div>
+                    <div class="conversation-start">
+                        <span>{{ $whatsAppMessage }}. created_at</span>
+                    </div>
+                    <div class="bubble you">
+                        text_body
+                    </div>
                     @endforeach
                 </div> --}}
 
@@ -559,7 +611,7 @@
                     <div class="col-2">
                         <div class="d-flex justify-content-center">
                             <a href="javascript:;" class="write-link smiley"></a>
-                            <a href="javascript:;" id="sendMessageButton" class="write-link send">Send Message</a>
+                            <a href="javascript:;" id="sendMessageButton" class="write-link send"></a>
                         </div>
                     </div>
                 </div>
@@ -624,19 +676,6 @@
 
 
 
-
-        document.getElementById('sendMessageButton').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link behavior (optional)
-
-            // Example: Fetch phone and sender name dynamically (you can replace with your actual data retrieval logic)
-            var phone = document.getElementById('phoneInput')
-                .value; // Assuming you have an input field with id="phoneInput"
-            var senderName = document.getElementById('senderNameInput')
-                .value; // Assuming you have an input field with id="senderNameInput"
-
-            // Call sendMessage function with dynamic values
-            sendMessage(phone, senderName);
-        });
 
         // Define the sendMessage function (you might already have this in your PHP)
         function sendMessage(phone, senderName) {
