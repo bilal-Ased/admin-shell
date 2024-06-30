@@ -1,5 +1,4 @@
 <x-app-layout :assets="$assets ?? []">
-
     <style>
         @charset "UTF-8";
 
@@ -17,26 +16,7 @@
             --dark: #1a1a1a;
             --light: #e6e6e6;
             --wrapper: 1000px;
-            --green: #25D366;
-        }
-
-        @charset "UTF-8";
-
-        *,
-        *:before,
-        *:after {
-            box-sizing: border-box !important;
-        }
-
-        :root {
-            --white: #fff;
-            --black: #000;
-            --bg: #f8f8f8;
-            --grey: #999;
-            --dark: #1a1a1a;
-            --light: #e6e6e6;
-            --wrapper: 1000px;
-            --green: #25D366;
+            --blue: #00b0ff;
         }
 
         body {
@@ -97,42 +77,7 @@
 
         .wc-container .left input {
             float: left;
-            width: 100%;
-            height: 42px;
-            padding: 0 15px;
-            border: 1px solid var(--light);
-            background-color: #eceff1;
-            border-radius: 21px;
-            font-family: "Source Sans Pro", sans-serif;
-            font-weight: 400;
-        }
-
-        .wc-container .left input:focus {
-            outline: none;
-        }
-
-        .wc-container .left .top {
-            position: relative;
-            width: 100%;
-            height: 96px;
-            padding: 29px;
-        }
-
-        .wc-container .left .top:after {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            display: block;
-            width: 80%;
-            height: 1px;
-            content: "";
-            background-color: var(--light);
-            transform: translate(-50%, 0);
-        }
-
-        .wc-container .left input {
-            float: left;
-            width: 100%;
+            width: 188px;
             height: 42px;
             padding: 0 15px;
             border: 1px solid var(--light);
@@ -149,12 +94,11 @@
         .wc-container .left a.search {
             display: block;
             float: left;
-            width: 100%;
+            width: 42px;
             height: 42px;
             margin-left: 10px;
-            align-items: center;
             border: 1px solid var(--light);
-            background-color: var(--green);
+            background-color: var(--blue);
             background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/382994/name-type.png");
             background-repeat: no-repeat;
             background-position: top 12px left 14px;
@@ -232,7 +176,7 @@
             margin-left: -1px;
             padding-top: 13px;
             border: 0;
-            background-color: var(--green);
+            background-color: var(--blue);
             width: calc(100% + 2px);
             padding-left: calc(10% + 1px);
         }
@@ -428,7 +372,7 @@
         .wc-container .right .bubble.you {
             float: left;
             color: var(--white);
-            background-color: var(--green);
+            background-color: var(--blue);
             align-self: flex-start;
             -webkit-animation-name: slideFromLeft;
             animation-name: slideFromLeft;
@@ -436,7 +380,7 @@
 
         .wc-container .right .bubble.you:before {
             left: -3px;
-            background-color: var(--green);
+            background-color: var(--blue);
         }
 
         .wc-container .right .bubble.me {
@@ -461,10 +405,9 @@
         }
 
         .wc-container .right .conversation-start span {
-            font-size: 17px;
+            font-size: 14px;
             display: inline-block;
-            color: black;
-            font-weight: bolder;
+            color: var(--grey);
         }
 
         .wc-container .right .conversation-start span:before,
@@ -475,7 +418,7 @@
             width: 30%;
             height: 1px;
             content: "";
-            background-color: black;
+            background-color: var(--light);
         }
 
         .wc-container .right .conversation-start span:before {
@@ -533,16 +476,7 @@
                 opacity: 1;
             }
         }
-
-        .right {
-            background-image: url('{{ asset(' images/avatars/background.jpg') }}');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.5;
-        }
     </style>
-
-
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
@@ -591,19 +525,6 @@
                 </ul>
             </div>
             <div class="right px-3">
-
-                {{-- <div class="top"><span>To: <span class="name">from_username</span></span></div>
-                <div class="chat" data-chat="1">
-                    @foreach ([1, 2, 3, 4.5, 6, 7] as $whatsAppMessage)
-                    <div class="conversation-start">
-                        <span>{{ $whatsAppMessage }}. created_at</span>
-                    </div>
-                    <div class="bubble you">
-                        text_body
-                    </div>
-                    @endforeach
-                </div> --}}
-
                 <div id="whatsappConversation" class="chat-old"></div>
                 <div class="write d-flex">
                     <a href="javascript:;" class="write-link attach col-1"></a>
@@ -678,30 +599,6 @@
 
 
         // Define the sendMessage function (you might already have this in your PHP)
-        function sendMessage(phone, senderName) {
-            var postParams = {
-                'phone': phone,
-                'sender_name': senderName
-            };
-
-            // Assuming you're using AJAX to call the PHP function
-            fetch('YOUR_PHP_ENDPOINT_URL', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(postParams)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle the response from PHP (data)
-                    console.log('Message sent:', data);
-                    // You can update UI or show success message here
-                })
-                .catch(error => {
-                    console.error('Error sending message:', error);
-                    // Handle errors here
-                });
-        }
+        
     </script>
 </x-app-layout>

@@ -100,8 +100,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <img src="{{ asset('images/landing-pages/images/home-1/aboutus.webp') }}" alt=""
-                        class="img-fluid ">
+                    <img src="{{ asset('images/landing-pages/images/home-1/aboutus.webp') }}" alt="" class="img-fluid ">
                 </div>
                 <div class="col-md-6">
                     <p class="mb-2 text-secondary text-uppercase">
@@ -216,16 +215,13 @@
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                 <div class="col">
-                    <img src="{{ asset('images/landing-pages/images/home-1/01.webp') }}" alt=""
-                        class="img-fluid ">
+                    <img src="{{ asset('images/landing-pages/images/home-1/01.webp') }}" alt="" class="img-fluid ">
                 </div>
                 <div class="col">
-                    <img src="{{ asset('images/landing-pages/images/home-1/02.webp') }}" alt=""
-                        class="img-fluid ">
+                    <img src="{{ asset('images/landing-pages/images/home-1/02.webp') }}" alt="" class="img-fluid ">
                 </div>
                 <div class="col">
-                    <img src="{{ asset('images/landing-pages/images/home-1/03.webp') }}" alt=""
-                        class="img-fluid ">
+                    <img src="{{ asset('images/landing-pages/images/home-1/03.webp') }}" alt="" class="img-fluid ">
                 </div>
             </div>
         </div>
@@ -358,49 +354,39 @@
                 <div class="overflow-hidden slider-circle-btn" id="testimonial-slider">
                     <ul class="p-0 m-0 swiper-wrapper list-inline">
                         <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal
-                                testText="Torquatos nec eu, detr
+                            <x-landing-pages.widgets.testiominal testText="Torquatos nec eu, detr
                         periculis ex, nihil expetendis in mei. Mei an pericula euripidis.hinc partem ei est. Eos ei nisl
                         graecis, vix aperiri consequat an. Eius lorem tincidunt vix at, vel pertinax sensibus id, error
                         epicurei mea. Mea facilisis urbanitas.Torquatos nec eu, detr periculis ex, nihil expetendis in
-                        mei."
-                                testOwner="Elsa Schmidt" testSubtitle="Spa" />
+                        mei." testOwner="Elsa Schmidt" testSubtitle="Spa" />
                         </li>
                         <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal
-                                testText="Torquatos nec eu, detr
+                            <x-landing-pages.widgets.testiominal testText="Torquatos nec eu, detr
                         periculis ex, nihil expetendis in mei. Mei an pericula euripidis.hinc partem ei est. Eos ei nisl
                         graecis, vix aperiri consequat an. Eius lorem tincidunt vix at, vel pertinax sensibus id, error
                         epicurei mea. Mea facilisis urbanitas.Torquatos nec eu, detr periculis ex, nihil expetendis in
-                        mei."
-                                testOwner="Elsa Schmidt" testSubtitle="Spa" />
+                        mei." testOwner="Elsa Schmidt" testSubtitle="Spa" />
                         </li>
                         <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal
-                                testText="Torquatos nec eu, detr
+                            <x-landing-pages.widgets.testiominal testText="Torquatos nec eu, detr
                         periculis ex, nihil expetendis in mei. Mei an pericula euripidis.hinc partem ei est. Eos ei nisl
                         graecis, vix aperiri consequat an. Eius lorem tincidunt vix at, vel pertinax sensibus id, error
                         epicurei mea. Mea facilisis urbanitas.Torquatos nec eu, detr periculis ex, nihil expetendis in
-                        mei."
-                                testOwner="Elsa Schmidt" testSubtitle="Spa" />
+                        mei." testOwner="Elsa Schmidt" testSubtitle="Spa" />
                         </li>
                         <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal
-                                testText="Torquatos nec eu, detr
+                            <x-landing-pages.widgets.testiominal testText="Torquatos nec eu, detr
                         periculis ex, nihil expetendis in mei. Mei an pericula euripidis.hinc partem ei est. Eos ei nisl
                         graecis, vix aperiri consequat an. Eius lorem tincidunt vix at, vel pertinax sensibus id, error
                         epicurei mea. Mea facilisis urbanitas.Torquatos nec eu, detr periculis ex, nihil expetendis in
-                        mei."
-                                testOwner="Elsa Schmidt" testSubtitle="Spa" />
+                        mei." testOwner="Elsa Schmidt" testSubtitle="Spa" />
                         </li>
                         <li class="swiper-slide">
-                            <x-landing-pages.widgets.testiominal
-                                testText="Torquatos nec eu, detr
+                            <x-landing-pages.widgets.testiominal testText="Torquatos nec eu, detr
                         periculis ex, nihil expetendis in mei. Mei an pericula euripidis.hinc partem ei est. Eos ei nisl
                         graecis, vix aperiri consequat an. Eius lorem tincidunt vix at, vel pertinax sensibus id, error
                         epicurei mea. Mea facilisis urbanitas.Torquatos nec eu, detr periculis ex, nihil expetendis in
-                        mei."
-                                testOwner="Elsa Schmidt" testSubtitle="Spa" />
+                        mei." testOwner="Elsa Schmidt" testSubtitle="Spa" />
                         </li>
                     </ul>
                     <div class="swiper-button swiper-button-next"></div>
