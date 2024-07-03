@@ -14,62 +14,7 @@
                         <a hrer="javascript" class="btn btn-primary" id="bookDemo">Book Demo</a>
                         <a hrer="javascript" class="btn btn-secondary ms-3">Get Qoute</a>
                     </div>
-                    <div class="modal fade" id="bookDemoModal" tabindex="-1" aria-labelledby="bookDemoLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="bookDemoModal">Book Demo</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="text" class="form-control" placeholder="First Name"
-                                                id="first_name" name="first_name" required>
-                                        </div>
-                                        <div class="col">
-                                            <input type="text" class="form-control" id="second_name"
-                                                placeholder="Second Name" name="second_name">
-                                        </div>
-                                    </div>
-
-                                    <br>
-
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="text" class="form-control" placeholder="Phone Number"
-                                                id="phone_number" name="phone_number" required>
-                                        </div>
-                                        <div class="col">
-                                            <input type="email" class="form-control" id="email"
-                                                placeholder="Email Address" name="email">
-                                        </div>
-                                    </div>
-
-                                    <br>
-                                    <div class="row">
-                                        <div class="col">
-                                            <input type="date"
-                                                class="form-control  date_flatpicker flatpickr-input active"" id="
-                                                end_date" placeholder="End Date" name="end_date">
-
-                                        </div>
-                                        <div class="col">
-                                            <input type="time"
-                                                class="form-control  date_flatpicker flatpickr-input active"" id=" time"
-                                                placeholder="End Date" name="time">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @include('bookDemoModal')
                 </div>
                 <div class="col-lg-12 mt-4 mt-lg-0">
                     <img src="{{ asset('images/landing-pages/images/home-5/top-banner.webp') }}" alt=""
@@ -519,12 +464,4 @@
             }
         }
     </style>
-
-
-    <script>
-        document.getElementById('bookDemo').addEventListener('click', function(){
-            $("#bookDemoModal").modal('show');
-        });
-
-    </script>
 </x-app-layout>

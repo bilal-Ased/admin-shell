@@ -23,13 +23,13 @@ class Customer extends Model
         return self::count();
     }
 
-    public function appointments()
-    {
-        return $this->hasMany(Appointment::class);
-    }
-
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    public function demo()
+    {
+        return $this->hasMany(Demo::class);
     }
 }

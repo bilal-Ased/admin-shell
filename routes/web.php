@@ -10,6 +10,7 @@ use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\chatwootController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\demoController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\feedbackController;
 use App\Http\Controllers\HomeController;
@@ -61,7 +62,9 @@ Route::group(['prefix' => 'landing-pages'], function () {
 
     Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 
+    
 });
+Route::post('demo',[demoController::class,'store'])->name('demo.store');
 
 //UI Pages Routs
 Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
