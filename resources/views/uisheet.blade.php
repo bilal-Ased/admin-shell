@@ -397,7 +397,12 @@
 
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
+
+
+        
     </script>
+
+
 
 
     <a href="https://wa.me/254797686905" class="wa-float-img-circle" target="_blank">
@@ -464,4 +469,6 @@
             }
         }
     </style>
+
+
 </x-app-layout>

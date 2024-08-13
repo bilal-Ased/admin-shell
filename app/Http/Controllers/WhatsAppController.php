@@ -130,4 +130,12 @@ class WhatsAppController extends Controller
 
         return view('whatsapp.messages', ['whatsAppMessages' => $whatsAppMessages, 'contact' => $contact]);
     }
+
+
+    public function getMessage(Request $request)
+    {
+        $data = $request->all();
+        Log::info(response()->json($request->all()));
+
+    }
 }

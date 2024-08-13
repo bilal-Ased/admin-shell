@@ -231,7 +231,7 @@
         </a>
         <ul class="sub-nav collapse" id="sidebar-helpdesk-pages" data-bs-parent="#sidebar">
             <li class=" nav-item">
-                <a class="nav-link {{ activeRoute(route('materials.index')) }}" href="{{ route('materials.index') }}">
+                <a class="nav-link {{ activeRoute(route('tickets.index')) }}" href="{{ route('tickets.index') }}">
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                             <g>
@@ -523,3 +523,20 @@
 
 
 </ul>
+
+
+<script>
+    let timer
+    function debounce(callback, e)
+    {
+        if(timer)
+    {
+        clearTimeout(timer)
+    }
+
+    timer = setTimeout(() => {
+        window[callback](e)
+    }, 800);
+
+    }
+</script>

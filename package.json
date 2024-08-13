@@ -11,6 +11,11 @@
         "production": "mix --production"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
+        "@material/textfield": "^14.0.0",
+        "@mui/material": "^5.16.1",
+        "@mui/styled-engine-sc": "^6.0.0-alpha.18",
         "@popperjs/core": "^2.9.1",
         "apexcharts": "^3.27.1",
         "bootstrap": "^5.2.3",
@@ -20,9 +25,11 @@
         "fslightbox": "^3.3.0-2",
         "fullcalendar": "^6.1.10",
         "jquery": "^3.6.0",
+        "material-components-web": "^14.0.0",
         "nouislider": "^14.7.0",
         "select2": "^4.1.0-rc.0",
         "smooth-scrollbar": "^8.7.4",
+        "styled-components": "^6.1.11",
         "sweetalert2": "^10.0.2",
         "swiper": "^6.5.7",
         "waypoints": "^4.0.1"

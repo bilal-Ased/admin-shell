@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Demo;
+use App\Notifications\DemoBooked;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class demoController extends Controller
 {
@@ -26,8 +28,6 @@ class demoController extends Controller
             'start_date' => $request->start_date,
             'start_time' => $request->start_time,
         ]);
-
-        return back()->with('success', 'Demo booked successfully!');
     }
 
 }

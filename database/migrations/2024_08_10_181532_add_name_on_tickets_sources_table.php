@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback', function (Blueprint $table) {
-            $table->id();
+        Schema::table('ticket_sources', function (Blueprint $table) {
             $table->string('name');
-            $table->string('email');
-            $table->string('subject');
-            $table->string('message');
-            $table->timestamps();
+            $table->boolean('status')->default(1);
         });
     }
 
@@ -26,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feedback');
+        Schema::table('ticket_sources', function (Blueprint $table) {
+            //
+        });
     }
 };

@@ -23,9 +23,11 @@ use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ticketsConfigsController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsAppController;
+use App\Models\Customer;
 use App\Models\DoctorSchedule;
 use Illuminate\Support\Facades\Artisan;
 // Packages
@@ -42,7 +44,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/storage', function () {
     Artisan::call('storage:link');
@@ -61,13 +63,15 @@ Route::group(['prefix' => 'landing-pages'], function () {
     Route::get('pricing', [HomeController::class, 'landing_pricing'])->name('landing-pages.pricing');
 
     Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
-
-    
 });
-Route::post('demo',[demoController::class,'store'])->name('demo.store');
+Route::post('demo', [demoController::class, 'store'])->name('demo.store');
 
 //UI Pages Routs
 Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
+
+
+Route::any('/incoming-messages', [WhatsAppController::class, 'getMessage']);
+
 
 Route::group(['middleware' => 'auth'], function () {
     // Permission Module
@@ -84,25 +88,31 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customers/index', [CustomerController::class, 'index'])->name('customers.index');
     Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
     Route::get('/customers/{id}/edit', [CustomerController::class, 'editCustomer'])->name('customers.edit');
-    Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
     Route::post('/customers/change-status/{id}', [CustomerController::class, 'changeStatus'])->name('customers.change-status');
     Route::get('/companies/index', [CompaniesController::class, 'index'])->name('companies.index');
+    Route::post('customers/search', [CustomerController::class, 'searchCustomers'])->name('customers.search');
+    Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
+
+
     Route::post('/companies', [CompaniesController::class, 'store'])->name('companies.store');
 
 
     Route::get('/calendar', [CalendarController::class, 'showCalendar'])->name('appointments.calendar');
- 
+
 
 
     Route::get('/products/index', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'save'])->name('products.save');
 
- 
+
     Route::get('/settings/services', [ServicesController::class, 'index'])->name('services.index');
     Route::post('/services', [ServicesController::class, 'store'])->name('services.store');
 
     Route::get('/send-message', [WhatsAppController::class, 'sendMessage']);
+
+
+    Route::get('/tickets/create', [TicketsController::class, 'index'])->name('tickets.index');
 
     Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
     Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');
@@ -124,6 +134,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/configurations/locations', [locationController::class, 'index'])->name('location.index');
     Route::post('/settings/configurations/locations/store', [locationController::class, 'store'])->name('locations.store');
 
+
+    Route::get('/settings/tickets/statuses', [ticketsConfigsController::class, 'getTicketStatus']);
+    Route::get('/settings/tickets/categories', [ticketsConfigsController::class, 'getTicketCategories']);
+    Route::get('/settings/tickets/sources', [ticketsConfigsController::class, 'getTicketSources']);
+    Route::get('/settings/all-users', [ticketsConfigsController::class, 'getAllUsers']);
 });
 
 Route::any('/facebook/index', [FacebookController::class, 'index']);

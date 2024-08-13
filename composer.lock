@@ -4,8 +4,82 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c42f5fd124dca2fb844ead899856191",
+    "content-hash": "97325b989bd2d936c9815b2d5d7ec922",
     "packages": [
+        {
+            "name": "algolia/algoliasearch-client-php",
+            "version": "3.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/algolia/algoliasearch-client-php.git",
+                "reference": "cf87b649f745479c0800299481d91dc303e23cea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/cf87b649f745479c0800299481d91dc303e23cea",
+                "reference": "cf87b649f745479c0800299481d91dc303e23cea",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": "^7.3 || ^8.0",
+                "psr/http-message": "^1.1 || ^2.0",
+                "psr/log": "^1.0 || ^2.0 || ^3.0",
+                "psr/simple-cache": "^1.0 || ^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.0",
+                "fzaninotto/faker": "^1.8",
+                "phpunit/phpunit": "^8.0 || ^9.0",
+                "symfony/yaml": "^2.0 || ^4.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "If you prefer to use Guzzle HTTP client instead of the Http Client implementation provided by the package"
+            },
+            "bin": [
+                "bin/algolia-doctor"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-2.0": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Http/Psr7/functions.php",
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Algolia\\AlgoliaSearch\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Algolia Team",
+                    "email": "contact@algolia.com"
+                }
+            ],
+            "description": "Algolia Search API Client for PHP",
+            "keywords": [
+                "algolia",
+                "api",
+                "client",
+                "php",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/3.4.1"
+            },
+            "time": "2023-08-28T14:34:04+00:00"
+        },
         {
             "name": "beyondcode/laravel-ask-database",
             "version": "1.0.0",
@@ -3718,6 +3792,84 @@
                 "source": "https://github.com/laravel/sanctum"
             },
             "time": "2023-12-19T18:44:48+00:00"
+        },
+        {
+            "name": "laravel/scout",
+            "version": "v10.11.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/scout.git",
+                "reference": "b31056d49ae0540a475947391d7ea8617d779aee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/b31056d49ae0540a475947391d7ea8617d779aee",
+                "reference": "b31056d49ae0540a475947391d7ea8617d779aee",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/bus": "^9.0|^10.0|^11.0",
+                "illuminate/contracts": "^9.0|^10.0|^11.0",
+                "illuminate/database": "^9.0|^10.0|^11.0",
+                "illuminate/http": "^9.0|^10.0|^11.0",
+                "illuminate/pagination": "^9.0|^10.0|^11.0",
+                "illuminate/queue": "^9.0|^10.0|^11.0",
+                "illuminate/support": "^9.0|^10.0|^11.0",
+                "php": "^8.0",
+                "symfony/console": "^6.0|^7.0"
+            },
+            "require-dev": {
+                "algolia/algoliasearch-client-php": "^3.2",
+                "meilisearch/meilisearch-php": "^1.0",
+                "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^7.31|^8.11|^9.0",
+                "php-http/guzzle7-adapter": "^1.0",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^9.3|^10.4",
+                "typesense/typesense-php": "^4.9.3"
+            },
+            "suggest": {
+                "algolia/algoliasearch-client-php": "Required to use the Algolia engine (^3.2).",
+                "meilisearch/meilisearch-php": "Required to use the Meilisearch engine (^1.0).",
+                "typesense/typesense-php": "Required to use the Typesense engine (^4.9)."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "10.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Scout\\ScoutServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Scout\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
+            "keywords": [
+                "algolia",
+                "laravel",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/scout/issues",
+                "source": "https://github.com/laravel/scout"
+            },
+            "time": "2024-08-06T15:13:57+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -7688,6 +7840,67 @@
                 }
             ],
             "time": "2023-06-16T10:52:11+00:00"
+        },
+        {
+            "name": "sensasi-delight/material-blade",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensasi-delight/material-blade.git",
+                "reference": "764153ba656efb77a92b046be25c60b671ff224c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensasi-delight/material-blade/zipball/764153ba656efb77a92b046be25c60b671ff224c",
+                "reference": "764153ba656efb77a92b046be25c60b671ff224c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9|^10|^11",
+                "illuminate/view": "^9|^10|^11",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.16"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MaterialBlade\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MaterialBlade\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zain Adam",
+                    "email": "zainadam.id@gmail.com"
+                }
+            ],
+            "description": "Material Blade is a simple package that provides the beautifulness of Google Material Design components as Laravel Blade components. Material Blade aims to make UI/UX development of your Laravel app faster, inspired by Material UI.",
+            "keywords": [
+                "blade",
+                "components",
+                "google",
+                "laravel",
+                "material design",
+                "package"
+            ],
+            "support": {
+                "issues": "https://github.com/sensasi-delight/material-blade/issues",
+                "source": "https://github.com/sensasi-delight/material-blade/tree/main"
+            },
+            "time": "2024-06-30T23:08:17+00:00"
         },
         {
             "name": "spatie/image",
@@ -14911,7 +15124,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bosunski/todo": 20
+        "bosunski/todo": 20,
+        "sensasi-delight/material-blade": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
