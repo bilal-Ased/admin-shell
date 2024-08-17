@@ -179,14 +179,13 @@
     </style>
     <div>
         <div class="row">
-            <div class="col-sm-12 col-lg-6">
+            <div class="col-sm-12 col-lg-5">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
                             {{-- <h4 class="card-title">Create Ticket</h4> --}}
                         </div>
                     </div>
-                    {{-- body placed here --}}
                     <div class="card-body" id="customerBio">
                         <img src="{{asset('client-images/7758834.jpg')}}" id="customerBioImageHolder" alt="Image" />
                         <div id="customerBioInner" style="display:none;">
@@ -194,19 +193,14 @@
                             <p class="cardText" id="customerPhone"><strong>Phone Number:</strong></p>
                             <p class="cardText" id="customerEmail"><strong>Email:</strong></p>
                             <p class="cardText" id="customerAltPhone"><strong>Alternate Number:</strong></p>
-                            <p class="cardText" id="customerStatus"><strong>Status:</strong></p>
                             <p class="cardText" id="customerCreated"><strong>Created At:</strong></p>
-                            <p class="cardText" id="customerUpdated"><strong>Updated At:</strong></p>
-                            <p class="cardText" id="customerDob"><strong>Date of Birth:</strong></p>
-                            <p class="cardText" id="customerGender"><strong>Gender:</strong></p>
                             <p class="cardText" id="customerCompanyId"><strong>Company ID:</strong></p>
-                            <p class="cardText" id="customerSourceId"><strong>Source ID:</strong></p>
                         </div>
 
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-lg-6">
+            <div class="col-sm-12 col-lg-7">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
@@ -214,7 +208,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form id="ticketForm">
+                        <form id="ticketForm" action="{{ route('tickets.store') }}" method="POST">
                             <div class="form-group">
                                 <label class="form-label" for="customer">Customer:</label>
                                 <input type="text" class="form-control form-control-sm" id="customerSearch"
@@ -232,13 +226,14 @@
                                     <div class="col">
                                         <label class="d-flex align-items-center gap-1"><span>Issue Source </span> <small
                                                 class="text-danger">*</small></label>
-                                        <select id="ticketSources" class="form-select">
+                                        <select id="ticketSources" class="form-select" name="issue_source_id">
 
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <label>Issue Category</label>
-                                        <select id="ticketCategory" class="form-control">
+                                        <label class="d-flex align-items-center gap-1"><span>Issue Category </span>
+                                            <small class="text-danger">*</small></label>
+                                        <select id="ticketCategory" class="form-control" name="issue_category_id">
                                         </select>
                                     </div>
                                 </div>
@@ -247,13 +242,14 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
-                                        <label>Disposition</label>
-                                        <input type="text" class="form-control form-control-sm"
-                                            placeholder="First name">
+                                        <label class="d-flex align-items-center gap-1"><span>Disposition </span> <small
+                                                class="text-danger">*</small></label>
+                                        <select id="ticketDisposition" class="form-control"
+                                            name="disposition_id"></select>
                                     </div>
                                     <div class="col">
                                         <label>Department</label>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Last name">
+                                        <select id="department" class="form-select" name="department_id"></select>
                                     </div>
                                 </div>
                             </div>
@@ -261,14 +257,16 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col">
-                                        <label>Assigned To</label>
-                                        <select id="assignedTo" class="form-select">
+                                        <label class="d-flex align-items-center gap-1"><span>Assigned To </span> <small
+                                                class="text-danger">*</small></label> <select id="assignedTo"
+                                            class="form-select" name="assigned_to">
 
                                         </select>
                                     </div>
                                     <div class=" col">
-                                        <label>Status</label>
-                                        <select id="ticketStatus" class="form-control">
+                                        <label class="d-flex align-items-center gap-1"><span>Status </span> <small
+                                                class="text-danger">*</small></label> <select id="ticketStatus"
+                                            class="form-control" name="status_id">
                                         </select>
                                     </div>
                                 </div>
@@ -277,13 +275,13 @@
 
                             <div class="form-group">
                                 <label for="customFile" class="form-label custom-file-input">Attach File</label>
-                                <input class="form-control" type="file" id="customFile">
+                                <input class="form-control" type="file" id="customFile" name="file_path">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="exampleFormControlTextarea1">Comments</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                                    name="comments"></textarea>
                             </div>
-
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -391,7 +389,7 @@
             customerBioInner.find('#customerName').text(customer.second_name)
             customerBioInner.find('#customerEmail').text(customer.email)
             customerBioInner.find('#customerPhone').text(customer.phone_number)
-            customerBioInner.find('#customerName').text(customer.first_name)
+            customerBioInner.find('#customerCreatedAt').text(customer.created_at)
             customerBioInner.find('#customerName').text(customer.first_name)
 
         }
@@ -405,31 +403,54 @@
         }
 
         initCustomer()
-        
         $(function() {
-            initializeSelect2('#ticketStatus', '{{URL('/settings/tickets/statuses ')}}');
+            
+            initializeSelect2('#ticketStatus', '{{URL('/settings/tickets/statuses')}}');
             initializeSelect2('#ticketCategory', '{{URL('/settings/tickets/categories ')}}');
             initializeSelect2('#ticketSources', '{{URL('/settings/tickets/sources ')}}');
-            initializeSelect2('#ticketSources', '{{URL('/settings/tickets/dispositions ')}}');
-            // initializeSelect2('#assignedTo', '{{URL('settings/all-users')}}');
-            listSelect2Data('assignedTo', `{{URL('settings/all-users')}}`, 'enter user name', 'ticketForm',selectCurrentLoggedInUser)
-            selectCurrentLoggedInUser()
+
+            // Generic change event binding for populating related Select2 elements
+            bindSelect2ChangeEvent('#ticketCategory', '#ticketDisposition', '{{URL('/settings/tickets/disposition')}}', 'issue_category_id');
+            bindSelect2ChangeEvent('#ticketDisposition', '#department', '{{URL('/settings/tickets/department')}}', 'disposition_id');
+
+            listSelect2Data('assignedTo', `{{URL('settings/all-users')}}`, 'enter user name', 'ticketForm', selectCurrentLoggedInUser);
+            selectCurrentLoggedInUser();
         });
 
+        // Global function to populate a Select2 dropdown with dynamic parameters
+        function populateSelect2(elementSelector, url, params = {}) {
+            let queryString = $.param(params);
+            let fullUrl = queryString ? `${url}?${queryString}` : url;
+            initializeSelect2(elementSelector, fullUrl);
+        }
+
+        // Function to bind the change event and populate related Select2 dropdowns
+        function bindSelect2ChangeEvent(triggerElementSelector, targetElementSelector, url, paramName) {
+            $(triggerElementSelector).on('change', function() {
+                var paramValue = $(this).val();
+                let params = {};
+                params[paramName] = paramValue;
+                populateSelect2(targetElementSelector, url, params);
+            });
+        }
 
 
-        function selectCurrentLoggedInUser()
-        {
-            
-            console.log('object')
         
+
+
+
+
+        function selectCurrentLoggedInUser() {
+
+            console.log('object')
+
             const user = @json($loggedInUser)
 
             const loggedInUser = new Option(
-                user.username,
-                user.id,
-            ) 
-            
+                user.username
+                , user.id
+            , )
+
             console.log(loggedInUser)
 
 
@@ -476,39 +497,44 @@
 
 
         function listSelect2Data(field_id, data_url, searchPlaceholder = null, dropdownParentId = null, callback = null) {
-        $("#" + field_id).select2({
-            searchInputPlaceholder: searchPlaceholder,
-            placeholder: searchPlaceholder,
-            allowClear: false,
-            dropdownParent: $('#' + dropdownParentId),
-            ajax: {
-                url: data_url,
-                dataType: 'json',
-                delay: 250,
-                type: "GET",
-                quietMillis: 50,
-                data: function(term) {
-                    if (!term.term) {
+            $("#" + field_id).select2({
+                searchInputPlaceholder: searchPlaceholder
+                , placeholder: searchPlaceholder
+                , allowClear: false
+                , dropdownParent: $('#' + dropdownParentId)
+                , ajax: {
+                    url: data_url
+                    , dataType: 'json'
+                    , delay: 250
+                    , type: "GET"
+                    , quietMillis: 50
+                    , data: function(term) {
+                        if (!term.term) {
+                            return {
+                                term: 'data_default'
+                            };
+                        }
                         return {
-                            term: 'data_default'
+                            term: term
+                            , format: 'json'
                         };
                     }
-                    return {
-                        term: term,
-                        format: 'json'
-                    };
-                },
-                processResults: function(data) {
-                    var results = data.data
-                    setTimeout(() => {
-                        if (callback) {callback()}
-                    }, 300);
-                    return {results}
-                },
-                cache: true
-            }
-        });
-    }
+                    , processResults: function(data) {
+                        var results = data.data
+                        setTimeout(() => {
+                            if (callback) {
+                                callback()
+                            }
+                        }, 300);
+                        return {
+                            results
+                        }
+                    }
+                    , cache: true
+                }
+            });
+        }
+
         function templateResult(data) {
             if (data.loading) {
                 return data.text;

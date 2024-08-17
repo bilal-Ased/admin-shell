@@ -11,6 +11,7 @@ use App\Http\Controllers\chatwootController;
 use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\demoController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\feedbackController;
 use App\Http\Controllers\HomeController;
@@ -113,6 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/tickets/create', [TicketsController::class, 'index'])->name('tickets.index');
+    Route::post('/tickets/store', [TicketsController::class, 'store'])->name('tickets.store');
 
     Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
     Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');
@@ -138,8 +140,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/tickets/statuses', [ticketsConfigsController::class, 'getTicketStatus']);
     Route::get('/settings/tickets/categories', [ticketsConfigsController::class, 'getTicketCategories']);
     Route::get('/settings/tickets/sources', [ticketsConfigsController::class, 'getTicketSources']);
+    Route::get('/settings/tickets/disposition', [ticketsConfigsController::class, 'getTicketDispositions']);
+    Route::get('/settings/tickets/department', [ticketsConfigsController::class, 'getDepartments']);
     Route::get('/settings/all-users', [ticketsConfigsController::class, 'getAllUsers']);
 });
+
+
+
+Route::get('/emails', [EmailController::class, 'index']);
+Route::get('/emails/respond/{mail_id}', [EmailController::class, 'respondView']);
+Route::post('/emails/respond/{mail_id}', [EmailController::class, 'respond']);
 
 Route::any('/facebook/index', [FacebookController::class, 'index']);
 Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);

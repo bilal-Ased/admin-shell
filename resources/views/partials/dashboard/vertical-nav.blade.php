@@ -457,6 +457,47 @@
             </li>
         </ul>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-ticket" role="button" aria-expanded="false"
+            aria-controls="sidebar-ticket">
+            <i class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M2 5C2 4.44772 2.44772 4 3 4H8.66667H21C21.5523 4 22 4.44772 22 5V8H15.3333H8.66667H2V5Z"
+                        fill="currentColor" stroke="white" />
+                    <path d="M2 8H6H14H22V11V19C22 19.5523 21.5523 20 21 20H14H6H3C2.44772 20 2 19.5523 2 19V11V8Z"
+                        fill="currentColor" fill-opacity="0.4" />
+                    <path
+                        d="M6 8H2V11M6 8V20M6 8H14M6 20H3C2.44772 20 2 19.5523 2 19V11M6 20H14M14 8H22V11M14 8V20M14 20H21C21.5523 20 22 19.5523 22 19V11M2 11H22M2 14H22M2 17H22M10 8V20M18 8V20"
+                        stroke="white" />
+                </svg>
+            </i>
+            <span class="item-name">Tickets</span>
+            <i class="right-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" fill="currentColor">
+                    <g>
+                        <path
+                            d="M21 6H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-1 14H4v-1.5l4.5-2.5L13 18l5.5-3.5L20 18zm0-4l-4.5-2.5L13 13l-5.5-3.5L4 13V8h16v8z" />
+                    </g>
+                </svg>
+
+            </i>
+        </a>
+        <ul class="sub-nav collapse" id="sidebar-ticket" data-bs-parent="#sidebar">
+            <li class="nav-item">
+                <a class="nav-link {{ activeRoute(route('table.datatable')) }}" href="{{ route('table.datatable') }}">
+                    <i class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                            <g>
+                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon"> D </i>
+                    <span class="item-name">Ticket Configurations</span>
+                </a>
+            </li>
+        </ul>
+    </li>
     <li class="nav-item mb-5">
         <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-icons" role="button" aria-expanded="false"
             aria-controls="sidebar-icons">
@@ -520,6 +561,10 @@
             </li>
         </ul>
     </li>
+
+
+
+
 
 
 </ul>

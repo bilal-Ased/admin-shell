@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedSmallInteger('issue_source_id');
             $table->unsignedSmallInteger('category_id');
             $table->unsignedSmallInteger('ticket_status_id');
-            $table->string('comments');
             $table->timestamps();
         });
     }
