@@ -115,6 +115,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/tickets/create', [TicketsController::class, 'index'])->name('tickets.index');
     Route::post('/tickets/store', [TicketsController::class, 'store'])->name('tickets.store');
+    Route::get('/tickets/list', [TicketsController::class, 'list'])->name('tickets.list');
 
     Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
     Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');

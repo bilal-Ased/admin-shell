@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\TicketsDataTable;
 use App\Models\Customer;
 use App\Models\Tickets;
 use Illuminate\Http\Request;
@@ -42,5 +43,10 @@ class TicketsController extends Controller
         Tickets::create($request->all());
 
         return redirect()->route('tickets.index')->with('success', 'Ticket Created successfully!');
+    }
+
+    public function list(TicketsDataTable $dataTable)
+    {
+        return $dataTable->render('tickets.all-tickets');
     }
 }
