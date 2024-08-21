@@ -218,23 +218,23 @@
                                     value="{{$customer->id ?? ''}}">
                                 <div id="searchSuggestions" class="suggestions-container"></div>
                             </div>
-
-
-
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col">
-                                        <label class="d-flex align-items-center gap-1"><span>Issue Source </span> <small
-                                                class="text-danger">*</small></label>
-                                        <select id="ticketSources" class="form-select" name="issue_source_id">
-
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="p-0">
+                                            <label class="d-flex align-items-center gap-1"><span>Issue Source </span>
+                                                <small class="text-danger">*</small></label>
+                                            <select id="ticketSources" class="form-select" name="issue_source_id">
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <label class="d-flex align-items-center gap-1"><span>Issue Category </span>
-                                            <small class="text-danger">*</small></label>
-                                        <select id="ticketCategory" class="form-control" name="issue_category_id">
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="p-0">
+                                            <label class="d-flex align-items-center gap-1"><span>Issue Category </span>
+                                                <small class="text-danger">*</small></label>
+                                            <select id="ticketCategory" class="form-control" name="issue_category_id">
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -303,6 +303,9 @@
         const resultsPerPage = 10;
 
         function customerSearch(e) {
+
+
+
             let searchReq = $(e).val();
 
             if (searchReq.length > 0) {
@@ -330,7 +333,29 @@
             } else {
                 $('#searchSuggestions').hide();
             }
+
+
+
         };
+
+
+
+        $(
+
+
+        ()=>{
+            $('#customerSearch').on('keydown', 
+                (e)=>{
+
+                    if(e.key === 'Enter'){
+
+                        e.preventDefault()
+                    }
+                }
+            )
+        }
+
+        )
 
         function displaySuggestions(data) {
             let suggestionsContainer = $('#searchSuggestions');

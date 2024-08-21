@@ -1,5 +1,23 @@
 <x-app-layout :assets="$assets ?? []">
+    <style>
+        .ticket-style {
+            background: #d1e3f7;
+            color: #1a4d85;
+            padding: 0 5px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        .ticket-style-source {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+
+        }
+    </style>
     <div>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
@@ -22,24 +40,20 @@
     </div>
 
     @push('scripts')
+    <!-- Ensure DataTables scripts and styles are included -->
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
-    @endpush
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
             setTimeout(() => {
-
-                // document.querySelectorAll('.list-customer-action .list-customer-btn').forEach(element => {
-                //     element.addEventListener('click', function() {
-                //         getCustomerModal(element.getAttribute('data-href'));
-                //     });
-                // });
-
+                $('#tickets-table').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'excel', 'pdf', 'print'
+                    ]
+                });
             }, 3000);
         });
-
-        
     </script>
-
+    @endpush
 </x-app-layout>

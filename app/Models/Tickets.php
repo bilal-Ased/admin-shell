@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Tickets extends Model
 {
     use HasFactory;
+
+
+    const STATUS_OPEN = 1;
+
+
+
     public $fillable = ['customer_id', 'issue_source_id', 'issue_category_id', 'disposition_id', 'department_id', 'assigned_to', 'status_id', 'file_path', 'comments'];
 
 
@@ -40,5 +47,11 @@ class Tickets extends Model
     public function ticketStatuses()
     {
         return $this->belongsTo(TicketStatuses::class, 'status_id');
+    }
+
+
+    public function getAuthUserId()
+    {
+        return Auth::id();
     }
 }

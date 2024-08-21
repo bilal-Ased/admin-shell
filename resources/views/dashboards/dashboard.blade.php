@@ -20,8 +20,8 @@
                                         </svg>
                                     </div>
                                     <div class="progress-detail">
-                                        <p class="mb-2">Total Users</p>
-                                        <h4 class="counter" style="visibility: visible;">{{ $userCount }}</h4>
+                                        <p class="mb-2">Open Tickets</p>
+                                        <h4 class="counter" style="visibility: visible;">{{ $openTickets }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +56,8 @@
                                         </svg>
                                     </div>
                                     <div class="progress-detail">
-                                        <p class="mb-2">Total Items</p>
-                                        <h4 class="counter">{{ $itemsCount }}</h4>
+                                        <p class="mb-2">My Tickets</p>
+                                        <h4 class="counter">{{ $myTickets }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@
                     <div class="card overflow-hidden" data-aos="fade-up" data-aos-delay="400">
                         <div class="card-header d-flex justify-content-between flex-wrap">
                             <div class="header-title">
-                                <h4 class="card-title mb-2">Upcoming Projects</h4>
+                                <h4 class="card-title mb-2">Last five Tickets</h4>
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -210,20 +210,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($upcomingProjects as $project)
+                                        @foreach ($topFiveTickets as $topFiveTicket)
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <h6>{{ $project->customer->first_name }}
-                                                        {{ $project->customer->last_name }}</h6>
+                                                    <h6>{{ $topFiveTicket->customer->first_name }}
+                                                        {{ $topFiveTicket->customer->last_name }}</h6>
                                                 </div>
                                             </td>
-                                            <td>{{ $project->budget }}</td>
+                                            <td>{{ $topFiveTicket->ticketSources->name }}</td>
                                             <td>
                                                 @php
-                                                $projectCreatedAt = new DateTime($project->project_created_at);
+                                                $topFiveTicketCreatedAt = new
+                                                DateTime($topFiveTicket->created_at);
                                                 $now = new DateTime();
-                                                $interval = $projectCreatedAt->diff($now);
+                                                $interval = $topFiveTicketCreatedAt->diff($now);
 
                                                 $days = $interval->days;
                                                 $hours = $interval->h;
@@ -244,11 +245,9 @@
                                                 $countdown .= $minutes . ' minutes ';
                                                 }
 
-                                                if ($seconds > 0) {
-                                                $countdown .= $seconds . ' seconds ';
-                                                }
 
-                                                echo rtrim($countdown);
+
+                                                echo rtrim($countdown). 'ago';
                                                 @endphp
                                             </td>
 
@@ -294,7 +293,7 @@
                         <div class="card-body d-flex justify-content-around text-center">
                             <div>
                                 <h2 class="mb-2">750<small>K</small></h2>
-                                <p class="mb-0 text-gray">Website Visitors</p>
+                                <p class="mb-0 text-gray">Tickets this Month</p>
                             </div>
                             <hr class="hr-vertial">
                             <div>

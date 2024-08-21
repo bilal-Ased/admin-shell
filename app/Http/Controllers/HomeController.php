@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Material;
 use App\Models\Project;
+use App\Models\Tickets;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PHPUnit\Framework\Attributes\Ticket;
 use Spatie\Analytics\Facades\Analytics;
 use Spatie\Analytics\Period;
 
@@ -19,24 +22,25 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
+        $userId = Auth::id();
+
+
         $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(6));
 
         $selectedItem = isset($analyticsData[0]) ? $analyticsData[0] : null;
 
 
-        $userCount = User::count();
+        $openTickets = Tickets::where('status_id', Tickets::STATUS_OPEN)->count();
+        $myTickets = Tickets::where('assigned_to', $userId)->count();
         $customerCount = Customer::getTotalCount();
         $newCustomerCount = Customer::where('created_at', '>=', Carbon::now()->subDays(30))->count();
-        $itemsCount = Material::count();
-        $upcomingProjects = Project::with('customer')
-            ->where('end_date', '>', now()) // Assuming end_date is the deadline
-            ->orderBy('end_date') // You can change the sorting as per your requirement
-            ->take(5) // Limit the results to 5
+        $topFiveTickets = Tickets::with('customer', 'ticketSources')
+            ->orderBy('created_at', 'desc')
+            ->take(5)
             ->get();
-
         $assets = ['chart', 'animation'];
 
-        return view('dashboards.dashboard', compact('assets', 'userCount', 'customerCount', 'newCustomerCount', 'itemsCount', 'upcomingProjects', 'analyticsData'));
+        return view('dashboards.dashboard', compact('assets', 'openTickets', 'customerCount', 'newCustomerCount', 'myTickets', 'topFiveTickets', 'analyticsData'));
     }
 
     /*
@@ -309,5 +313,5 @@ class HomeController extends Controller
     public function landing_pricing(Request $request)
     {
         return view('landing-pages.pages.pricing');
-    } 
+    }
 }

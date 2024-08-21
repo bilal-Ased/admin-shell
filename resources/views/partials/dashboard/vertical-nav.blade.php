@@ -247,7 +247,7 @@
 
 
     <li class=" nav-item">
-        <a class="nav-link {{ activeRoute(route('tickets.list')) }}" href="{{ route('tickets.list') }}">
+        <a class="nav-link {{ activeRoute(route('my.tickets')) }}" href="{{ route('my.tickets') }}">
             <i class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                     <g>
