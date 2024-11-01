@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\DataTables\CustomerDataTable;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CustomerController extends Controller
 {
+
+
     public function index(CustomerDataTable $dataTable)
     {
-        return $dataTable->render('customers.index');
+
+        $response = $dataTable->render('customers.index');
+        return $response;
     }
+
 
     public function store(Request $request)
     {
@@ -21,13 +27,16 @@ class CustomerController extends Controller
             'last_name' => 'required',
             'phone_number' => 'required|unique:customers,phone_number',
             'alternate_number' => 'nullable',
+            'gender' => 'nullable',
             'email' => 'nullable|email|unique:customers,email',
+            'date_of_birth' => 'required',
         ], [
             'phone_number.unique' => 'The phone number has already been taken.',
             'email.unique' => 'The email has already been taken.',
         ]);
 
         Customer::create($request->all());
+
 
         return redirect()->route('customers.index')->with('success', 'Customer added successfully!');
     }

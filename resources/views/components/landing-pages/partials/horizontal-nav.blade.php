@@ -34,8 +34,7 @@
                     href="{{ route('landing-pages.blog') }}">Blog</a></li>
             <li class="nav-item d-xl-none"><a class="nav-link {{ activeRoute(route('landing-pages.faq')) }}"
                     href="{{ route('landing-pages.faq') }}">Faq</a></li>
-            <li class="nav-item d-xl-none"><a class="nav-link {{ activeRoute(route('landing-pages.contact')) }}"
-                    href="{{ route('landing-pages.contact') }}">Contact Us</a></li>
+
         </ul>
     </div> <!-- container-fluid.// -->
 </nav>

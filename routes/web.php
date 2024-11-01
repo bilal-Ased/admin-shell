@@ -2,35 +2,27 @@
 
 // Controllers
 
-use App\Http\Controllers\Announcements;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\brandController;
+use App\Http\Controllers\AppointmentStatusController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\ChatbotController;
-use App\Http\Controllers\chatwootController;
-use App\Http\Controllers\CompaniesController;
+
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\demoController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\FacebookController;
-use App\Http\Controllers\feedbackController;
+use App\Http\Controllers\DoctorsSheduleController;
+
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\locationController;
-use App\Http\Controllers\Materialscontroller;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProjectController;
+
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
-use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\SubscriptionController;
+
 use App\Http\Controllers\ticketsConfigsController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsAppController;
-use App\Models\Customer;
-use App\Models\DoctorSchedule;
+
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
 // Packages
 use Illuminate\Support\Facades\Route;
 
@@ -57,13 +49,9 @@ Route::group(['prefix' => 'landing-pages'], function () {
     Route::get('blog', [HomeController::class, 'landing_blog'])->name('landing-pages.blog');
     Route::get('blog-detail', [HomeController::class, 'landing_blog_detail'])->name('landing-pages.blog-detail');
     Route::get('about', [HomeController::class, 'landing_about'])->name('landing-pages.about');
-    Route::get('contact', [feedbackController::class, 'index'])->name('landing-pages.contact');
-    Route::post('contact/feedback', [feedbackController::class, 'store'])->name('feedback.store');
     Route::get('ecommerce', [HomeController::class, 'landing_ecommerce'])->name('landing-pages.ecommerce');
     Route::get('faq', [HomeController::class, 'landing_faq'])->name('landing-pages.faq');
     Route::get('pricing', [HomeController::class, 'landing_pricing'])->name('landing-pages.pricing');
-
-    Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
 });
 Route::post('demo', [demoController::class, 'store'])->name('demo.store');
 
@@ -90,81 +78,53 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
     Route::get('/customers/{id}/edit', [CustomerController::class, 'editCustomer'])->name('customers.edit');
     Route::post('/customers/change-status/{id}', [CustomerController::class, 'changeStatus'])->name('customers.change-status');
-    Route::get('/companies/index', [CompaniesController::class, 'index'])->name('companies.index');
     Route::post('customers/search', [CustomerController::class, 'searchCustomers'])->name('customers.search');
     Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 
 
-    Route::post('/companies', [CompaniesController::class, 'store'])->name('companies.store');
 
 
     Route::get('/calendar', [CalendarController::class, 'showCalendar'])->name('appointments.calendar');
+    Route::get('/create-appointment', [AppointmentController::class, 'index'])->name('appointment.create');
+    Route::post('/store-appointment', [AppointmentController::class, 'store'])->name('appointment.store');
+    Route::get('/appointments/list', [AppointmentController::class, 'list'])->name('appointments.list');
+    Route::get('/my/appointments', [AppointmentController::class, 'getAuthUsersAppointments'])->name('my.appointments');
+    Route::get('/my/appointments', [AppointmentController::class, 'getAuthUsersAppointments'])->name('my.appointments');
+    Route::get('/update/appointment/{id}', [AppointmentController::class, 'update'])->name('update.appointment');
+
+    Route::post('/user-schedule', [DoctorsSheduleController::class, 'store'])->name('userSchedule.store');
+    Route::get('/user-schedule-create', [DoctorsSheduleController::class, 'index'])->name('shedule-managment');
+    Route::get('/user/get-available-slots', [DoctorsSheduleController::class, 'getAvailableSlots'])->name('user.getAvailableSlots');
 
 
-
-    Route::get('/products/index', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'save'])->name('products.save');
-
-
-    Route::get('/settings/services', [ServicesController::class, 'index'])->name('services.index');
-    Route::post('/services', [ServicesController::class, 'store'])->name('services.store');
-
-    Route::get('/send-message', [WhatsAppController::class, 'sendMessage']);
 
 
     Route::get('/tickets/create', [TicketsController::class, 'index'])->name('tickets.index');
     Route::post('/tickets/store', [TicketsController::class, 'store'])->name('tickets.store');
     Route::get('/tickets/list', [TicketsController::class, 'list'])->name('tickets.list');
     Route::get('my/tickets/list', [TicketsController::class, 'getAuthUsersTickets'])->name('my.tickets');
-
-    Route::get('/materials/index', [Materialscontroller::class, 'index'])->name('materials.index');
-    Route::post('/materials/store', [Materialscontroller::class, 'store'])->name('materials.store');
-    Route::get('materials/export/', [Materialscontroller::class, 'export']);
-    Route::get('all/brands', [Materialscontroller::class, 'getBrands']);
-    Route::get('all/locations', [Materialscontroller::class, 'getLocations']);
-    Route::get('all/accounts', [Materialscontroller::class, 'getAccounts']);
-
-    Route::get('/projects/index', [ProjectController::class, 'index'])->name('projects.index');
-    Route::post('/projects/store', [ProjectController::class, 'store'])->name('projects.store');
-    Route::get('/projects/calendar', [ProjectController::class, 'calendar'])->name('projects.calendar');
-
-    Route::get('/search/materials', [ProjectController::class, 'searchMaterials'])->name('materials.search');
-
-    Route::get('/settings/configurations/brands', [brandController::class, 'index'])->name('brands.index');
-    Route::post('/settings/configurations/brands/store', [brandController::class, 'store'])->name('brands.store');
-    Route::post('/settings/configurations/brands/edit', [brandController::class, 'edit'])->name('brands.edit');
-
-    Route::get('/settings/configurations/locations', [locationController::class, 'index'])->name('location.index');
-    Route::post('/settings/configurations/locations/store', [locationController::class, 'store'])->name('locations.store');
+    Route::get('update/ticket/{id}', [TicketsController::class, 'update'])->name('update.ticket');
 
 
+
+    Route::get('/settings/tickets/configs', [ticketsConfigsController::class, 'index']);
     Route::get('/settings/tickets/statuses', [ticketsConfigsController::class, 'getTicketStatus']);
     Route::get('/settings/tickets/categories', [ticketsConfigsController::class, 'getTicketCategories']);
     Route::get('/settings/tickets/sources', [ticketsConfigsController::class, 'getTicketSources']);
     Route::get('/settings/tickets/disposition', [ticketsConfigsController::class, 'getTicketDispositions']);
     Route::get('/settings/tickets/department', [ticketsConfigsController::class, 'getDepartments']);
     Route::get('/settings/all-users', [ticketsConfigsController::class, 'getAllUsers']);
+    Route::get('/settings/all-doctors', [ticketsConfigsController::class, 'getDoctors']);
+
+    Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index']);
 });
 
 
 
-Route::get('/emails', [EmailController::class, 'index']);
-Route::get('/emails/respond/{mail_id}', [EmailController::class, 'respondView']);
-Route::post('/emails/respond/{mail_id}', [EmailController::class, 'respond']);
 
-Route::any('/facebook/index', [FacebookController::class, 'index']);
-Route::any('/facebook/response', [FacebookController::class, 'fetchResponse']);
-Route::any('/facebook/webhook', [FacebookController::class, 'getResponse']);
 
-Route::prefix('whatsapp')->group(function () {
-    Route::any('/index', [WhatsAppController::class, 'index'])->name('whatsapp.index');
-    Route::any('/response', [WhatsAppController::class, 'getResponse']);
-    Route::get('/contacts/{contact_id}/messages', [WhatsAppController::class, 'getContactMessages']);
-});
 
-Route::post('/chatbot/session', [ChatbotController::class, 'createSession']);
-Route::get('/chatbot/index', [ChatbotController::class, 'index']);
+
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {
     //MenuStyle Page Routs
@@ -174,6 +134,8 @@ Route::group(['prefix' => 'menu-style'], function () {
     Route::get('boxed', [HomeController::class, 'boxed'])->name('menu-style.boxed');
     Route::get('boxed-fancy', [HomeController::class, 'boxedfancy'])->name('menu-style.boxedfancy');
 });
+Route::get('/chart', [HomeController::class, 'handleChart'])->name('menu-style.chart');
+Route::get('/view', [HomeController::class, 'view']);
 
 //App Details Page => 'special-pages'], function()
 Route::group(['prefix' => 'special-pages'], function () {

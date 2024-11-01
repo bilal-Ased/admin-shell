@@ -17,15 +17,13 @@
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit?
+                                    How do I get Started ?
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <p class="mb-0">Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                                        amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam
-                                        consequat.</p>
+                                    <p class="mb-0">With a few simple steps you can sign up for the crm.</p>
                                 </div>
                             </div>
                         </div>

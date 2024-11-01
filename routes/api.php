@@ -19,9 +19,3 @@ use App\Http\Controllers\todoController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::post('/api/todo/add', [todoController::class, 'store']);
-
-
-Route::post('/callback', [MpesaController::class, 'mpesaCallback']);
-Route::post('/stkpush', [MpesaController::class, 'initiateStkPush']);

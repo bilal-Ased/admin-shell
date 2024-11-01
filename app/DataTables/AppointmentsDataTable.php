@@ -22,9 +22,16 @@ class AppointmentsDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'appointments.action')
-            ->setRowId('id');
+        return (new EloquentDataTable(
+            $query->select('appointments.*')->orderBy('created_at', 'desc')
+        ))->addColumn('action', 'appointments.action')
+            ->setRowId('appointments.id')
+            ->editColumn('ID', function ($appointment) {
+                $str = '<div class="d-flex"><a class="shadow rounded appointments-style" href="' . route('update.appointment', $appointment->id) . '">#AP' . $appointment->id . '</a></div>';
+
+                return $str;
+            })
+            ->rawColumns(['ID']);
     }
 
     /**
@@ -35,7 +42,9 @@ class AppointmentsDataTable extends DataTable
      */
     public function query(Appointment $model): QueryBuilder
     {
-        return $model->newQuery()->with('customer','user');
+
+
+        return $model->newQuery()->with('customer', 'user');
     }
 
     /**
@@ -46,19 +55,18 @@ class AppointmentsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('appointments-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('appointments-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax(route('appointments.list')) // Ensure you replace this with your actual route name
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -70,20 +78,19 @@ class AppointmentsDataTable extends DataTable
     {
 
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'id'],
+            ['data' => 'ID', 'name' => 'id', 'title' => 'ID'],
             ['data' => 'customer.first_name', 'name' => 'customer.first_name', 'title' => 'Customer', 'orderable' => true],
-            ['data' => 'appointment_datetime', 'name' => 'appointment_datetime', 'title' => 'appointment Date'],
-            ['data' => 'user.username','name'=> 'user.username', 'title' => 'Doctor'],
-            ['data' => 'reason', 'name' => 'reason', 'title' => 'Reason'],
+            ['data' => 'appointment_date', 'name' => 'appointment_date', 'title' => 'appointment Date'],
+            ['data' => 'user.username', 'name' => 'user.username', 'title' => 'Doctor'],
 
 
 
             Column::computed('action')
-            ->exportable(false)
-            ->printable(false)
-            ->searchable(false)
-            ->width(60)
-            ->addClass('text-center hide-search'),
+                ->exportable(false)
+                ->printable(false)
+                ->searchable(false)
+                ->width(60)
+                ->addClass('text-center hide-search'),
         ];
     }
 

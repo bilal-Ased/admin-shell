@@ -1,6 +1,6 @@
 <div class="flex align-items-center list-customer-action">
     <button onclick="getCustomerModal($(this).attr('data-href'))"
-        class="btn btn-sm btn-icon btn-warning list-customer-btn" data-bs-toggle="tooltip" title="Edit User"
+        class="btn btn-sm btn-icon btn-warning list-customer-btn" data-bs-toggle="tooltip" title="Edit Customer"
         data-href="{{ route('customers.edit', $id) }}">
         <span class="btn-inner">
             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,34 +16,34 @@
         </span>
     </button>
     @if (auth()->user()->hasRole('admin') && auth()->id() !== $id)
-        <?php
+    <?php
         // $message = __('global-message.delete_alert', ['form' => __('customers.title')])
         ?>
-        <form method="post" action="{{ route('customers.change-status', $id) }}" style="display: inline;">
-            @csrf
-            <button type="submit" class="btn btn-sm btn-icon btn-{{ $status ? 'danger' : 'success' }}"
-                onclick="return confirm('Are you sure you want to change the status?')"
-                title="{{ $status ? 'Deactivate' : 'Activate' }}">
-                <span class="btn-inner">
-                    <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                        stroke="currentColor">
-                        <!-- Adjust the paths based on your icon for active and inactive states -->
-                        @if ($status)
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-                        @else
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" data-slot="icon" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                            </svg>
-                        @endif
+    <form method="post" action="{{ route('customers.change-status', $id) }}" style="display: inline;">
+        @csrf
+        <button type="submit" class="btn btn-sm btn-icon btn-{{ $status ? 'danger' : 'success' }}"
+            onclick="return confirm('Are you sure you want to change the status?')"
+            title="{{ $status ? 'Deactivate' : 'Activate' }}">
+            <span class="btn-inner">
+                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    stroke="currentColor">
+                    <!-- Adjust the paths based on your icon for active and inactive states -->
+                    @if ($status)
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" data-slot="icon" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
-                </span>
-            </button>
-        </form>
+                    @else
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" data-slot="icon" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    @endif
+                </svg>
+            </span>
+        </button>
+    </form>
     @endif
 </div>

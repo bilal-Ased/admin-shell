@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use App\Models\Customer;
 use App\Models\Material;
 use App\Models\Project;
@@ -21,18 +22,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-
         $userId = Auth::id();
-
-
-        $analyticsData = Analytics::fetchVisitorsAndPageViews(Period::days(6));
-
-        $selectedItem = isset($analyticsData[0]) ? $analyticsData[0] : null;
-
-
-        $openTickets = Tickets::where('status_id', Tickets::STATUS_OPEN)->count();
-        $myTickets = Tickets::where('assigned_to', $userId)->count();
+        // $openTickets = Tickets::where('status_id', Tickets::STATUS_OPEN)->count();
+        $myAppointments = Appointment::where('user_id', $userId)->count();
         $customerCount = Customer::getTotalCount();
+        $appointmentsToday = Appointment::where('appointment_date', '=', Carbon::today())->count();
+
         $newCustomerCount = Customer::where('created_at', '>=', Carbon::now()->subDays(30))->count();
         $topFiveTickets = Tickets::with('customer', 'ticketSources')
             ->orderBy('created_at', 'desc')
@@ -40,7 +35,32 @@ class HomeController extends Controller
             ->get();
         $assets = ['chart', 'animation'];
 
-        return view('dashboards.dashboard', compact('assets', 'openTickets', 'customerCount', 'newCustomerCount', 'myTickets', 'topFiveTickets', 'analyticsData'));
+        return view('dashboards.dashboard', compact('assets', 'appointmentsToday', 'customerCount', 'newCustomerCount', 'myAppointments', 'topFiveTickets'));
+    }
+
+
+    public function handleChart()
+    {
+        // Get the counts of appointments grouped by month
+        $monthlyData = Appointment::select(\DB::raw("MONTH(appointment_date) as month, COUNT(*) as count"))
+            ->whereYear('appointment_date', date('Y')) // Adjust the year if necessary
+            ->groupBy(\DB::raw("MONTH(appointment_date)"))
+            ->orderBy(\DB::raw("MONTH(appointment_date)"))
+            ->pluck('count', 'month'); // Pluck both count and month
+
+        // Prepare an array for each month (1-12)
+        $appointmentData = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $appointmentData[$month] = $monthlyData->get($month, 0); // Default to 0 if no appointments
+        }
+
+        return response()->json($appointmentData); // Return JSON response
+    }
+
+
+    public function view()
+    {
+        return view('dashboards.chart');
     }
 
     /*

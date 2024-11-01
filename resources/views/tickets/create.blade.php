@@ -1,13 +1,4 @@
 <x-app-layout :assets="$assets ?? []">
-
-
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
-
     <style>
         .form-group {
             position: relative;
@@ -178,27 +169,11 @@
         }
     </style>
     <div>
+        @include('tickets.includes.ticket_scripts')
+
         <div class="row">
             <div class="col-sm-12 col-lg-5">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <div class="header-title">
-                            {{-- <h4 class="card-title">Create Ticket</h4> --}}
-                        </div>
-                    </div>
-                    <div class="card-body" id="customerBio">
-                        <img src="{{asset('client-images/7758834.jpg')}}" id="customerBioImageHolder" alt="Image" />
-                        <div id="customerBioInner" style="display:none;">
-                            <h5 class="cardTitle" id="customerName">help</h5>
-                            <p class="cardText" id="customerPhone"><strong>Phone Number:</strong></p>
-                            <p class="cardText" id="customerEmail"><strong>Email:</strong></p>
-                            <p class="cardText" id="customerAltPhone"><strong>Alternate Number:</strong></p>
-                            <p class="cardText" id="customerCreated"><strong>Created At:</strong></p>
-                            <p class="cardText" id="customerCompanyId"><strong>Company ID:</strong></p>
-                        </div>
-
-                    </div>
-                </div>
+                @include('tickets.customer-bio')
             </div>
             <div class="col-sm-12 col-lg-7">
                 <div class="card">
@@ -255,33 +230,13 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col">
-                                        <label class="d-flex align-items-center gap-1"><span>Assigned To </span> <small
-                                                class="text-danger">*</small></label> <select id="assignedTo"
-                                            class="form-select" name="assigned_to">
-
-                                        </select>
-                                    </div>
-                                    <div class=" col">
-                                        <label class="d-flex align-items-center gap-1"><span>Status </span> <small
-                                                class="text-danger">*</small></label> <select id="ticketStatus"
-                                            class="form-control" name="status_id">
-                                        </select>
-                                    </div>
-                                </div>
+                                @include('tickets.includes.assigned_and_status')
                             </div>
-
-
                             <div class="form-group">
                                 <label for="customFile" class="form-label custom-file-input">Attach File</label>
                                 <input class="form-control" type="file" id="customFile" name="file_path">
                             </div>
-                            <div class="form-group">
-                                <label class="form-label" for="exampleFormControlTextarea1">Comments</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
-                                    name="comments"></textarea>
-                            </div>
+
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
@@ -291,20 +246,13 @@
         </div>
     </div>
 
-
-    @php
-    $loggedInUser = auth()->user();
-
-    @endphp
-
     {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+
     <script>
         let currentPage = 1;
         const resultsPerPage = 10;
 
         function customerSearch(e) {
-
-
 
             let searchReq = $(e).val();
 
@@ -333,16 +281,9 @@
             } else {
                 $('#searchSuggestions').hide();
             }
-
-
-
         };
 
-
-
         $(
-
-
         ()=>{
             $('#customerSearch').on('keydown', 
                 (e)=>{
@@ -357,11 +298,13 @@
 
         )
 
+        var searchCustomers = []
         function displaySuggestions(data) {
             let suggestionsContainer = $('#searchSuggestions');
             suggestionsContainer.empty();
 
             if (data.results.length > 0) {
+                searchCustomers = data.results
                 data.results.forEach(item => {
                     suggestionsContainer.append(`
                 <div class="suggestion-item" data-id="${item.id}">
@@ -377,12 +320,19 @@
         }
 
         $('body').on('click', '.suggestion-item', function() {
+            console.log('load customer....')
+
             let selectedText = $(this).text();
             let customerId = $(this).data('id'); // Get the customer ID from the data attribute
             $('#customerSearch').val(selectedText);
             $('#customerId').val(customerId); // Set the hidden input with the customer ID
             $('#searchSuggestions').hide(); // Hide suggestions after selection
-        });
+            const customer = searchCustomers.find((customer) => customer.id == customerId)
+        
+        if (customer) {
+            renderCustomerBio(customer)
+        }
+    });
 
         // Handle pagination clicks
         $('body').on('click', '.page-link', function() {
@@ -398,39 +348,8 @@
         });
 
 
-        function renderCustomerBio(customer) {
-
-            console.log(customer)
-            customer = JSON.parse(customer)
-
-            const customerBio = $('#customerBio')
-            const customerBioImageHolder = customerBio.find('#customerBioImageHolder')
-            const customerBioInner = customerBio.find('#customerBioInner')
-
-            customerBioImageHolder.hide()
-            customerBioInner.show()
-
-            customerBioInner.find('#customerName').text(customer.first_name)
-            customerBioInner.find('#customerName').text(customer.second_name)
-            customerBioInner.find('#customerEmail').text(customer.email)
-            customerBioInner.find('#customerPhone').text(customer.phone_number)
-            customerBioInner.find('#customerCreatedAt').text(customer.created_at)
-            customerBioInner.find('#customerName').text(customer.first_name)
-
-        }
-
-        function initCustomer() {
-            let customer = `@json($customer)`
-            console.log('customer:', customer)
-            if (customer !== 'null') {
-                renderCustomerBio(customer)
-            }
-        }
-
-        initCustomer()
         $(function() {
             
-            initializeSelect2('#ticketStatus', '{{URL('/settings/tickets/statuses')}}');
             initializeSelect2('#ticketCategory', '{{URL('/settings/tickets/categories ')}}');
             initializeSelect2('#ticketSources', '{{URL('/settings/tickets/sources ')}}');
 
@@ -438,141 +357,8 @@
             bindSelect2ChangeEvent('#ticketCategory', '#ticketDisposition', '{{URL('/settings/tickets/disposition')}}', 'issue_category_id');
             bindSelect2ChangeEvent('#ticketDisposition', '#department', '{{URL('/settings/tickets/department')}}', 'disposition_id');
 
-            listSelect2Data('assignedTo', `{{URL('settings/all-users')}}`, 'enter user name', 'ticketForm', selectCurrentLoggedInUser);
-            selectCurrentLoggedInUser();
         });
 
-        // Global function to populate a Select2 dropdown with dynamic parameters
-        function populateSelect2(elementSelector, url, params = {}) {
-            let queryString = $.param(params);
-            let fullUrl = queryString ? `${url}?${queryString}` : url;
-            initializeSelect2(elementSelector, fullUrl);
-        }
-
-        // Function to bind the change event and populate related Select2 dropdowns
-        function bindSelect2ChangeEvent(triggerElementSelector, targetElementSelector, url, paramName) {
-            $(triggerElementSelector).on('change', function() {
-                var paramValue = $(this).val();
-                let params = {};
-                params[paramName] = paramValue;
-                populateSelect2(targetElementSelector, url, params);
-            });
-        }
-
-
-        
-
-
-
-
-        function selectCurrentLoggedInUser() {
-
-            console.log('object')
-
-            const user = @json($loggedInUser)
-
-            const loggedInUser = new Option(
-                user.username
-                , user.id
-            , )
-
-            console.log(loggedInUser)
-
-
-
-            const assignedTo = $('#assignedTo')
-
-            assignedTo.prepend(loggedInUser).trigger('change')
-
-
-            return user
-        }
-
-        function initializeSelect2(selector, url) {
-            console.log(url)
-            $(selector).select2({
-                ajax: {
-                    url: url
-                    , type: 'get'
-                    , dataType: 'json'
-                    , delay: 250
-                    , data: function(params) {
-                        return {
-                            searchItem: params.term
-                            , page: params.page
-                        };
-                    }
-                    , processResults: function(data, params) {
-                        params.page = params.page || 1;
-                        var formattedData = data.data
-                        return {
-                            results: formattedData
-                            , pagination: {
-                                more: data.last_page != params.page
-                            }
-                        };
-                    }
-                    , cache: true
-                , }
-                , placeholder: 'Select an option'
-                , templateResult: templateResult
-                , templateSelection: templateSelection
-            , });
-        }
-
-
-        function listSelect2Data(field_id, data_url, searchPlaceholder = null, dropdownParentId = null, callback = null) {
-            $("#" + field_id).select2({
-                searchInputPlaceholder: searchPlaceholder
-                , placeholder: searchPlaceholder
-                , allowClear: false
-                , dropdownParent: $('#' + dropdownParentId)
-                , ajax: {
-                    url: data_url
-                    , dataType: 'json'
-                    , delay: 250
-                    , type: "GET"
-                    , quietMillis: 50
-                    , data: function(term) {
-                        if (!term.term) {
-                            return {
-                                term: 'data_default'
-                            };
-                        }
-                        return {
-                            term: term
-                            , format: 'json'
-                        };
-                    }
-                    , processResults: function(data) {
-                        var results = data.data
-                        setTimeout(() => {
-                            if (callback) {
-                                callback()
-                            }
-                        }, 300);
-                        return {
-                            results
-                        }
-                    }
-                    , cache: true
-                }
-            });
-        }
-
-        function templateResult(data) {
-            if (data.loading) {
-                return data.text;
-            }
-            return data.name;
-        }
-
-        function templateSelection(data) {
-            return data.name;
-        }
-
     </script>
-
-
 
 </x-app-layout>

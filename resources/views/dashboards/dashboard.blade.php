@@ -1,8 +1,8 @@
 <x-app-layout :assets="$assets ?? []">
-
-
-
-
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <div class="row">
         <div class="col-md-12 col-lg-12">
             <div class="row row-cols-1">
@@ -20,8 +20,8 @@
                                         </svg>
                                     </div>
                                     <div class="progress-detail">
-                                        <p class="mb-2">Open Tickets</p>
-                                        <h4 class="counter" style="visibility: visible;">{{ $openTickets }}</h4>
+                                        <p class="mb-2">Appointments Today</p>
+                                        <h4 class="counter" style="visibility: visible;">{{ $appointmentsToday }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -56,8 +56,8 @@
                                         </svg>
                                     </div>
                                     <div class="progress-detail">
-                                        <p class="mb-2">My Tickets</p>
-                                        <h4 class="counter">{{ $myTickets }}</h4>
+                                        <p class="mb-2">My Appointments</p>
+                                        <h4 class="counter">{{ $myAppointments }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -145,48 +145,11 @@
                 <div class="col-md-12">
                     <div class="card" data-aos="fade-up" data-aos-delay="800">
                         <div class="card-header d-flex justify-content-between flex-wrap">
-                            <div class="header-title">
-                                <h4 class="card-title">$855.8K</h4>
-                                <p class="mb-0">Gross Sales</p>
-                            </div>
-                            <div class="d-flex align-items-center align-self-center">
-                                <div class="d-flex align-items-center text-primary">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24"
-                                        fill="currentColor">
-                                        <g id="Solid dot2">
-                                            <circle id="Ellipse 65" cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                    <div class="ms-2">
-                                        <span class="text-gray">Sales</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center ms-3 text-info">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" viewBox="0 0 24 24"
-                                        fill="currentColor">
-                                        <g id="Solid dot3">
-                                            <circle id="Ellipse 66" cx="12" cy="12" r="8" fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                    <div class="ms-2">
-                                        <span class="text-gray">Cost</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    This Week
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton2">
-                                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
+
+                            {{-- --}}
                         </div>
                         <div class="card-body">
-                            <div id="d-main" class="d-main"></div>
+                            <div id="chartData" class="chartData"></div>
                         </div>
                     </div>
                 </div>
@@ -214,8 +177,8 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <h6>{{ $topFiveTicket->customer->first_name }}
-                                                        {{ $topFiveTicket->customer->last_name }}</h6>
+                                                    <h6>{{ $topFiveTicket->customer->first_name ?? null }}
+                                                        {{ $topFiveTicket->customer->last_name ?? null}}</h6>
                                                 </div>
                                             </td>
                                             <td>{{ $topFiveTicket->ticketSources->name }}</td>
@@ -359,4 +322,55 @@
             </div>
         </div>
     </div>
+
+    {{-- chart code --}}
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/chart')
+                .then(response => response.json())
+                .then(appointmentData => {
+                    console.log(appointmentData); // Check the fetched data
+
+                    const data = Object.values(appointmentData); // Convert to an array
+
+                    Highcharts.chart('chartData', {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Monthly Appointments for ' + new Date().getFullYear(),
+                            align: 'center'
+                        },
+                        
+                        xAxis: {
+                            categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                            crosshair: true,
+                            accessibility: {
+                                description: 'Months of the year'
+                            }
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Number of Appointments'
+                            }
+                        },
+                        tooltip: {
+                            valueSuffix: ' appointments'
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: [{
+                            name: 'Appointments',
+                            data: data // Use the converted array
+                        }]
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error)); // Handle any errors
+        });
+    </script>
 </x-app-layout>

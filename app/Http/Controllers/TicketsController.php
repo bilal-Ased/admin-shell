@@ -7,11 +7,14 @@ use App\DataTables\TicketsDataTable;
 use App\Models\Customer;
 use App\Models\Tickets;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TicketsController extends Controller
 {
     public function index(Request $request)
     {
+
+
         $query = Customer::query();
         $callId = $request->query('call_id'); // Extract call_id if needed
 
@@ -35,13 +38,15 @@ class TicketsController extends Controller
             'disposition_id' => 'required',
             'department_id' => 'nullable',
             'assigned_to' => 'required',
-            'assigned_to' => 'required',
             'status_id' => 'required',
             'file_path' => 'nullable',
             'comments' => 'nullable',
         ]);
 
+        $request['created_by'] = Auth::id();
         Tickets::create($request->all());
+
+
 
         return redirect()->route('tickets.list')->with('success', 'Ticket Created successfully!');
     }
@@ -53,5 +58,15 @@ class TicketsController extends Controller
     public function getAuthUsersTickets(MyTicketsDataTable $dataTable)
     {
         return $dataTable->render('tickets.my-tickets');
+    }
+
+
+    public function update(Request $request, $ticketId)
+    {
+        $ticket = Tickets::with(['user', 'status'])->findOrFail($ticketId);
+        // $ticket->assigned_to = 3;
+        // $ticket->save();
+
+        return view('tickets.update', ['ticket' => $ticket]);
     }
 }

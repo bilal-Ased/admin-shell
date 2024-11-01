@@ -3,6 +3,7 @@
 
     <!DOCTYPE html>
     <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
         <!-- Include Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     </head>
+
     <body>
         <br><br><br>
         <div id="calendar"></div>
@@ -38,11 +40,12 @@
 
                         // Display details using a Bootstrap modal
                         $('#modalTitle').text(appointment.customer + ' - ' + appointment.reason);
-                        $('#doctorName').text('Doctor: ' + appointment.doctor);
+                        $('#doctorName').text('Doctor: ' + appointment.id);
                         $('#modal').modal('show');
                     },
                     // Add other calendar configuration options as needed
                 });
+
 
                 calendar.render();
             });
@@ -69,5 +72,6 @@
             </div>
         </div>
     </body>
+
     </html>
 </x-app-layout>

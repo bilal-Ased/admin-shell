@@ -18,20 +18,12 @@ class Customer extends Model
         'alternate_number',
         'email',
         'status',
+        'date_of_birth',
+        'gender',
     ];
 
     public static function getTotalCount()
     {
         return self::count();
-    }
-
-    public function projects()
-    {
-        return $this->hasMany(Project::class);
-    }
-
-    public function demo()
-    {
-        return $this->hasMany(Demo::class);
     }
 }

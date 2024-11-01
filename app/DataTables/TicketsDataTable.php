@@ -2,15 +2,13 @@
 
 namespace App\DataTables;
 
-use App\Models\Ticket;
 use App\Models\Tickets;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
+
 use Yajra\DataTables\Services\DataTable;
 
 class TicketsDataTable extends DataTable
@@ -34,7 +32,7 @@ class TicketsDataTable extends DataTable
             ->setRowId('tickets.id')
             ->editColumn('ID', function ($ticket) {
                 // dd($ticket);
-                $str = '<div class="d-flex shadow rounded ticket-style">#TN' . $ticket->id . '</div>';
+                $str = '<div class="d-flex shadow rounded ticket-style"><a href="' . route('update.ticket', $ticket->id) . '">#TN' . $ticket->id . '</a></div>';
 
                 return $str;
             })
@@ -52,7 +50,36 @@ class TicketsDataTable extends DataTable
 
                 return $str;
             })
-            ->rawColumns(['ID', 'ticket_sources.name']);
+            ->editColumn('ticket_statuses.name', function ($query) {
+                // Log the query object to inspect available properties
+
+                // Initialize variables
+                $status = '';
+                $displayText = '';
+
+                // Check the status using the 'id' field
+                switch ($query->status_id) {  // Ensure 'id' is the correct field
+                    case 1:
+                        $status = 'danger'; // Open
+                        $displayText = 'Open';
+                        break;
+                    case 2:
+                        $status = 'info'; // In Progress
+                        $displayText = 'In Progress';
+                        break;
+                    case 3:
+                        $status = 'success'; // Closed
+                        $displayText = 'Closed';
+                        break;
+                }
+
+                // Log the final status and displayText
+
+                // Return the badge HTML if displayText is set
+                return $displayText ? '<span class="text-capitalize badge bg-' . $status . '">' . $displayText . '</span>' : '';
+            })
+
+            ->rawColumns(['ID', 'ticket_sources.name', 'ticket_statuses.name']);
     }
 
     function getSourceIcon($source)
@@ -79,7 +106,7 @@ class TicketsDataTable extends DataTable
     public function query(Tickets $model): QueryBuilder
     {
         // dd($model->newQuery()->toSql());
-        return $model->newQuery()->with(['customer', 'ticketStatuses', 'ticketSources', 'ticketCategories', 'user']);
+        return $model->newQuery()->with(['customer', 'status', 'ticketSources', 'ticketCategories', 'user']);
     }
 
     /**
@@ -116,7 +143,7 @@ class TicketsDataTable extends DataTable
             ['data' => 'customer.first_name', 'name' => 'customer.first_name', 'title' => 'Customer', 'orderable' => true],
             ['data' => 'ticket_sources.name', 'name' => 'ticketSources.name', 'title' => 'Source'],  // Updated
             ['data' => 'ticket_categories.name', 'name' => 'ticketCategories.name', 'title' => 'Issue Category'],
-            ['data' => 'ticket_statuses.name', 'name' => 'ticketStatuses.name', 'title' => 'Status'],
+            ['data' => 'ticket_statuses.name', 'name' => 'status.name', 'title' => 'Status'],
             ['data' => 'user.username', 'name' => 'user.username', 'title' => 'Assigned To'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
 

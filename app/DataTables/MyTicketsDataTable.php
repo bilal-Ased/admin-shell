@@ -9,8 +9,7 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
+
 use Yajra\DataTables\Services\DataTable;
 
 
@@ -38,7 +37,7 @@ class MyTicketsDataTable extends DataTable
     public function query(Tickets $model): QueryBuilder
     {
         $authUserId = Auth::id();
-        return $model->newQuery()->with('customer', 'ticketStatuses', 'ticketSources', 'ticketCategories', 'user')->where('assigned_to', $authUserId);
+        return $model->newQuery()->with('customer', 'status', 'ticketSources', 'ticketCategories', 'user')->where('assigned_to', $authUserId);
     }
 
     /**
@@ -76,7 +75,7 @@ class MyTicketsDataTable extends DataTable
             ['data' => 'customer.first_name', 'name' => 'customer.first_name', 'title' => 'Customer', 'orderable' => true],
             ['data' => 'ticket_sources.name', 'name' => 'ticketSources.name', 'title' => 'Source'],  // Updated
             ['data' => 'ticket_categories.name', 'name' => 'ticketCategories.name', 'title' => 'Issue Category'],
-            ['data' => 'ticket_statuses.name', 'name' => 'ticketStatuses.name', 'title' => 'Status'],
+            ['data' => 'status.name', 'name' => 'status.name', 'title' => 'Status'],
             ['data' => 'user.username', 'name' => 'user.username', 'title' => 'Assigned To'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
 

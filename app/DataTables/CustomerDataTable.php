@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -19,7 +20,9 @@ class CustomerDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        return datatables()
+        // Start time
+
+        $dataTable = datatables()
             ->eloquent($query)
             ->editColumn('status', function ($query) {
                 $status = 'warning';
@@ -38,7 +41,7 @@ class CustomerDataTable extends DataTable
                         $displayText = 'Unknown';
                 }
 
-                return '<span class="text-capitalize badge bg-'.$status.'">'.$displayText.'</span>';
+                return '<span class="text-capitalize badge bg-' . $status . '">' . $displayText . '</span>';
             })
             ->editColumn('created_at', function ($query) {
                 return date('Y/m/d', strtotime($query->created_at));
@@ -48,10 +51,11 @@ class CustomerDataTable extends DataTable
 
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-
             ->addColumn('action', 'customers.action')
             ->rawColumns(['action', 'status']);
+        return $dataTable;
     }
+
 
     /**
      * Get query source of dataTable.
@@ -59,7 +63,6 @@ class CustomerDataTable extends DataTable
     public function query(Customer $model): QueryBuilder
     {
         return $model->newQuery();
-
     }
 
     /**
@@ -71,7 +74,7 @@ class CustomerDataTable extends DataTable
             ->setTableId('customer-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-                    //->dom('Bfrtip')
+            ->serverSide(true) // Enable server-side processing
             ->orderBy(1)
             ->selectStyleSingle()
             ->buttons([
@@ -81,7 +84,6 @@ class CustomerDataTable extends DataTable
                 Button::make('reset'),
                 Button::make('reload'),
             ]);
-
     }
 
     /**
@@ -111,6 +113,6 @@ class CustomerDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Customer_'.date('YmdHis');
+        return 'Customer_' . date('YmdHis');
     }
 }

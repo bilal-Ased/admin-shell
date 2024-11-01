@@ -9,19 +9,18 @@ use App\Models\TicketSources;
 use App\Models\TicketStatuses;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
 
 class ticketsConfigsController extends Controller
 {
 
-    public function index() {}
-
-
-
+    public function index()
+    {
+        return view('settings.ticket-configs');
+    }
 
     public function getTicketStatus(Request $request)
     {
-
         $data = TicketStatuses::where('status', 1)->where('name', 'like', '%' . $request->searchItem . '%');
         return $data->paginate(10, ['*'], 'page', $request->page);
     }
@@ -29,8 +28,6 @@ class ticketsConfigsController extends Controller
 
     public function getAllUsers(Request $request)
     {
-
-
         // Build the query
         $searchTerm = $request->input('term');
         if ($searchTerm == 'data_default') $searchTerm = null;
@@ -90,6 +87,18 @@ class ticketsConfigsController extends Controller
                 $q->where('disposition_id', $disposition_id);
             });
 
+        return $data->paginate(10, ['*'], 'page', $request->page);
+    }
+
+
+    public function getDoctors(Request $request)
+    {
+        $get_doctor = request()->get_doctor;
+        $data = User::where('username', 'like', '%' . $request->searchItem . '%')
+            ->where('user_type', 'doctor') // Still filtering by user_type
+            ->when($get_doctor, function ($q) use ($get_doctor) {
+                $q->where('user_type', $get_doctor); // Use the new variable here
+            })->select('users.*', 'users.username as name', 'users.username as text');
         return $data->paginate(10, ['*'], 'page', $request->page);
     }
 }

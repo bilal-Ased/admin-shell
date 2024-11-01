@@ -1,181 +1,161 @@
 <x-app-layout :assets="$assets ?? []">
+    <style>
+        .form-group {
+            position: relative;
+        }
 
-    <!-- Include jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
 
-    <!-- Include Select2 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+        /* Basic styling for the Select2 container */
+        .select2-container--default .select2-selection--single {
+            background-color: #f8f9fa !important;
+            /* Light background color */
+            border: 1px solid #ced4da !important;
+            /* Border color matching form elements */
+            border-radius: 4px !important;
+            /* Rounded corners */
+            height: 38px !important;
+            /* Match the height of your form elements */
+        }
 
-    <!-- Include Select2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+        /* Style for the dropdown arrow */
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 34px !important;
+            /* Align with the container height */
+            top: 2px !important;
+            /* Align with the text */
+        }
 
-    <!-- Include Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        /* Focus styling */
+        .select2-container--default .select2-selection--single:focus-within {
+            border-color: #80bdff !important;
+            /* Border color on focus */
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25) !important;
+            /* Subtle shadow on focus */
+        }
 
-    <div class="row">
-        <div class="col-sm-12 col-lg-6">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="header-title">
-                        <h4 class="card-title">Create Appointment</h4>
+        /* Style for the dropdown items */
+        .select2-container--default .select2-results__option {
+            padding: 8px 12px !important;
+            /* Spacing for dropdown options */
+            font-size: 14px !important;
+            /* Font size to match form inputs */
+        }
+
+        /* Hover effect for dropdown items */
+        .select2-container--default .select2-results__option--highlighted {
+            background-color: #007bff !important;
+            /* Highlight background color */
+            color: #ffffff !important;
+            /* Highlight text color */
+        }
+
+        /* Style for the placeholder text */
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #6c757d !important;
+            /* Placeholder text color */
+            font-size: 14px !important;
+            /* Font size to match form inputs */
+        }
+
+        .select2-container {
+            z-index: 1000 !important;
+        }
+    </style>
+    <div>
+        @include('tickets.includes.ticket_scripts')
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-5">
+                @include('appointments.customer-bio')
+            </div>
+            <div class="col-sm-12 col-lg-7">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="header-title">
+                            <h4 class="card-title">Create Appointment</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form id="AppointmentForm" action="{{ route('appointment.store') }}" method="POST">
+                            <div class="form-group">
+                                @include('customers.customer-search')
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="d-flex align-items-center gap-1"><span>Select Doctor</span> <small
+                                                class="text-danger">*</small></label>
+                                        <select id="selectDoctor" class="form-select" name="user_id">
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label" for="exampleInputdate">Select Date</label>
+                                        <input type="date" class="form-control" id="exampleInputdate"
+                                            name="appointment_date">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-label" for="exampleInputtime">Select Time</label>
+                                        <input type="time" class="form-control" id="exampleInputtime"
+                                            name="appointment_time">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Send Customer Email Notification
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('appointments.store') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label class="form-label" for="customer">Customer:</label>
-                            <select id="customer" class="form-control" name="customer" style="width: 100%;">
-                                <option value="" disabled selected>Select a customer</option>
-                            </select>
-                            <input type="hidden" id="customerId" name="customer_id">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="appointment_datetime">Date Time:</label>
-                            <input type="datetime-local" class="form-control" id="appointment_datetime"
-                                name="appointment_datetime">
-                            <span id="availability-message" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="reason">Reason:</label>
-                            <input type="text" class="form-control" id="reason" name="reason">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="doctor">Doctor:</label>
-                            <select id="user_id" class="form-control" name="user_id" style="width: 100%;">
-                                <option value="" disabled selected>Select a doctor</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary" id="submit-btn">Create Appointment</button>
-                        <button type="button" class="btn btn-danger">Cancel</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-lg-6">
-            <div class="card">
-                {{-- <div class="card-body"> --}}
-                <img src="{{ asset('images/brands/appointment.jpg') }}" alt="Example Image">
-                {{-- </div> --}}
             </div>
         </div>
     </div>
+
+    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+    <!-- Modal -->
+    <!-- Your index file -->
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCustomerModalLabel">Add Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @include('customers.modal')
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        jQuery(document).ready(function($) {
-            // Elements
-            var availabilityMessage = $('#availability-message');
-            var submitButton = $('#submit-btn');
+        $(function() {            
+            initializeSelect2('#selectDoctor', '{{URL('settings/all-doctors')}}');
 
-            // Live validation for appointment availability
-            function checkAvailability() {
-                var doctorId = $('#user_id').val();
-                var appointmentDatetime = $('#appointment_datetime').val();
-
-                if (doctorId) { // Only check if a doctor is selected
-                    axios.post('/appointments/check-availability', {
-                            user_id: doctorId,
-                            appointment_datetime: appointmentDatetime
-                        })
-                        .then(function(response) {
-                            var message = 'The selected doctor is ' + (response.data.isAvailable ? 'available' :
-                                'not available') + ' at the specified time.';
-                            availabilityMessage.text(message).show(); // Show the message
-                            submitButton.prop('disabled', !response.data.isAvailable);
-                        })
-                        .catch(function(error) {
-                            console.error('Error:', error);
-                        });
-                } else {
-                    availabilityMessage.hide(); // Hide the message if no doctor is selected
-                }
-            }
-
-            // Attach change event listeners
-            $('#user_id, #appointment_datetime').on('change', function() {
-                availabilityMessage.text(''); // Clear the message
-                submitButton.prop('disabled', false); // Enable the submit button
-                checkAvailability();
-            });
-
-            // Customer search
-            $('#customer').select2({
-                ajax: {
-                    url: '/search/customers',
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(params) {
-                        return {
-                            q: params.term,
-                        };
-                    },
-                    processResults: function(data) {
-                        var term = $('#customer').val();
-                        var count = data.length;
-
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                },
-                placeholder: 'Search for a customer',
-                minimumInputLength: 3,
-                language: {
-                    searching: function(params) {
-                        return 'Searching...';
-                    },
-                    inputTooShort: function() {
-                        return 'Please enter at least 3 characters';
-                    }
-                },
-                escapeMarkup: function(markup) {
-                    return markup;
-                },
-                templateResult: function(data) {
-                    return data.text;
-                },
-                templateSelection: function(data) {
-                    return data.text;
-                }
-            }).on('select2:open', function() {
-                $('.select2-dropdown').append('<div class="select2-result-count" id="result-count"></div>');
-            }).on('select2:select', function(e) {
-                var data = e.params.data;
-                $('#customerId').val(data.id);
-            });
-
-            // Doctor search
-            $('#user_id').select2({
-                ajax: {
-                    url: '/search/doctors',
-                    dataType: 'json',
-                    delay: 250,
-                    data: function(params) {
-                        return {
-                            q: params.term,
-                        };
-                    },
-                    processResults: function(data) {
-                        return {
-                            results: data
-                        };
-                    },
-                    cache: true
-                },
-                placeholder: 'Search for a doctor',
-                minimumInputLength: 3
-            });
-
-            // Initial hide of the message
-            availabilityMessage.hide();
-
-            // Initial check on page load
-            checkAvailability();
         });
+
     </script>
 
 </x-app-layout>

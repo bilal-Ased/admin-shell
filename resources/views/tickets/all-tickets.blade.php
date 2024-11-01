@@ -15,7 +15,24 @@
             align-items: center;
 
         }
+
+        /* Style for even rows */
+        .dataTables_wrapper tr:nth-child(even) {
+            background-color: #f9f9f9;
+            /* Light gray color */
+        }
+
+        body {
+            overflow: -moz-scrollbars-vertical;
+            overflow-x: hidden;
+            /* overflow-y: hidden; */
+            height: 100%;
+            margin: 0;
+        }
     </style>
+
+
+
     <div>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
         <div class="row">

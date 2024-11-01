@@ -16,18 +16,15 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions = [
             [
-                'uuid' => '2',
                 'name' => 'role',
                 'title' => 'Role',
             ],
             [
-                'uuid' => '3',
                 'name' => 'role-add',
                 'title' => 'Role Add',
                 'parent_id' => 1,
             ],
             [
-                'uuid' => '4',
                 'name' => 'role-list',
                 'title' => 'Role List',
                 'parent_id' => 1,
@@ -37,13 +34,11 @@ class PermissionTableSeeder extends Seeder
                 'title' => 'Permission',
             ],
             [
-                'uuid' => '4',
                 'name' => 'permission-add',
                 'title' => 'Permission Add',
                 'parent_id' => 4,
             ],
             [
-                'uuid' => '5',
                 'name' => 'permission-list',
                 'title' => 'Permission List',
                 'parent_id' => 4,

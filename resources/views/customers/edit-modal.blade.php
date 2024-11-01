@@ -42,8 +42,20 @@
                 <label for="alternate_number" class="form-label">Alternate Number</label>
                 <input type="text" class="form-control" id="editCustomerName" name="alternate_number"
                     value="{{ $customer->alternate_number }}" required>
-
             </div>
+            <div class="col"><br>
+                <label for="date_of_birth" class="form-label">Alternate Number</label>
+                <input type="date" class="form-control" id="customerInputdate" name="date_of_birth"
+                    value="{{ $customer->date_of_birth }}" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col"><br>
+                <label for="gender" class="form-label">Gender</label>
+                <input type="text" class="form-control" id="editCustomerName" name="alternate_number"
+                    value="{{ $customer->alternate_number }}" required>
+            </div>
+
         </div>
 
         <br>
