@@ -5,11 +5,11 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">Customers List</h4>
+                            <h4 class="card-title">Appointment Status</h4>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#addAppointmentStatusModal">
-                                Add Customer
+                                Add Status
                             </button>
 
                             <!-- Modal -->
@@ -24,7 +24,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            @include('customers.modal')
+                                            @include('appointments.appointment-status.status-modal')
                                         </div>
                                     </div>
                                 </div>
@@ -60,14 +60,14 @@
             }, 3000);
         });
 
-        function getCustomerModal(url) {
+        function getAppointmentStatusModal(url) {
             var xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
                         // Successful response
-                        var modal = document.getElementById('editCustomerModal');
+                        var modal = document.getElementById('editAppointmentStatusModal');
 
                         // Assuming the modal content is supposed to be inserted into a specific element inside the modal.
                         var modalContentElement = modal.querySelector('.modal-content');

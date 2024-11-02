@@ -24,6 +24,15 @@ class AppointmentStatusController extends Controller
         AppointmentStatus::create($request->all());
 
 
-        return redirect()->route('customers.index')->with('success', 'Status added successfully!');
+        return redirect()->route('appointment-status.index')->with('success', 'Status added successfully!');
+    }
+
+
+
+    public function update($appointmentStatusId)
+    {
+        $appointmentStatus = AppointmentStatus::findOrFail($appointmentStatusId);
+
+        return view('appointments.appointment-status.edit-modal', ['appointmentStatus' => $appointmentStatus]);
     }
 }

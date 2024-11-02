@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -20,9 +19,7 @@ class CustomerDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-        // Start time
-
-        $dataTable = datatables()
+        return datatables()
             ->eloquent($query)
             ->editColumn('status', function ($query) {
                 $status = 'warning';
@@ -36,7 +33,6 @@ class CustomerDataTable extends DataTable
                         $status = 'danger'; // Inactive
                         $displayText = 'Inactive';
                         break;
-                        // Add more cases if needed
                     default:
                         $displayText = 'Unknown';
                 }
@@ -47,15 +43,13 @@ class CustomerDataTable extends DataTable
                 return date('Y/m/d', strtotime($query->created_at));
             })
             ->filterColumn('full_name', function ($query, $keyword) {
-                $sql = "CONCAT(customers.first_name,' ',customers.last_name)  like ?";
+                $sql = "CONCAT(customers.first_name,' ',customers.last_name) like ?";
 
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', 'customers.action')
             ->rawColumns(['action', 'status']);
-        return $dataTable;
     }
-
 
     /**
      * Get query source of dataTable.
@@ -71,18 +65,10 @@ class CustomerDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('customer-table')
             ->columns($this->getColumns())
-            ->minifiedAjax()
-            ->serverSide(true) // Enable server-side processing
-            ->orderBy(1)
-            ->selectStyleSingle()
-            ->buttons([
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload'),
+            ->parameters([
+                'dom'          => 'Bfrtip',
+                'buttons'      => ['export', 'print', 'reset', 'reload'],
             ]);
     }
 
@@ -91,20 +77,14 @@ class CustomerDataTable extends DataTable
      */
     public function getColumns(): array
     {
-
         return [
             ['data' => 'first_name', 'name' => 'first_name', 'title' => 'FULL NAME', 'orderable' => true],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
             ['data' => 'phone_number', 'name' => 'phone_number', 'title' => 'Phone Number'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
+            Column::computed('action')->exportable(false)->printable(false)->searchable(false)->addClass('text-center'),
 
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->searchable(false)
-                ->width(60)
-                ->addClass('text-center hide-search'),
         ];
     }
 

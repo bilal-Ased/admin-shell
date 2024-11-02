@@ -9,13 +9,20 @@ class Appointment extends Model
 {
     use HasFactory;
 
+    const STATUS_Sheduled = 1;
+    const STATUS_ReSheduled = 2;
+    const STATUS_Cancelled = 3;
+
+
+
     public $fillable = [
         'customer_id',
         'appointment_date',
         'appointment_time',
         'user_id',
         'comment',
-        'created_by'
+        'created_by',
+        'status_id'
     ];
 
 

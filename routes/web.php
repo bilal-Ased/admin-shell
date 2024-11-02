@@ -11,7 +11,7 @@ use App\Http\Controllers\demoController;
 use App\Http\Controllers\DoctorsSheduleController;
 
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\IsuranceController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
@@ -56,13 +56,14 @@ Route::group(['prefix' => 'landing-pages'], function () {
 Route::post('demo', [demoController::class, 'store'])->name('demo.store');
 
 //UI Pages Routs
-Route::get('/', [HomeController::class, 'uisheet'])->name('uisheet');
 
 
 Route::any('/incoming-messages', [WhatsAppController::class, 'getMessage']);
 
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+
     // Permission Module
     Route::get('/role-permission', [RolePermission::class, 'index'])->name('role.permission.list');
     Route::resource('permission', PermissionController::class);
@@ -116,15 +117,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/all-users', [ticketsConfigsController::class, 'getAllUsers']);
     Route::get('/settings/all-doctors', [ticketsConfigsController::class, 'getDoctors']);
 
-    Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index']);
+    Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index'])->name('appointment-status.index');
+    Route::post('/appointment/status/store', [AppointmentStatusController::class, 'store'])->name('appointment-status.store');
+    Route::get('/appointment/status/update/{id}', [AppointmentStatusController::class, 'update'])->name('appointment-status.update');
+    Route::get('/settings/insurance/list', [IsuranceController::class, 'index'])->name('isurance.view');
 });
-
-
-
-
-
-
-
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {
     //MenuStyle Page Routs
@@ -135,7 +132,9 @@ Route::group(['prefix' => 'menu-style'], function () {
     Route::get('boxed-fancy', [HomeController::class, 'boxedfancy'])->name('menu-style.boxedfancy');
 });
 Route::get('/chart', [HomeController::class, 'handleChart'])->name('menu-style.chart');
+Route::get('/statusChart', [HomeController::class, 'statusChart'])->name('menu-style.statusChart');
 Route::get('/view', [HomeController::class, 'view']);
+Route::get('/status-chart', [HomeController::class, 'statusChartView']);
 
 //App Details Page => 'special-pages'], function()
 Route::group(['prefix' => 'special-pages'], function () {

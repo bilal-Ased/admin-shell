@@ -38,6 +38,7 @@ class AppointmentController extends Controller
         ]);
 
         $request['created_by'] = Auth::id();
+        $request['status_id'] = Appointment::STATUS_Sheduled;
         $appointment = Appointment::create($request->all());
 
         Mail::to($appointment->user->email)->send(new AppointmentCreated($appointment));

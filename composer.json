@@ -30,6 +30,7 @@
         "laravel/tinker": "^2.8",
         "lavary/laravel-menu": "^1.8",
         "maatwebsite/excel": "^3.1",
+        "mbarlow/megaphone": "^2.0",
         "nesbot/carbon": "^2.72",
         "nunomaduro/laravel-desktop-notifier": "^2.8",
         "nwidart/laravel-modules": "^10.0",
@@ -44,6 +45,8 @@
         "vonage/client": "^4.0",
         "webklex/laravel-imap": "^5.3",
         "yajra/laravel-datatables": "^9.0",
+        "yajra/laravel-datatables-buttons": "^9.1",
+        "yajra/laravel-datatables-export": "^0.8.0",
         "yajra/laravel-datatables-oracle": "~10.0"
     },
     "require-dev": {

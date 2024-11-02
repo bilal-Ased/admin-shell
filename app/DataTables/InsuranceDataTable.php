@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\AppointmentStatus;
+use App\Models\Insurnace;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AppointmentStatusDataTable extends DataTable
+class InsuranceDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,20 +23,17 @@ class AppointmentStatusDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'appointments.appointment-status.action')
-            ->setRowId('id')
-            ->editColumn('created_at', function ($query) {
-                return date('m/d/Y', strtotime($query->created_at));
-            });
+            ->addColumn('action', 'insurance.action')
+            ->setRowId('id');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\AppointmentStatus $model
+     * @param \App\Models\Insurance $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(AppointmentStatus $model): QueryBuilder
+    public function query(Insurnace $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -49,7 +46,7 @@ class AppointmentStatusDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('appointmentstatus-table')
+            ->setTableId('insurance-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -72,16 +69,15 @@ class AppointmentStatusDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ['data' => 'id', 'name' => 'id', 'title' => 'ID', 'orderable' => true],
-            ['data' => 'name', 'name' => 'name', 'title' => 'Name'],
-            ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
-
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
-                ->searchable(false)
                 ->width(60)
-                ->addClass('text-center hide-search'),
+                ->addClass('text-center'),
+            Column::make('id'),
+            Column::make('add your columns'),
+            Column::make('created_at'),
+            Column::make('updated_at'),
         ];
     }
 
@@ -92,6 +88,6 @@ class AppointmentStatusDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'AppointmentStatus_' . date('YmdHis');
+        return 'Insurance_' . date('YmdHis');
     }
 }

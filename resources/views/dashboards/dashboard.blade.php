@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-lg-8">
+        <div class="col-md-12 col-lg-6">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card" data-aos="fade-up" data-aos-delay="800">
@@ -226,30 +226,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-lg-4">
+        <div class="col-md-12 col-lg-6">
             <div class="row">
                 <div class="col-md-6 col-lg-12">
                     {{-- add new chart here --}}
 
                     <div class="card" data-aos="fade-up" data-aos-delay="1200">
-                        <div class="card-header d-flex justify-content-between flex-wrap">
-                            <div class="header-title">
-                                <h4 class="card-title">Conversions</h4>
-                            </div>
-                            <div class="dropdown">
-                                <a href="#" class="text-gray dropdown-toggle" id="dropdownMenuButton3"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    This Week
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton3">
-                                    <li><a class="dropdown-item" href="#">This Week</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-                        </div>
+
                         <div class="card-body">
-                            <div id="d-activity" class="d-activity"></div>
+                            <div id="statusChart" class="statusChart"></div>
                         </div>
                     </div>
                     <div class="card" data-aos="fade-up" data-aos-delay="300">
@@ -329,7 +314,6 @@
             fetch('/chart')
                 .then(response => response.json())
                 .then(appointmentData => {
-                    console.log(appointmentData); // Check the fetched data
 
                     const data = Object.values(appointmentData); // Convert to an array
 
@@ -372,5 +356,56 @@
                 })
                 .catch(error => console.error('Error fetching data:', error)); // Handle any errors
         });
+
+
+
+
+                // Fetch appointment data and create the pie chart
+            fetch('{{ route("menu-style.statusChart") }}') // Replace with your actual route name
+            .then(response => response.json())
+            .then(data => {
+                Highcharts.chart('statusChart', {
+                    chart: {
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Appointments by Status'
+                    },
+                    tooltip: {
+                        pointFormat: '<b>{point.name}</b>: {point.y} appointments ({point.percentage:.1f}%)'
+                    },
+                    plotOptions: {
+                        series: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: [{
+                                enabled: true,
+                                distance: 20
+                            }, {
+                                enabled: true,
+                                distance: -40,
+                                format: '{point.percentage:.1f}%',
+                                style: {
+                                    fontSize: '1.2em',
+                                    textOutline: 'none',
+                                    opacity: 0.7
+                                },
+                                filter: {
+                                    operator: '>',
+                                    property: 'percentage',
+                                    value: 10
+                                }
+                            }]
+                        }
+                    },
+                    series: [{
+                        name: 'Status',
+                        colorByPoint: true,
+                        data: data // Pass the appointment data directly here
+                    }]
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
     </script>
 </x-app-layout>

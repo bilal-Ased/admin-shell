@@ -63,6 +63,49 @@ class HomeController extends Controller
         return view('dashboards.chart');
     }
 
+
+    public function statusChart()
+    {    // Get the counts of appointments grouped by status
+        // Get the counts of appointments grouped by status
+        $statusCounts = Appointment::select('status_id', \DB::raw("COUNT(*) as count"))
+            ->groupBy('status_id')
+            ->pluck('count', 'status_id');
+
+        // Prepare data for the pie chart directly
+        $chartData = [];
+        foreach ($statusCounts as $status => $count) {
+            // Determine the status name based on its ID using defined constants
+            switch ($status) {
+                case Appointment::STATUS_Sheduled: // Reference the constant from the model
+                    $statusName = 'Scheduled';
+                    break;
+                case Appointment::STATUS_ReSheduled: // Reference the constant from the model
+                    $statusName = 'ReScheduled';
+                    break;
+                case Appointment::STATUS_Cancelled: // Reference the constant from the model
+                    $statusName = 'Cancelled';
+                    break;
+                default:
+                    $statusName = 'Unknown'; // Default case for unrecognized status
+                    break;
+            }
+
+            $chartData[] = [
+                'name' => $statusName,
+                'y' => $count,
+            ];
+        }
+
+        return response()->json($chartData); // Return JSON response
+    }
+
+
+    public function statusChartView()
+    {
+        return view('dashboards.status-chart');
+    }
+
+
     /*
      * Menu Style Routs
      */

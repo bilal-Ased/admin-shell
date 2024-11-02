@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Appointment;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -31,7 +32,39 @@ class AppointmentsDataTable extends DataTable
 
                 return $str;
             })
-            ->rawColumns(['ID']);
+            ->editColumn('appointment_details', function ($appointment) {
+                // Concatenate appointment_date and appointment_time
+                return Carbon::parse($appointment->appointment_date)->format('M j, Y') . ', ' . Carbon::parse($appointment->appointment_time)->format('g:i A');
+            })
+            ->editColumn('status_id', function ($appointment) {
+                // Initialize variables
+                $statusClass = '';
+                $displayText = '';
+
+                // Check the status using the 'status_id' field
+                switch ($appointment->status_id) {
+                    case 1:
+                        $statusClass = 'info'; // Scheduled
+                        $displayText = 'Scheduled';
+                        break;
+                    case 2:
+                        $statusClass = 'success'; // Rescheduled
+                        $displayText = 'Rescheduled';
+                        break;
+                    case 3:
+                        $statusClass = 'danger'; // Cancelled
+                        $displayText = 'Cancelled';
+                        break;
+                    default:
+                        $statusClass = 'success'; // Default class for unknown status
+                        $displayText = 'Unknown';
+                        break;
+                }
+
+                // Return the badge HTML if displayText is set
+                return $displayText ? '<span class="text-capitalize badge bg-' . $statusClass . '">' . $displayText . '</span>' : '';
+            })
+            ->rawColumns(['ID', 'appointment_details', 'status_id']);
     }
 
     /**
@@ -80,7 +113,8 @@ class AppointmentsDataTable extends DataTable
         return [
             ['data' => 'ID', 'name' => 'id', 'title' => 'ID'],
             ['data' => 'customer.first_name', 'name' => 'customer.first_name', 'title' => 'Customer', 'orderable' => true],
-            ['data' => 'appointment_date', 'name' => 'appointment_date', 'title' => 'appointment Date'],
+            ['data' => 'appointment_details', 'name' => 'appointment_details', 'title' => 'Appointment Date'],
+            ['data' => 'status_id', 'name' => 'status_id', 'title' => 'Status '],
             ['data' => 'user.username', 'name' => 'user.username', 'title' => 'Doctor'],
 
 

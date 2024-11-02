@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Google\Service\Classroom\Announcement;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use MBarlow\Megaphone\HasMegaphone;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -124,5 +126,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
             'availableSlots' => array_diff($slots, $bookedSlots),
             'bookedSlots' => $bookedSlots
         ];
+    }
+
+
+    public function announcements()
+    {
+        return $this->hasMany(AnnouncementUser::class);
     }
 }
