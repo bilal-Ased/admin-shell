@@ -21,12 +21,30 @@ class CustomerDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addColumn('full_name', function ($query) {
+                $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($query->first_name . ' ' . $query->last_name) . '&background=D1E3F7&color=1A4D85';
+                $fullName = htmlspecialchars($query->first_name . ' ' . $query->last_name);
+                $customerId = $query->id; // Assuming the customer ID is available in the query
+
+                // Create the link to the customer activity page
+                $link = route('customers.activity', ['id' => $customerId]);
+
+                return '<div data-fullname="' . $fullName . '">' .
+                    '<a href="' . $link . '">' .  // Link only around the avatar
+                    '<img src="' . $avatarUrl . '" alt="User-Profile" width="30" height="30" class="rounded-circle me-2">' .
+                    '</a>' .
+                    '<span>' . $fullName . '</span>' .  // Full name outside of the link
+                    '</div>';
+            })
+
+
+
             ->editColumn('status', function ($query) {
                 $status = 'warning';
 
                 switch ($query->status) {
                     case 1:
-                        $status = 'primary'; // Active
+                        $status = 'info'; // Active
                         $displayText = 'Active';
                         break;
                     case 0:
@@ -48,7 +66,7 @@ class CustomerDataTable extends DataTable
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', 'customers.action')
-            ->rawColumns(['action', 'status']);
+            ->rawColumns(['action', 'status', 'full_name']);
     }
 
     /**
@@ -68,7 +86,7 @@ class CustomerDataTable extends DataTable
             ->columns($this->getColumns())
             ->parameters([
                 'dom'          => 'Bfrtip',
-                'buttons'      => ['export', 'print', 'reset', 'reload'],
+                'buttons'      => ['export'],
             ]);
     }
 
@@ -78,7 +96,7 @@ class CustomerDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            ['data' => 'first_name', 'name' => 'first_name', 'title' => 'FULL NAME', 'orderable' => true],
+            ['data' => 'full_name', 'name' => 'full_name', 'title' => 'FULL NAME', 'orderable' => true],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
             ['data' => 'phone_number', 'name' => 'phone_number', 'title' => 'Phone Number'],

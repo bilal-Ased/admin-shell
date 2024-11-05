@@ -81,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/customers/change-status/{id}', [CustomerController::class, 'changeStatus'])->name('customers.change-status');
     Route::post('customers/search', [CustomerController::class, 'searchCustomers'])->name('customers.search');
     Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::get('/customers/activity/{id}', [CustomerController::class, 'customerActivity'])->name('customers.activity');
+
+
 
 
 
@@ -120,7 +123,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index'])->name('appointment-status.index');
     Route::post('/appointment/status/store', [AppointmentStatusController::class, 'store'])->name('appointment-status.store');
     Route::get('/appointment/status/update/{id}', [AppointmentStatusController::class, 'update'])->name('appointment-status.update');
-    Route::get('/settings/insurance/list', [IsuranceController::class, 'index'])->name('isurance.view');
+    Route::get('/settings/insurance/list', [IsuranceController::class, 'index'])->name('isurance.index');
+    Route::get('/settings/insurance/list/search', [IsuranceController::class, 'getInsurnace']);
+    Route::post('settings/insurance/store', [IsuranceController::class, 'store'])->name('insurance.store');
 });
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {

@@ -24,7 +24,9 @@ class InsuranceDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'insurance.action')
-            ->setRowId('id');
+            ->setRowId('id')->editColumn('created_at', function ($query) {
+                return date('m/d/Y', strtotime($query->created_at));
+            });
     }
 
     /**
@@ -69,15 +71,16 @@ class InsuranceDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            ['data' => 'id', 'name' => 'id', 'title' => 'ID', 'orderable' => true],
+            ['data' => 'name', 'name' => 'name', 'title' => 'Name'],
+            ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
+
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
+                ->searchable(false)
                 ->width(60)
-                ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+                ->addClass('text-center hide-search'),
         ];
     }
 

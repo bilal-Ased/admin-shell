@@ -41,7 +41,15 @@ class AppointmentController extends Controller
         $request['status_id'] = Appointment::STATUS_Sheduled;
         $appointment = Appointment::create($request->all());
 
+
+
         Mail::to($appointment->user->email)->send(new AppointmentCreated($appointment));
+
+
+        if ($request->has('send_email')) {
+            // Send email to the customer if the checkbox is checked
+            Mail::to($appointment->customer->email)->send(new AppointmentCreated($appointment));
+        }
 
 
         return redirect()->route('appointments.list')->with('success', 'Appointment Created successfully!');

@@ -21,7 +21,6 @@ class AppointmentCreated extends Mailable
     public function __construct(Appointment $appointment)
     {
         $this->appointment = $appointment;
-
     }
 
     /**
@@ -29,17 +28,30 @@ class AppointmentCreated extends Mailable
      */
     public function build()
     {
+        if ($this->appointment->created_by === $this->appointment->user_id) {
+            // Send to user
+            return $this->subject('Appointment Created')
+                ->view('emails.appointment_created'); // The original view for user
+        } else {
+            // Send to customer
+            // return $this->subject('Your Appointment Details')
+            //     ->view('emails.customer_appointment_created'); // New view for customer
 
-
-
-
-        return $this->markdown('emails.appointment-created')
-        ->subject('New Appointment Created');
-        
-        // return $this->view('emails.appointment-created')
-        // ->subject('New Appointment Created');
-
+            return $this->markdown('emails.customer_appointment_created');
+        }
     }
+
+
+
+
+
+    // return $this->markdown('emails.appointment-created')
+    // ->subject('New Appointment Created');
+
+    // return $this->view('emails.appointment-created')
+    // ->subject('New Appointment Created');
+
+
 
     /**
      * Get the attachments for the message.

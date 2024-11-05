@@ -25,7 +25,11 @@ class AppointmentsDataTable extends DataTable
     {
         return (new EloquentDataTable(
             $query->select('appointments.*')->orderBy('created_at', 'desc')
-        ))->addColumn('action', 'appointments.action')
+        ))
+            ->addColumn('full_name', function ($query) {
+                return $query->first_name . ' ' . $query->last_name;
+            })
+            ->addColumn('action', 'appointments.action')
             ->setRowId('appointments.id')
             ->editColumn('ID', function ($appointment) {
                 $str = '<div class="d-flex"><a class="shadow rounded appointments-style" href="' . route('update.appointment', $appointment->id) . '">#AP' . $appointment->id . '</a></div>';
@@ -64,7 +68,7 @@ class AppointmentsDataTable extends DataTable
                 // Return the badge HTML if displayText is set
                 return $displayText ? '<span class="text-capitalize badge bg-' . $statusClass . '">' . $displayText . '</span>' : '';
             })
-            ->rawColumns(['ID', 'appointment_details', 'status_id']);
+            ->rawColumns(['ID', 'appointment_details', 'status_id', 'full_name']);
     }
 
     /**
@@ -112,7 +116,7 @@ class AppointmentsDataTable extends DataTable
 
         return [
             ['data' => 'ID', 'name' => 'id', 'title' => 'ID'],
-            ['data' => 'customer.first_name', 'name' => 'customer.first_name', 'title' => 'Customer', 'orderable' => true],
+            ['data' => 'full_name', 'name' => 'full_name', 'title' => 'Customer', 'orderable' => true],
             ['data' => 'appointment_details', 'name' => 'appointment_details', 'title' => 'Appointment Date'],
             ['data' => 'status_id', 'name' => 'status_id', 'title' => 'Status '],
             ['data' => 'user.username', 'name' => 'user.username', 'title' => 'Doctor'],

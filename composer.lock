@@ -2184,16 +2184,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.379.0",
+            "version": "v0.380.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "5a671ff040d55cec7b69b88d84c91bd8867d1c8e"
+                "reference": "a706b940e309d6cd858eee6a394e89fa17310c93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/5a671ff040d55cec7b69b88d84c91bd8867d1c8e",
-                "reference": "5a671ff040d55cec7b69b88d84c91bd8867d1c8e",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/a706b940e309d6cd858eee6a394e89fa17310c93",
+                "reference": "a706b940e309d6cd858eee6a394e89fa17310c93",
                 "shasum": ""
             },
             "require": {
@@ -2222,9 +2222,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.379.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.380.0"
             },
-            "time": "2024-10-28T01:10:22+00:00"
+            "time": "2024-11-03T01:06:19+00:00"
         },
         {
             "name": "google/auth",
@@ -8189,16 +8189,16 @@
         },
         {
             "name": "spatie/image-optimizer",
-            "version": "1.7.5",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/image-optimizer.git",
-                "reference": "43aff6725cd87bb78ccd8532633cfa8bdc962505"
+                "reference": "4fd22035e81d98fffced65a8c20d9ec4daa9671c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/43aff6725cd87bb78ccd8532633cfa8bdc962505",
-                "reference": "43aff6725cd87bb78ccd8532633cfa8bdc962505",
+                "url": "https://api.github.com/repos/spatie/image-optimizer/zipball/4fd22035e81d98fffced65a8c20d9ec4daa9671c",
+                "reference": "4fd22035e81d98fffced65a8c20d9ec4daa9671c",
                 "shasum": ""
             },
             "require": {
@@ -8238,9 +8238,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/image-optimizer/issues",
-                "source": "https://github.com/spatie/image-optimizer/tree/1.7.5"
+                "source": "https://github.com/spatie/image-optimizer/tree/1.8.0"
             },
-            "time": "2024-05-16T08:48:33+00:00"
+            "time": "2024-11-04T08:24:54+00:00"
         },
         {
             "name": "spatie/laravel-analytics",

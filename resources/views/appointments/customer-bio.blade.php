@@ -7,16 +7,23 @@
     <div class="card-body" id="customerBio">
         <img src="{{asset('images/brands/appointment.jpg')}}" id="customerBioImageHolder" alt="Image" />
         <div id="customerBioInner" style="display:none;">
-            <h5 class="cardTitle" id="customerName">help</h5>
+            <p class="cardText">
+                <b>Name:</b> <span id="customerName"></span>
+            </p>
             <p class="cardText">
                 <b>Phone Number:</b> <span id="customerPhone"></span>
             </p>
+            <p class="cardText">
+                <b>Phone Number:</b> <span id="customerPhone"></span>
+            </p>
+            <p class="cardText">
+                <b>Email:</b> <span id="customerEmail"></span>
+            </p>
 
-            <p class="cardText" id="customerEmail"><strong>Email:</strong></p>
-            <p class="cardText" id="customerAltPhone"><strong>Alternate Number:</strong></p>
-            <p class="cardText" id="customerCreatedAt"><strong>Created At:</strong></p>
+            <p class="cardText">
+                <b>Created At:</b> <span id="customerCreatedAt"></span>
+            </p>
         </div>
-
     </div>
 </div>
 <script>

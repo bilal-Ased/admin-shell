@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\CustomerDataTable;
+use App\Models\Appointment;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -72,7 +73,7 @@ class CustomerController extends Controller
 
         // Calculate pagination data
         $totalCount = $query->count(); // Total count should be done before pagination
-        $customers = $query->skip(($page - 1) * $perPage)->take($perPage)->get(['id', 'first_name', 'last_name', 'phone_number']); // Select needed columns
+        $customers = $query->skip(($page - 1) * $perPage)->take($perPage)->get(['id', 'first_name', 'last_name', 'phone_number', 'email', 'created_at']); // Select needed columns
 
         // Calculate total pages
         $totalPages = ceil($totalCount / $perPage);
@@ -112,5 +113,20 @@ class CustomerController extends Controller
         $customer->save();
 
         return redirect()->back()->with('success', 'Status changed successfully!');
+    }
+
+
+    public function customerActivity($customerId)
+    {
+        $customer = Customer::findOrFail($customerId);
+        // Assuming you have an Appointment model and a relationship defined
+        $appointments = Appointment::where('customer_id', $customerId)
+            ->orderBy('appointment_date', 'desc') // Order by date
+            ->get();
+
+        return view('customers.history', [
+            'customer' => $customer,
+            'appointments' => $appointments,
+        ]);
     }
 }

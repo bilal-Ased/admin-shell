@@ -11,7 +11,6 @@
                             data-bs-target="#addCustomerModal">
                             Add Customer
                         </button>
-                        <livewire:export-button :table-id="$dataTable->getTableId()" />
 
                     </div>
                     <div class="card-body px-0">
