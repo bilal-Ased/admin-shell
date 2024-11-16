@@ -14,6 +14,6 @@ class CustomerProfile extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'id');
+        return $this->belongsTo(Customer::class, 'customer_profile_id');
     }
 }

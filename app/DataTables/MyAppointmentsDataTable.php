@@ -9,8 +9,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class MyAppointmentsDataTable extends DataTable
@@ -32,7 +30,7 @@ class MyAppointmentsDataTable extends DataTable
 
                 return $str;
             })
-            ->rawColumns(['ID']);
+            ->rawColumns(['ID', 'appointment_details', 'action']);
     }
 
     /**

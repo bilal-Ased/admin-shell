@@ -11,6 +11,7 @@ use App\Http\Controllers\Security\RolePermission;
 use App\Http\Controllers\ticketsConfigsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::get('/storage', function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
+    // dd(Auth::id());
+    // (Auth::logout());
+
     Route::get('/', [HomeController::class, 'index']);
 
     // Permission Module

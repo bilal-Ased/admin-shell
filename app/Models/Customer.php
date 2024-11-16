@@ -9,7 +9,6 @@ use Laravel\Scout\Searchable;
 class Customer extends Model
 {
     use HasFactory;
-    use Searchable;
 
     protected $fillable = [
         'first_name',

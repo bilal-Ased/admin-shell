@@ -46,6 +46,46 @@
       </div>
    </div>
 
+
+   <div class="modal fade" id="updateAppointmentModal" tabindex="-1" aria-labelledby="updateAppointmentModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="updateAppointmentModalLabel">Update Appointment</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               @include('appointments.edit-modal')
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+   <script>
+      function updateAppointmentModal(customer) {
+         customer = JSON.parse(customer)
+// Populate the form fields with customer data
+   $('#customerFirstName').val(customer.first_name);
+   $('#customerLastName').val(customer.last_name);
+   $('#customerPhoneNumber').val(customer.phone_number);
+   $('#customerEmail').val(customer.email);
+   $('#alternateNumber').val(customer.alternate_number || '');
+   $('#dateOfBirth').val(customer.date_of_birth || '');
+   $('#gender').val(customer.gender || '');
+
+// If you want to update form action dynamically (optional)
+
+var url = `{{ url('/customers/update/') }}/${customer.id}`;
+
+
+$('#editCustomerForm').attr('action',);
+$('#updateAppointmentModal').modal('show');
+}
+
+   </script>
+
    @push('scripts')
    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
    @endpush

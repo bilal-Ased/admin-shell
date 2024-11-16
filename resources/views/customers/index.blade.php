@@ -65,4 +65,9 @@
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
     @endpush
 
+
+
+
+
+
 </x-app-layout>

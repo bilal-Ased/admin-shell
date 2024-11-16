@@ -22,7 +22,7 @@ class CustomerDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addColumn('full_name', function ($query) {
-                $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($query->first_name . ' ' . $query->last_name) . '&background=D1E3F7&color=1A4D85';
+                $avatarUrl = 'https://ui-avatars.com/api/?name=' . urlencode($query->first_name . ' ' . $query->last_name) . '&background=3A6073&color=FFF8E1';
                 $fullName = htmlspecialchars($query->first_name . ' ' . $query->last_name);
                 $customerId = $query->id; // Assuming the customer ID is available in the query
 
@@ -83,11 +83,11 @@ class CustomerDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->columns($this->getColumns())
-            ->parameters([
-                'dom'          => 'Bfrtip',
-                'buttons'      => ['export'],
-            ]);
+            ->columns($this->getColumns());
+        // ->parameters([
+        //     'dom'          => 'Bfrtip',
+        //     'buttons'      => ['export'],
+        // ]);
     }
 
     /**
@@ -100,7 +100,6 @@ class CustomerDataTable extends DataTable
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
             ['data' => 'phone_number', 'name' => 'phone_number', 'title' => 'Phone Number'],
-            ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
             Column::computed('action')->exportable(false)->printable(false)->searchable(false)->addClass('text-center'),
 
         ];

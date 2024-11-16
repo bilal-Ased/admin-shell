@@ -30,21 +30,10 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card p-3">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
                             <h4 class="card-title">All Appointments</h4>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="start_date">Start Date:</label>
-                                    <input type="date" id="start_date" class="form-control">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="end_date">End Date:</label>
-                                    <input type="date" id="end_date" class="form-control">
-                                </div>
-                            </div>
-                            <button id="filter-button" class="btn btn-primary mt-2">Filter</button>
 
                         </div>
                     </div>

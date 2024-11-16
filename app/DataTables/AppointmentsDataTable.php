@@ -71,7 +71,7 @@ class AppointmentsDataTable extends DataTable
                 // Return the badge HTML if displayText is set
                 return $displayText ? '<span class="text-capitalize badge bg-' . $statusClass . '">' . $displayText . '</span>' : '';
             })
-            ->rawColumns(['ID', 'appointment_details', 'status_id']);
+            ->rawColumns(['ID', 'appointment_details', 'status_id', 'action']);
     }
 
     /**
