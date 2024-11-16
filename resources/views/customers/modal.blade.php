@@ -92,6 +92,8 @@
         </div>
     </div>
 
+
+
     <div class="row">
         <div class="col"><br>
             <label for="gender" class="form-label">Gender</label>
@@ -112,7 +114,7 @@
             <input type="checkbox" class="form-check-input" id="allergiesCheckbox">
             <label class="form-check-label" for="allergiesCheckbox">Do you have any allergies?</label>
         </div>
-        <textarea class="form-control allergies-comment" id="allergiesComment"
+        <textarea class="form-control allergies-comment" id="allergiesComment" name="allergy"
             placeholder="Please list your allergies here..."></textarea>
     </div>
 

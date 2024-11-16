@@ -50,8 +50,12 @@ class UserTableSeeder extends Seeder
             ]
         ];
         foreach ($users as $key => $value) {
-            $user = User::create($value);
-            $user->assignRole($value['user_type']);
+
+            $exists = User::where("email", $value['email'])->first();
+            if (!$exists) {
+                $user = User::create($value);
+                $user->assignRole($value['user_type']);
+            }
         }
     }
 }

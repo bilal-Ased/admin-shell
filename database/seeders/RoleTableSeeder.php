@@ -37,10 +37,13 @@ class RoleTableSeeder extends Seeder
         ];
 
         foreach ($roles as $key => $value) {
-            $permission = $value['permissions'];
-            unset($value['permissions']);
-            $role = Role::create($value);
-            $role->givePermissionTo($permission);
+            $exists = Role::where("name", $value)->first();
+            if (!$exists) {
+                $permission = $value['permissions'];
+                unset($value['permissions']);
+                $role = Role::create($value);
+                $role->givePermissionTo($permission);
+            }
         }
     }
 }

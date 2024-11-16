@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ca83a173e0e6528fb9941b16347803d",
+    "content-hash": "8d3373beb91bc28bf5f524f42053e976",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
-            "version": "4.8.0",
+            "version": "4.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/algolia/algoliasearch-client-php.git",
-                "reference": "9aea95b33f10858762b5dc5d2e1fae245080c5e8"
+                "reference": "0c5e91df7a475cdcd96f039052a5e5b81c0f7f18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/9aea95b33f10858762b5dc5d2e1fae245080c5e8",
-                "reference": "9aea95b33f10858762b5dc5d2e1fae245080c5e8",
+                "url": "https://api.github.com/repos/algolia/algoliasearch-client-php/zipball/0c5e91df7a475cdcd96f039052a5e5b81c0f7f18",
+                "reference": "0c5e91df7a475cdcd96f039052a5e5b81c0f7f18",
                 "shasum": ""
             },
             "require": {
@@ -69,9 +69,9 @@
             ],
             "support": {
                 "issues": "https://github.com/algolia/algoliasearch-client-php/issues",
-                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.8.0"
+                "source": "https://github.com/algolia/algoliasearch-client-php/tree/4.8.1"
             },
-            "time": "2024-10-30T14:28:58+00:00"
+            "time": "2024-11-06T17:47:50+00:00"
         },
         {
             "name": "beyondcode/laravel-ask-database",
@@ -300,51 +300,6 @@
                 }
             ],
             "time": "2024-03-26T11:57:09+00:00"
-        },
-        {
-            "name": "bosunski/todo",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bosunski/todo.git",
-                "reference": "f144e1f07afdb3e8b7190253d7df8571edf7c36e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bosunski/todo/zipball/f144e1f07afdb3e8b7190253d7df8571edf7c36e",
-                "reference": "f144e1f07afdb3e8b7190253d7df8571edf7c36e",
-                "shasum": ""
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Bosunski\\Todo\\TodoServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Bosunski\\Todo\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bosun Egberinde",
-                    "email": "bosunski@gmail.com"
-                }
-            ],
-            "description": "A Simple Laravel ToDo List Package",
-            "support": {
-                "issues": "https://github.com/bosunski/todo/issues",
-                "source": "https://github.com/bosunski/todo/tree/master"
-            },
-            "time": "2018-02-06T14:25:45+00:00"
         },
         {
             "name": "botman/botman",
@@ -15421,7 +15376,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "bosunski/todo": 20,
         "sensasi-delight/material-blade": 20
     },
     "prefer-stable": true,

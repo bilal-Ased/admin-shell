@@ -26,10 +26,13 @@ class AppointmentsDataTable extends DataTable
         return (new EloquentDataTable(
             $query->select('appointments.*')->orderBy('created_at', 'desc')
         ))
-            ->addColumn('full_name', function ($query) {
-                return $query->first_name . ' ' . $query->last_name;
-            })
+
             ->addColumn('action', 'appointments.action')
+            ->addColumn('full_name', function ($appointment) {
+                $customer = $appointment->customer;
+
+                return $customer->full_name;
+            })
             ->setRowId('appointments.id')
             ->editColumn('ID', function ($appointment) {
                 $str = '<div class="d-flex"><a class="shadow rounded appointments-style" href="' . route('update.appointment', $appointment->id) . '">#AP' . $appointment->id . '</a></div>';
@@ -68,7 +71,7 @@ class AppointmentsDataTable extends DataTable
                 // Return the badge HTML if displayText is set
                 return $displayText ? '<span class="text-capitalize badge bg-' . $statusClass . '">' . $displayText . '</span>' : '';
             })
-            ->rawColumns(['ID', 'appointment_details', 'status_id', 'full_name']);
+            ->rawColumns(['ID', 'appointment_details', 'status_id']);
     }
 
     /**

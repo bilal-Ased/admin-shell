@@ -13,13 +13,14 @@
                         </button>
 
                     </div>
-                    <div class="card-body px-0">
+                    <div class="card-body p-3">
                         {{ $dataTable->table() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Add Customer Modal -->
     <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel"
@@ -36,6 +37,26 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Edit Customer Modal -->
+    <div class="modal fade" id="editCustomerModal" tabindex="-1" aria-labelledby="editCustomerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCustomerModalLabel">Edit Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @include('customers.edit-modal')
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     @push('scripts')
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">

@@ -20,7 +20,7 @@
             placeholder: 'Search for a customer',
             ajax: {
                 url: '{{ route("customers.search") }}',
-                type: 'POST',
+                type: 'GET',
                 dataType: 'json',
                 delay: 250,
                 data: function(params) {

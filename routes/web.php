@@ -2,28 +2,15 @@
 
 // Controllers
 
-use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AppointmentStatusController;
-use App\Http\Controllers\CalendarController;
-
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\demoController;
-use App\Http\Controllers\DoctorsSheduleController;
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IsuranceController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
-
 use App\Http\Controllers\ticketsConfigsController;
-use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WhatsAppController;
-
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Mail;
-// Packages
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,89 +30,26 @@ Route::get('/storage', function () {
     Artisan::call('storage:link');
 });
 
-//Landing-Pages Routes
-Route::group(['prefix' => 'landing-pages'], function () {
-    Route::get('index', [HomeController::class, 'landing_index'])->name('landing-pages.index');
-    Route::get('blog', [HomeController::class, 'landing_blog'])->name('landing-pages.blog');
-    Route::get('blog-detail', [HomeController::class, 'landing_blog_detail'])->name('landing-pages.blog-detail');
-    Route::get('about', [HomeController::class, 'landing_about'])->name('landing-pages.about');
-    Route::get('ecommerce', [HomeController::class, 'landing_ecommerce'])->name('landing-pages.ecommerce');
-    Route::get('faq', [HomeController::class, 'landing_faq'])->name('landing-pages.faq');
-    Route::get('pricing', [HomeController::class, 'landing_pricing'])->name('landing-pages.pricing');
-});
-Route::post('demo', [demoController::class, 'store'])->name('demo.store');
-
-//UI Pages Routs
-
-
-Route::any('/incoming-messages', [WhatsAppController::class, 'getMessage']);
-
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/', [HomeController::class, 'index']);
 
     // Permission Module
     Route::get('/role-permission', [RolePermission::class, 'index'])->name('role.permission.list');
     Route::resource('permission', PermissionController::class);
     Route::resource('role', RoleController::class);
 
-    // Dashboard Routes
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     // Users Module
     Route::resource('users', UserController::class);
 
-    Route::get('/customers/index', [CustomerController::class, 'index'])->name('customers.index');
-    Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-    Route::get('/customers/{id}/edit', [CustomerController::class, 'editCustomer'])->name('customers.edit');
-    Route::post('/customers/change-status/{id}', [CustomerController::class, 'changeStatus'])->name('customers.change-status');
-    Route::post('customers/search', [CustomerController::class, 'searchCustomers'])->name('customers.search');
-    Route::post('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
-    Route::get('/customers/activity/{id}', [CustomerController::class, 'customerActivity'])->name('customers.activity');
+    require __DIR__ . '/dashboard/dashboard.php';
+    require __DIR__ . '/customers/customer.php';
+    require __DIR__ . '/appointments/appointments_routes.php';
+    require __DIR__ . '/tickets/tickets_routes.php';
+    require __DIR__ . '/settings/settings.php';
 
-
-
-
-
-
-    Route::get('/calendar', [CalendarController::class, 'showCalendar'])->name('appointments.calendar');
-    Route::get('/create-appointment', [AppointmentController::class, 'index'])->name('appointment.create');
-    Route::post('/store-appointment', [AppointmentController::class, 'store'])->name('appointment.store');
-    Route::get('/appointments/list', [AppointmentController::class, 'list'])->name('appointments.list');
-    Route::get('/my/appointments', [AppointmentController::class, 'getAuthUsersAppointments'])->name('my.appointments');
-    Route::get('/my/appointments', [AppointmentController::class, 'getAuthUsersAppointments'])->name('my.appointments');
-    Route::get('/update/appointment/{id}', [AppointmentController::class, 'update'])->name('update.appointment');
-
-    Route::post('/user-schedule', [DoctorsSheduleController::class, 'store'])->name('userSchedule.store');
-    Route::get('/user-schedule-create', [DoctorsSheduleController::class, 'index'])->name('shedule-managment');
-    Route::get('/user/get-available-slots', [DoctorsSheduleController::class, 'getAvailableSlots'])->name('user.getAvailableSlots');
-
-
-
-
-    Route::get('/tickets/create', [TicketsController::class, 'index'])->name('tickets.index');
-    Route::post('/tickets/store', [TicketsController::class, 'store'])->name('tickets.store');
-    Route::get('/tickets/list', [TicketsController::class, 'list'])->name('tickets.list');
-    Route::get('my/tickets/list', [TicketsController::class, 'getAuthUsersTickets'])->name('my.tickets');
-    Route::get('update/ticket/{id}', [TicketsController::class, 'update'])->name('update.ticket');
-
-
-
-    Route::get('/settings/tickets/configs', [ticketsConfigsController::class, 'index']);
-    Route::get('/settings/tickets/statuses', [ticketsConfigsController::class, 'getTicketStatus']);
-    Route::get('/settings/tickets/categories', [ticketsConfigsController::class, 'getTicketCategories']);
-    Route::get('/settings/tickets/sources', [ticketsConfigsController::class, 'getTicketSources']);
-    Route::get('/settings/tickets/disposition', [ticketsConfigsController::class, 'getTicketDispositions']);
-    Route::get('/settings/tickets/department', [ticketsConfigsController::class, 'getDepartments']);
-    Route::get('/settings/all-users', [ticketsConfigsController::class, 'getAllUsers']);
-    Route::get('/settings/all-doctors', [ticketsConfigsController::class, 'getDoctors']);
-
-    Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index'])->name('appointment-status.index');
-    Route::post('/appointment/status/store', [AppointmentStatusController::class, 'store'])->name('appointment-status.store');
-    Route::get('/appointment/status/update/{id}', [AppointmentStatusController::class, 'update'])->name('appointment-status.update');
-    Route::get('/settings/insurance/list', [IsuranceController::class, 'index'])->name('isurance.index');
-    Route::get('/settings/insurance/list/search', [IsuranceController::class, 'getInsurnace']);
-    Route::post('settings/insurance/store', [IsuranceController::class, 'store'])->name('insurance.store');
+    Route::get('/appointments/activity', [HomeController::class, 'getUserAppointments']);
 });
 //App Details Page => 'Dashboard'], function() {
 Route::group(['prefix' => 'menu-style'], function () {
@@ -144,26 +68,12 @@ Route::get('/status-chart', [HomeController::class, 'statusChartView']);
 //App Details Page => 'special-pages'], function()
 Route::group(['prefix' => 'special-pages'], function () {
     //Example Page Routs
-    Route::get('billing', [HomeController::class, 'billing'])->name('special-pages.billing');
+
     Route::get('calender', [HomeController::class, 'calender'])->name('special-pages.calender');
-    Route::get('kanban', [HomeController::class, 'kanban'])->name('special-pages.kanban');
-    Route::get('pricing', [HomeController::class, 'pricing'])->name('special-pages.pricing');
-    Route::get('rtl-support', [HomeController::class, 'rtlsupport'])->name('special-pages.rtlsupport');
+
     Route::get('timeline', [HomeController::class, 'timeline'])->name('special-pages.timeline');
 });
 
-//Widget Routs
-Route::group(['prefix' => 'widget'], function () {
-    Route::get('widget-basic', [HomeController::class, 'widgetbasic'])->name('widget.widgetbasic');
-    Route::get('widget-chart', [HomeController::class, 'widgetchart'])->name('widget.widgetchart');
-    Route::get('widget-card', [HomeController::class, 'widgetcard'])->name('widget.widgetcard');
-});
-
-//Maps Routs
-Route::group(['prefix' => 'maps'], function () {
-    Route::get('google', [HomeController::class, 'google'])->name('maps.google');
-    Route::get('vector', [HomeController::class, 'vector'])->name('maps.vector');
-});
 
 //Auth pages Routs
 Route::group(['prefix' => 'auth'], function () {
@@ -172,7 +82,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('confirmmail', [HomeController::class, 'confirmmail'])->name('auth.confirmmail');
     Route::get('lockscreen', [HomeController::class, 'lockscreen'])->name('auth.lockscreen');
     Route::get('recoverpw', [HomeController::class, 'recoverpw'])->name('auth.recoverpw');
-    Route::get('userprivacysetting', [HomeController::class, 'userprivacysetting'])->name('auth.userprivacysetting');
 });
 
 //Error Page Route

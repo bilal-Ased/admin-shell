@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('material_project', function (Blueprint $table) {
-            $table->integer('quantity')->unsigned()->default(1); // Example datatype and default value
-
+        Schema::table('customers', function (Blueprint $table) {
+            $table->unsignedBigInteger('customer_profile_id')->nullable();
         });
     }
 
@@ -22,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('material_project', function (Blueprint $table) {
-            $table->dropColumn('quantity');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->dropColumn('customer_profile_id');
         });
     }
 };

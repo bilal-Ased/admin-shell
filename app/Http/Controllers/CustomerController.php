@@ -23,25 +23,34 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_number' => 'required|unique:customers,phone_number',
-            'alternate_number' => 'nullable',
-            'gender' => 'nullable',
-            'email' => 'nullable|email|unique:customers,email',
-            'date_of_birth' => 'required',
-        ], [
-            'phone_number.unique' => 'The phone number has already been taken.',
-            'email.unique' => 'The email has already been taken.',
+        $customerData = $request->only([
+            'first_name',
+            'last_name',
+            'phone_number',
+            'alternate_number',
+            'email',
+            'status',
+            'date_of_birth',
+            'gender'
         ]);
 
-        Customer::create($request->all());
+        // If allergy information is present, include it in the profile creation process
+        if ($request->filled('allergy')) {
+            // Create the customer and the customer profile with allergy info
+            $customer = Customer::create($customerData);
+            $customer->customerProfile()->create([
+                'customer_id' => $customer->id,
+                'allergy' => $request->input('allergy'),
+            ]);
 
+            return redirect()->route('customers.index')->with('success', 'Customer and profile added successfully!');
+        } else {
+            // Otherwise, create only the customer without a profile
+            $customer = Customer::create($customerData);
 
-        return redirect()->route('customers.index')->with('success', 'Customer added successfully!');
+            return redirect()->route('customers.index')->with('success', 'Customer added successfully!');
+        }
     }
-
     public function editCustomer($customerId)
     {
         $customer = Customer::findOrFail($customerId);

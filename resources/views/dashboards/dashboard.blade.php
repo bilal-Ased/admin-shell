@@ -159,7 +159,7 @@
                     <div class="card overflow-hidden" data-aos="fade-up" data-aos-delay="400">
                         <div class="card-header d-flex justify-content-between flex-wrap">
                             <div class="header-title">
-                                <h4 class="card-title mb-2">Last five Tickets</h4>
+                                <h4 class="card-title mb-2">Five Upcoming Appointments</h4>
                             </div>
                         </div>
                         <div class="card-body p-0">
@@ -168,26 +168,26 @@
                                     <thead>
                                         <tr>
                                             <th>Customer Name</th>
-                                            <th>Cost</th>
+                                            <th>Date</th>
                                             <th>Created At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($topFiveTickets as $topFiveTicket)
+                                        @foreach ($fiveUpcomingAppointments as $fiveUpcomingAppointment)
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <h6>{{ $topFiveTicket->customer->first_name ?? null }}
-                                                        {{ $topFiveTicket->customer->last_name ?? null}}</h6>
+                                                    <h6>{{ $fiveUpcomingAppointment->customer->first_name ?? null }}
+                                                        {{ $fiveUpcomingAppointment->customer->last_name ?? null}}</h6>
                                                 </div>
                                             </td>
-                                            <td>{{ $topFiveTicket->ticketSources->name }}</td>
+                                            {{-- <td>{{ $topFiveTicket->ticketSources->name }}</td> --}}
                                             <td>
                                                 @php
-                                                $topFiveTicketCreatedAt = new
-                                                DateTime($topFiveTicket->created_at);
+                                                $fiveUpcomingAppointment = new
+                                                DateTime($fiveUpcomingAppointment->created_at);
                                                 $now = new DateTime();
-                                                $interval = $topFiveTicketCreatedAt->diff($now);
+                                                $interval = $fiveUpcomingAppointment->diff($now);
 
                                                 $days = $interval->days;
                                                 $hours = $interval->h;
@@ -207,8 +207,6 @@
                                                 if ($minutes > 0) {
                                                 $countdown .= $minutes . ' minutes ';
                                                 }
-
-
 
                                                 echo rtrim($countdown). 'ago';
                                                 @endphp
@@ -251,59 +249,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12">
-                    <div class="card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="card-header d-flex justify-content-between flex-wrap">
-                            <div class="header-title">
-                                <h4 class="card-title mb-2">Activity overview</h4>
-                                <p class="mb-0">
-                                    <svg class="me-2" width="24" height="24" viewBox="0 0 24 24">
-                                        <path fill="#17904b"
-                                            d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" />
-                                    </svg>
-                                    16% this month
-                                </p>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class=" d-flex profile-media align-items-top mb-2">
-                                <div class="profile-dots-pills border-primary mt-1"></div>
-                                <div class="ms-4">
-                                    <h6 class=" mb-1">$2400, Purchase</h6>
-                                    <span class="mb-0">11 JUL 8:10 PM</span>
-                                </div>
-                            </div>
-                            <div class=" d-flex profile-media align-items-top mb-2">
-                                <div class="profile-dots-pills border-primary mt-1"></div>
-                                <div class="ms-4">
-                                    <h6 class=" mb-1">New order #8744152</h6>
-                                    <span class="mb-0">11 JUL 11 PM</span>
-                                </div>
-                            </div>
-                            <div class=" d-flex profile-media align-items-top mb-2">
-                                <div class="profile-dots-pills border-primary mt-1"></div>
-                                <div class="ms-4">
-                                    <h6 class=" mb-1">Affiliate Payout</h6>
-                                    <span class="mb-0">11 JUL 7:64 PM</span>
-                                </div>
-                            </div>
-                            <div class=" d-flex profile-media align-items-top mb-2">
-                                <div class="profile-dots-pills border-primary mt-1"></div>
-                                <div class="ms-4">
-                                    <h6 class=" mb-1">New user added</h6>
-                                    <span class="mb-0">11 JUL 1:21 AM</span>
-                                </div>
-                            </div>
-                            <div class=" d-flex profile-media align-items-top mb-1">
-                                <div class="profile-dots-pills border-primary mt-1"></div>
-                                <div class="ms-4">
-                                    <h6 class=" mb-1">Product added</h6>
-                                    <span class="mb-0">11 JUL 4:50 AM</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               <div class="col-md-12 col-lg-12">
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+        <div class="card-header d-flex justify-content-between flex-wrap">
+            <div class="header-title">
+                <h4 class="card-title mb-2">Activity Overview</h4>
+                <p class="mb-0">
+                    <svg class="me-2" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="#17904b" d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" />
+                    </svg>
+                    16% this month
+                </p>
+            </div>
+        </div>
+        <div class="card-body" id="appointments-list">
+            <!-- Activities will be dynamically added here -->
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
     </div>
@@ -406,6 +370,54 @@
                 });
             })
             .catch(error => console.error('Error fetching data:', error));
+
+        fetch('/appointments/activity')
+    .then(response => response.json())
+    .then(appointments => {
+        const appointmentsList = document.getElementById('appointments-list');
+        appointmentsList.innerHTML = ''; // Clear existing content
+
+        if (appointments.message) {
+            // If there's no activity, show the message
+            const noActivityMessage = document.createElement('p');
+            noActivityMessage.textContent = appointments.message;
+            appointmentsList.appendChild(noActivityMessage);
+            return;
+        }
+
+        // Loop through the appointments and display the last 3 activities
+        appointments.forEach(appointment => {
+            const activityItem = document.createElement('div');
+            activityItem.classList.add('d-flex', 'profile-media', 'align-items-top', 'mb-2');
+
+            const profileDots = document.createElement('div');
+            profileDots.classList.add('profile-dots-pills', 'border-primary', 'mt-1');
+            activityItem.appendChild(profileDots);
+
+            const infoDiv = document.createElement('div');
+            infoDiv.classList.add('ms-4');
+
+            const title = document.createElement('h6');
+            title.classList.add('mb-1');
+            // Display the customer's name
+            title.textContent = appointment.customer ? appointment.customer.first_name : 'Unknown Customer';
+            infoDiv.appendChild(title);
+
+            const dateTime = document.createElement('span');
+            dateTime.classList.add('mb-0');
+            // Display appointment date and time
+            dateTime.textContent = new Date(appointment.appointment_date + ' ' + appointment.appointment_time).toLocaleString();
+            infoDiv.appendChild(dateTime);
+
+            activityItem.appendChild(infoDiv);
+            appointmentsList.appendChild(activityItem);
+        });
+    });
+
+
+
+       
+
 
     </script>
 </x-app-layout>

@@ -20,10 +20,22 @@ class Customer extends Model
         'status',
         'date_of_birth',
         'gender',
+        'customer_profile_id',
     ];
 
     public static function getTotalCount()
     {
         return self::count();
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+
+    public function customerProfile()
+    {
+        return $this->hasOne(CustomerProfile::class, 'customer_id');
     }
 }

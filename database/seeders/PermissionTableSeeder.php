@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 
 class PermissionTableSeeder extends Seeder
@@ -46,7 +47,10 @@ class PermissionTableSeeder extends Seeder
         ];
 
         foreach ($permissions as $value) {
-            Permission::create($value);
+            $exists = Permission::where("name", $value)->first();
+            if (!$exists) {
+                Permission::create($value);
+            }
         }
     }
 }

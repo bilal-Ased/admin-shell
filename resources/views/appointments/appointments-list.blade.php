@@ -26,11 +26,13 @@
       }
    </style>
 
+
+
    <div>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
       <div class="row">
          <div class="col-sm-12">
-            <div class="card">
+            <div class="card p-3">
                <div class="card-header d-flex justify-content-between">
                   <div class="header-title">
                      <h4 class="card-title">All Appointments</h4>

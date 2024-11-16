@@ -1,5 +1,8 @@
+<?php
+    $encoded_model = json_encode($model)
+?>
 <div class="flex align-items-center list-customer-action">
-    <button onclick="getCustomerModal($(this).attr('data-href'))"
+    <button onclick="getCustomerModal(`{{$encoded_model}}`)"
         class="btn btn-sm btn-icon btn-warning list-customer-btn" data-bs-toggle="tooltip" title="Edit Customer"
         data-href="{{ route('customers.edit', $id) }}">
         <span class="btn-inner">
