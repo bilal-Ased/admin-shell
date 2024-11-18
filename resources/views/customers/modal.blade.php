@@ -19,6 +19,8 @@
         position: relative;
         vertical-align: middle;
         z-index: 99999;
+        width: 100% !important;
+        padding: 0;
     }
 
     select2-dropdown {
