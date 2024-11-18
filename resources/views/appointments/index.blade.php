@@ -102,17 +102,21 @@
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="form-label" for="exampleInputdate">Select Date</label>
-                                        <input type="date" class="form-control" id="exampleInputdate"
+                                        <input type="text" class="datepicker form-control" placeholder="Select Date"
                                             name="appointment_date">
+
+
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-group">
                                         <label class="form-label" for="exampleInputtime">Select Time</label>
-                                        <input type="time" class="form-control" id="exampleInputtime"
-                                            name="appointment_time">
+                                        <input type="text" class="timepicker form-control" name="appointment_time">
+
                                     </div>
                                 </div>
+
+
 
                             </div>
                             <br>
@@ -125,16 +129,17 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+
+                            <button type="submit" class="btn btn-primary start">Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
 
-    {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
+    </div>
+
+
     <!-- Modal -->
     <!-- Your index file -->
     <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel"
@@ -143,7 +148,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addCustomerModalLabel">Add Customer</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close start" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     @include('customers.modal')
@@ -153,10 +158,35 @@
     </div>
 
     <script>
-        $(function() {            
+        $(function() {
             initializeSelect2('#selectDoctor', '{{URL('settings/all-doctors')}}');
 
         });
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+    flatpickr(".datepicker", {
+        defaultDate: new Date(),
+        disable: [
+            function (date) {
+                return date.getDay() === 0;
+            },
+        ],
+    });
+
+
+    flatpickr(".timepicker", {
+        enableTime: true,       // Enable time picker
+        noCalendar: true,       // Disable calendar view
+        dateFormat: "H:i",      // 24-hour time format
+        time_24hr: true         // Use 24-hour format
+    });
+
+});
+
+
+
+
 
     </script>
 

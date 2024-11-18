@@ -143,10 +143,8 @@
         <div class="col-md-12 col-lg-6">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card" data-aos="fade-up" data-aos-delay="800">
+                    <div class="card" data-aos="fade-up" data-aos-delay="200">
                         <div class="card-header d-flex justify-content-between flex-wrap">
-
-                            {{-- --}}
                         </div>
                         <div class="card-body">
                             <div id="chartData" class="chartData"></div>
@@ -226,48 +224,31 @@
         </div>
         <div class="col-md-12 col-lg-6">
             <div class="row">
-                <div class="col-md-6 col-lg-12">
-                    {{-- add new chart here --}}
-
-                    <div class="card" data-aos="fade-up" data-aos-delay="1200">
-
+                <div class="col-md-12">
+                    <div class="card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-header d-flex justify-content-between flex-wrap">
+                        </div>
                         <div class="card-body">
                             <div id="statusChart" class="statusChart"></div>
                         </div>
                     </div>
-                    <div class="card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="card-body d-flex justify-content-around text-center">
-                            <div>
-                                <h2 class="mb-2">750<small>K</small></h2>
-                                <p class="mb-0 text-gray">Tickets this Month</p>
-                            </div>
-                            <hr class="hr-vertial">
-                            <div>
-                                <h2 class="mb-2">{{ $newCustomerCount }}</h2>
-                                <p class="mb-0 text-gray">New Customers</p>
+                </div>
+
+
+                <div class="col-md-12 col-lg-12">
+                    <div class="card overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card-header d-flex justify-content-between flex-wrap">
+                            <div class="header-title">
+                                <h4 class="card-title mb-2">Appointments By Users</h4>
                             </div>
                         </div>
+                        <div class="card-body p-0">
+                            <div id="userAppointmentData" class="userAppointmentData"></div>
+
+                        </div>
+
                     </div>
                 </div>
-               <div class="col-md-12 col-lg-12">
-    <div class="card" data-aos="fade-up" data-aos-delay="400">
-        <div class="card-header d-flex justify-content-between flex-wrap">
-            <div class="header-title">
-                <h4 class="card-title mb-2">Activity Overview</h4>
-                <p class="mb-0">
-                    <svg class="me-2" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="#17904b" d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" />
-                    </svg>
-                    16% this month
-                </p>
-            </div>
-        </div>
-        <div class="card-body" id="appointments-list">
-            <!-- Activities will be dynamically added here -->
-        </div>
-    </div>
-</div>
-
             </div>
         </div>
     </div>
@@ -319,6 +300,90 @@
                     });
                 })
                 .catch(error => console.error('Error fetching data:', error)); // Handle any errors
+
+
+                fetch('/appointments-user')
+    .then(response => response.json())
+    .then(appointmentData => {
+        // Prepare data for the chart
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        // Initialize an array to hold the series data for each user
+        const seriesData = [];
+
+        // Initialize an array to store the tooltip labels (Usernames + Appointment count)
+        const tooltipLabels = [];
+
+        // Loop through each month
+        for (let month = 1; month <= 12; month++) {
+            const monthData = appointmentData[month] || []; // Get data for this month, default to an empty array if no data
+
+            // For each user in this month, we create a series entry
+            monthData.forEach(userData => {
+                // Check if the series for this user already exists
+                let userSeries = seriesData.find(series => series.name === userData.username);
+
+                // If the series doesn't exist, create a new one
+                if (!userSeries) {
+                    userSeries = {
+                        name: userData.username,
+                        data: Array(12).fill(0), // Initialize an array for the entire year with zeros
+                    };
+                    seriesData.push(userSeries);
+                }
+
+                // Set the appointment count for this user in the correct month
+                userSeries.data[month - 1] = userData.appointments;
+
+                // Create a tooltip label for this user's appointment data
+                tooltipLabels.push({
+                    username: userData.username,
+                    appointments: userData.appointments
+                });
+            });
+        }
+
+        // Prepare the chart using Highcharts
+        Highcharts.chart('userAppointmentData', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Monthly Appointments for ' + new Date().getFullYear(),
+                align: 'center'
+            },
+            xAxis: {
+                categories: months,
+                crosshair: true,
+                accessibility: {
+                    description: 'Months of the year'
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Number of Appointments'
+                }
+            },
+            tooltip: {
+                // Display the username and appointment count in the tooltip
+                pointFormat: '{series.name}: <b>{point.y}</b> appointments',
+                shared: true,
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: seriesData // Use the structured series data
+        });
+
+        // Optionally, you can log or display the tooltip labels separately if needed
+        console.log(tooltipLabels); // Displaying user appointments
+    })
+    .catch(error => console.error('Error fetching data:', error)); // Handle any errors
+
         });
 
 

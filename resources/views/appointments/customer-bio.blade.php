@@ -13,7 +13,7 @@
                         </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="tab" href="#customerAllergy" role=" tab"
+                        <a class="nav-link" data-bs-toggle="tab" href="#profile-allergies" role=" tab"
                             aria-controls="customer-info" aria-selected="false">
                             Allergies
                         </a>
@@ -49,13 +49,31 @@
 
                 <!-- Allergies Tab Content -->
                 <div class="tab-pane fade" id="profile-allergies" role="tabpanel">
-                    <p class="customerAllergy"></p>
+                    <p class="cardText">Hello</p>
                 </div>
 
                 <!-- History Tab Content -->
                 <div class="tab-pane fade" id="profile-history" role="tabpanel">
-                    <p class="cardText">Medical history will go here.</p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Start date</th>
+                                    <th>Doctor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>AP-1010</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                </tr>
 
+                            </tbody>
+
+                        </table>
+                    </div>
 
                 </div>
             </div>
@@ -85,8 +103,16 @@
         customerBioInner.find('#customerPhone').text(customer.phone_number)
         customerBioInner.find('#customerCreatedAt').text(customer.created_at)
 
-        $('#profile-allergies .customerAllergy').text(customer.email || 'No allergies listed')
+        const allergiesList = $('#profile-allergies');
+    allergiesList.empty(); // Clear previous entries
 
+    if (customer.allergies && customer.allergies.length > 0) {
+        customer.allergies.forEach(allergy => {
+            allergiesList.append(`<li>${allergy}</li>`);
+        });
+    } else {
+        allergiesList.append('<li>No allergies listed</li>');
+    }
 
 }
 </script>

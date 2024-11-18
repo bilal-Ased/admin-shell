@@ -1,5 +1,7 @@
 // resources/js/app.js
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import flatpckr from "flatpickr";
+window.flatpckr = flatpckr;
 
 import { createApp } from "vue";
 import Chatbox from "./chat/Chatbox.vue";

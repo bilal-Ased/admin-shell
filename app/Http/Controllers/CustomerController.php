@@ -6,6 +6,7 @@ use App\DataTables\CustomerDataTable;
 use App\Models\Appointment;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
@@ -93,7 +94,7 @@ class CustomerController extends Controller
         $perPage = $request->get('perPage', 10); // Results per page, default to 10
 
         // Initialize query
-        $query = Customer::query();
+        $query = Customer::query()->with('customerProfile'); // Include customer profiles (allergies)
 
         // Search across multiple fields
         if ($searchReq) {
@@ -109,7 +110,15 @@ class CustomerController extends Controller
 
         // Calculate pagination data
         $totalCount = $query->count(); // Total count should be done before pagination
-        $customers = $query->skip(($page - 1) * $perPage)->take($perPage)->get(['id', 'first_name', 'last_name', 'phone_number', 'email', 'created_at']); // Select needed columns
+        $customers = $query->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get(['id', 'first_name', 'last_name', 'phone_number', 'email', 'created_at']); // Select needed columns
+
+        foreach ($customers as $customer) {
+            $customer->allergies = DB::table('customer_profiles')
+                ->where('customer_id', $customer->id)
+                ->pluck('allergy'); // Fetch allergies as a collection
+        }
 
         // Calculate total pages
         $totalPages = ceil($totalCount / $perPage);

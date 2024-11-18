@@ -68,6 +68,7 @@ Route::get('/chart', [HomeController::class, 'handleChart'])->name('menu-style.c
 Route::get('/statusChart', [HomeController::class, 'statusChart'])->name('menu-style.statusChart');
 Route::get('/view', [HomeController::class, 'view']);
 Route::get('/status-chart', [HomeController::class, 'statusChartView']);
+Route::get('/appointments-user', [HomeController::class, 'appointmentByUserChart']);
 
 //App Details Page => 'special-pages'], function()
 Route::group(['prefix' => 'special-pages'], function () {

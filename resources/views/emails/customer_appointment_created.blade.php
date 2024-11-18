@@ -12,6 +12,6 @@ Thank you for scheduling an appointment with us. Here are your appointment detai
 If you have any questions or need to reschedule, please feel free to contact us.
 
 Best regards,<br>
+
 {{ config('app.name') }}<br>
-{{ config('app.url') }}
 @endcomponent

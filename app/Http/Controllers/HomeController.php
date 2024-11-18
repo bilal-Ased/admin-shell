@@ -120,20 +120,28 @@ class HomeController extends Controller
     }
 
 
-    /*
-     * Menu Style Routs
-     */
+    public function appointmentByUserChart()
+    {
+        $monthlyData = Appointment::select(\DB::raw("MONTH(appointment_date) as month, user_id, COUNT(*) as count"))
+            ->whereYear('appointment_date', date('Y')) // Adjust the year if necessary
+            ->groupBy(\DB::raw("MONTH(appointment_date), user_id"))
+            ->orderBy(\DB::raw("MONTH(appointment_date)"))
+            ->get();
 
+        $appointmentData = [];
+        foreach ($monthlyData as $data) {
+            $username = \App\Models\User::find($data->user_id)->username;
 
-    /*
-     * Widget Routs
-     */
-
-
-    /*
-     * Maps Routs
-     */
-
+            if (!isset($appointmentData[$data->month])) {
+                $appointmentData[$data->month] = [];
+            }
+            $appointmentData[$data->month][] = [
+                'username' => $username,
+                'appointments' => $data->count
+            ];
+        }
+        return response()->json($appointmentData);
+    }
 
     /*
      * Auth Routs

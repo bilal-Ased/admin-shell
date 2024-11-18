@@ -24,7 +24,7 @@ class AppointmentsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable(
-            $query->select('appointments.*')->orderBy('created_at', 'desc')
+            $query->select('appointments.*')->orderBy('appointment_date', 'desc')
         ))
 
             ->addColumn('action', 'appointments.action')
@@ -39,7 +39,7 @@ class AppointmentsDataTable extends DataTable
 
                 return $str;
             })
-            ->editColumn('appointment_details', function ($appointment) {
+            ->editColumn('appointment_date', function ($appointment) {
                 // Concatenate appointment_date and appointment_time
                 return Carbon::parse($appointment->appointment_date)->format('M j, Y') . ', ' . Carbon::parse($appointment->appointment_time)->format('g:i A');
             })
@@ -71,7 +71,7 @@ class AppointmentsDataTable extends DataTable
                 // Return the badge HTML if displayText is set
                 return $displayText ? '<span class="text-capitalize badge bg-' . $statusClass . '">' . $displayText . '</span>' : '';
             })
-            ->rawColumns(['ID', 'appointment_details', 'status_id', 'action']);
+            ->rawColumns(['ID', 'appointment_date', 'status_id', 'action']);
     }
 
     /**
@@ -82,9 +82,20 @@ class AppointmentsDataTable extends DataTable
      */
     public function query(Appointment $model): QueryBuilder
     {
+        $query = $model->newQuery()->with('customer', 'user');
 
+    // Check for date range inputs
+    $startDate = request()->get('start_date');
+    $endDate = request()->get('end_date');
 
-        return $model->newQuery()->with('customer', 'user');
+    if ($startDate && $endDate) {
+        $query->whereBetween('appointment_date', [
+            Carbon::parse($startDate)->startOfDay(),
+            Carbon::parse($endDate)->endOfDay()
+        ]);
+    }
+
+    return $query;
     }
 
     /**
@@ -120,7 +131,7 @@ class AppointmentsDataTable extends DataTable
         return [
             ['data' => 'ID', 'name' => 'id', 'title' => 'ID'],
             ['data' => 'full_name', 'name' => 'full_name', 'title' => 'Customer', 'orderable' => true],
-            ['data' => 'appointment_details', 'name' => 'appointment_details', 'title' => 'Appointment Date'],
+            ['data' => 'appointment_date', 'name' => 'appointment_date', 'title' => 'Appointment Date'],
             ['data' => 'status_id', 'name' => 'status_id', 'title' => 'Status '],
             ['data' => 'user.username', 'name' => 'user.username', 'title' => 'Doctor'],
 

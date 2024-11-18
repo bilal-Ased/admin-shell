@@ -47,6 +47,7 @@
    </div>
 
 
+
    <div class="modal fade" id="updateAppointmentModal" tabindex="-1" aria-labelledby="updateAppointmentModalLabel"
       aria-hidden="true">
       <div class="modal-dialog">
