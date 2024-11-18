@@ -5,48 +5,25 @@
         /* Adjust this value as needed */
     }
 
-    /* Basic styling for the Select2 container */
-    .select2-container--default .select2-selection--single {
-        background-color: #f8f9fa !important;
-        border: 1px solid #ced4da !important;
-        border-radius: 4px !important;
-        height: 38px !important;
-    }
-
-    /* Style for the dropdown arrow */
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: 34px !important;
-        top: 2px !important;
-    }
-
-    /* Focus styling */
-    .select2-container--default .select2-selection--single:focus-within {
-        border-color: #80bdff !important;
-        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25) !important;
-    }
-
-    /* Style for the dropdown items */
-    .select2-container--default .select2-results__option {
-        padding: 8px 12px !important;
-        font-size: 14px !important;
-    }
-
-    /* Hover effect for dropdown items */
-    .select2-container--default .select2-results__option--highlighted {
-        background-color: #007bff !important;
-        color: #ffffff !important;
-    }
-
-    /* Style for the placeholder text */
-    .select2-container--default .select2-selection--single .select2-selection__placeholder {
-        color: #6c757d !important;
-        font-size: 14px !important;
-    }
 
     /* Additional styling for the allergies section */
     .allergies-comment {
         display: none;
         /* Initially hide the comment box */
+    }
+
+    .select2-container {
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 0;
+        position: relative;
+        vertical-align: middle;
+        z-index: 99999;
+    }
+
+    select2-dropdown {
+        z-index: 1056;
+        /* Dropdown above the modal content */
     }
 </style>
 
@@ -105,7 +82,7 @@
 
         <div class="col"><br>
             <label for="insurance" class="form-label">Insurance</label>
-            <select class="form-select" name="insurance" id="insurance"></select>
+            <select class="form-select mb-3 shadow-none" name="insurance" id="insurance"></select>
         </div>
     </div>
 
