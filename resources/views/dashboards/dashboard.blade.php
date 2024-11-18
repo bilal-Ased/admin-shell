@@ -305,58 +305,45 @@
                 fetch('/appointments-user')
     .then(response => response.json())
     .then(appointmentData => {
-        // Prepare data for the chart
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        // Prepare the data for users and their total appointments
+        const users = [];
+        const appointments = [];
 
-        // Initialize an array to hold the series data for each user
-        const seriesData = [];
+        // Loop through each month and each user
+        for (const month in appointmentData) {
+            const monthData = appointmentData[month];
 
-        // Initialize an array to store the tooltip labels (Usernames + Appointment count)
-        const tooltipLabels = [];
-
-        // Loop through each month
-        for (let month = 1; month <= 12; month++) {
-            const monthData = appointmentData[month] || []; // Get data for this month, default to an empty array if no data
-
-            // For each user in this month, we create a series entry
             monthData.forEach(userData => {
-                // Check if the series for this user already exists
-                let userSeries = seriesData.find(series => series.name === userData.username);
-
-                // If the series doesn't exist, create a new one
-                if (!userSeries) {
-                    userSeries = {
-                        name: userData.username,
-                        data: Array(12).fill(0), // Initialize an array for the entire year with zeros
-                    };
-                    seriesData.push(userSeries);
+                // Check if the user already exists in the users array
+                const userIndex = users.findIndex(user => user.username === userData.username);
+                
+                if (userIndex === -1) {
+                    // If the user doesn't exist, add them
+                    users.push(userData.username);
+                    appointments.push(userData.appointments); // Add their appointments
+                } else {
+                    // If the user already exists, add their appointments to the existing total
+                    appointments[userIndex] += userData.appointments;
                 }
-
-                // Set the appointment count for this user in the correct month
-                userSeries.data[month - 1] = userData.appointments;
-
-                // Create a tooltip label for this user's appointment data
-                tooltipLabels.push({
-                    username: userData.username,
-                    appointments: userData.appointments
-                });
             });
         }
 
         // Prepare the chart using Highcharts
         Highcharts.chart('userAppointmentData', {
             chart: {
-                type: 'column'
+                type: 'column' // You can change this to 'bar' if you want horizontal bars
             },
             title: {
-                text: 'Monthly Appointments for ' + new Date().getFullYear(),
+                text: 'Total Appointments by User for ' + new Date().getFullYear(),
                 align: 'center'
             },
             xAxis: {
-                categories: months,
-                crosshair: true,
+                categories: users, // Use the users as categories on the X-axis
+                title: {
+                    text: 'Users'
+                },
                 accessibility: {
-                    description: 'Months of the year'
+                    description: 'Users and the number of appointments they made'
                 }
             },
             yAxis: {
@@ -366,9 +353,7 @@
                 }
             },
             tooltip: {
-                // Display the username and appointment count in the tooltip
-                pointFormat: '{series.name}: <b>{point.y}</b> appointments',
-                shared: true,
+                pointFormat: '{series.name}: <b>{point.y}</b> appointments'
             },
             plotOptions: {
                 column: {
@@ -376,13 +361,14 @@
                     borderWidth: 0
                 }
             },
-            series: seriesData // Use the structured series data
+            series: [{
+                name: 'Appointments',
+                data: appointments // The number of appointments for each user
+            }]
         });
-
-        // Optionally, you can log or display the tooltip labels separately if needed
-        console.log(tooltipLabels); // Displaying user appointments
     })
     .catch(error => console.error('Error fetching data:', error)); // Handle any errors
+
 
         });
 
