@@ -1,3 +1,23 @@
+<style>
+    .select2-container {
+        box-sizing: border-box;
+        display: inline-block;
+        margin: 0;
+        position: relative;
+        vertical-align: middle;
+        z-index: 99999;
+        width: 100% !important;
+        padding: 0;
+    }
+
+    select2-dropdown {
+        z-index: 1056;
+        /* Dropdown above the modal content */
+    }
+</style>
+
+@include('tickets.includes.ticket_scripts')
+
 <div class="modal-body">
     <!-- Tab Navigation -->
     <ul class="nav nav-tabs" id="modalTabs" role="tablist">
@@ -31,14 +51,16 @@
                     <div class="row">
                         <div class="col">
                             <label for="customerNumber" class="form-label">Status</label>
-                            <select class="form-select" id="status" name="status">
+                            <select id="selectDoctor" class="form-select" name="insurnace_status_id">
 
                             </select>
                         </div>
                         <div class="col">
                             <label for="toothWorkedOn" class="form-label">Tooth/Teeth Worked On</label>
-                            <select class="form-select" id="toothWorkedOn" name="tooth_worked_on">
-
+                            <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                                <option value="AL">Alabama</option>
+                                <option value="WY">Wyoming</option>
+                            </select>
                             </select>
                         </div>
                     </div>
@@ -81,8 +103,11 @@
 </div>
 </div>
 
-<!-- Script to Handle Modal Behavior -->
 <script>
+    $(function() {
+            initializeSelect2('#selectDoctor', '{{URL('settings/appointment-status/list')}}');
+
+        });
     document.addEventListener('DOMContentLoaded', function () {
         var updateInfoTab = new bootstrap.Tab(document.getElementById('update-info-tab'));
         updateInfoTab.show();
@@ -93,5 +118,8 @@
         });
     });
 
+    $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
     
 </script>

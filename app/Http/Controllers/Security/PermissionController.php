@@ -27,7 +27,7 @@ class PermissionController extends Controller
     {
         $data = $request->all();
         $view = view('role-permission.form-permission')->render();
-        return response()->json(['data' =>  $view, 'status'=> true]);
+        return response()->json(['data' =>  $view, 'status' => true]);
     }
 
     /**
@@ -60,7 +60,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-       //code here
+        //code here
     }
 
     /**
@@ -70,10 +70,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //code here
-    }
+    public function update(Request $request, $id) {}
 
     /**
      * Remove the specified resource from storage.

@@ -54,28 +54,26 @@
 
                 <!-- History Tab Content -->
                 <div class="tab-pane fade" id="profile-history" role="tabpanel">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
+                    <div style="overflow: hidden;">
+                        <table class="table table-striped" style="width: 100%; table-layout: fixed;">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Start date</th>
-                                    <th>Doctor</th>
+                                    <th style="width: 33%;">ID</th>
+                                    <th style="width: 33%;">Date</th>
+                                    <th style="width: 34%;">Doctor</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>AP-1010</td>
-                                    <td>System Architect</td>
+                                    <td>System</td>
                                     <td>Edinburgh</td>
                                 </tr>
-
                             </tbody>
-
                         </table>
                     </div>
-
                 </div>
+
             </div>
 
         </div>

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\AppointmentStatusController;
+use App\Models\AppointmentStatus;
 
 Route::middleware(['auth'])->group(function () {
 
@@ -14,3 +16,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my/appointments', [AppointmentController::class, 'getAuthUsersAppointments'])->name('my.appointments');
     Route::get('/update/appointment/{id}', [AppointmentController::class, 'update'])->name('update.appointment');
 });
+
+
+Route::get('/settings/appointment-status/list', [AppointmentStatusController::class, 'getAppointmentStatus'])->name('appointment.statuses');

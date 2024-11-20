@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Security;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -19,6 +20,28 @@ class RolePermission extends Controller
     public function store(Request $request)
     {
 
-        //code here
+        $validatedData = $request->validate([
+            'role_id' => 'required|exists:roles,id',
+            'permission_id' => 'required|exists:permissions,id',
+            'action' => 'required|in:assign,revoke', // `assign` to add, `revoke` to remove
+        ]);
+
+        $role = Role::findById($validatedData['role_id']);
+        $permission = Permission::findById($validatedData['permission_id']);
+
+        if ($validatedData['action'] === 'assign') {
+            if (!$role->hasPermissionTo($permission)) {
+                $role->givePermissionTo($permission);
+            }
+        } elseif ($validatedData['action'] === 'revoke') {
+            if ($role->hasPermissionTo($permission)) {
+                $role->revokePermissionTo($permission);
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Role-permission assignment updated successfully.',
+        ]);
     }
 }

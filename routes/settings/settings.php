@@ -17,7 +17,6 @@ Route::group(['middleware' => 'role:admin'], function () {
     Route::get('/settings/tickets/department', [ticketsConfigsController::class, 'getDepartments']);
     Route::get('/settings/all-users', [ticketsConfigsController::class, 'getAllUsers']);
 
-    Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index'])->name('appointment-status.index');
     Route::post('/appointment/status/store', [AppointmentStatusController::class, 'store'])->name('appointment-status.store');
     Route::get('/appointment/status/update/{id}', [AppointmentStatusController::class, 'update'])->name('appointment-status.update');
     Route::get('/settings/insurance/list', [IsuranceController::class, 'index'])->name('isurance.index');
@@ -26,3 +25,4 @@ Route::group(['middleware' => 'role:admin'], function () {
 
 Route::get('/settings/all-doctors', [ticketsConfigsController::class, 'getDoctors']);
 Route::get('/settings/insurance/list/search', [IsuranceController::class, 'getInsurnace']);
+Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index'])->name('appointment-status.index');

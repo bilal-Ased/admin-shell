@@ -108,7 +108,6 @@ class CustomerController extends Controller
             });
         }
 
-        // Calculate pagination data
         $totalCount = $query->count(); // Total count should be done before pagination
         $customers = $query->skip(($page - 1) * $perPage)
             ->take($perPage)
@@ -117,13 +116,11 @@ class CustomerController extends Controller
         foreach ($customers as $customer) {
             $customer->allergies = DB::table('customer_profiles')
                 ->where('customer_id', $customer->id)
-                ->pluck('allergy'); // Fetch allergies as a collection
+                ->pluck('allergy');
         }
 
-        // Calculate total pages
         $totalPages = ceil($totalCount / $perPage);
 
-        // Return results in JSON format
         return response()->json([
             'results' => $customers,
             'totalCount' => $totalCount,

@@ -23,7 +23,6 @@ class AppointmentStatusController extends Controller
 
         AppointmentStatus::create($request->all());
 
-
         return redirect()->route('appointment-status.index')->with('success', 'Status added successfully!');
     }
 
@@ -34,5 +33,13 @@ class AppointmentStatusController extends Controller
         $appointmentStatus = AppointmentStatus::findOrFail($appointmentStatusId);
 
         return view('appointments.appointment-status.edit-modal', ['appointmentStatus' => $appointmentStatus]);
+    }
+
+
+    public function getAppointmentStatus(Request $request)
+    {
+        $data = AppointmentStatus::where('id', 1)->where('name', 'like', '%' . $request->searchItem . '%');
+
+        return $data->paginate(10, ['*'], 'page', $request->page);
     }
 }

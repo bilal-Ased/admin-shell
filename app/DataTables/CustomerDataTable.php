@@ -19,6 +19,8 @@ class CustomerDataTable extends DataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
+
+
         return datatables()
             ->eloquent($query)
             ->addColumn('full_name', function ($query) {
