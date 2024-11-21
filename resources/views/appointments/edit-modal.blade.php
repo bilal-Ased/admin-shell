@@ -10,9 +10,12 @@
         padding: 0;
     }
 
-    select2-dropdown {
+    .select2-dropdown {
         z-index: 1056;
-        /* Dropdown above the modal content */
+    }
+
+    .select2-container .select2-selection--multiple {
+        min-height: 40px !important;
     }
 </style>
 
@@ -34,8 +37,8 @@
             </a>
         </li>
         <li class="nav-item" role="presentation">
-            <a class="nav-link" id="customer-info-tab" data-bs-toggle="tab" href="#customer-info" role="tab"
-                aria-controls="customer-info" aria-selected="false">
+            <a class="nav-link" id="history-info-tab" data-bs-toggle="tab" href="#history-info" role="tab"
+                aria-controls="history-info" aria-selected="false">
                 History Info
             </a>
         </li>
@@ -45,9 +48,9 @@
     <!-- Tab Content -->
     <div class="tab-content mt-3" id="modalTabsContent">
         <div class="tab-pane fade show active" id="update-info" role="tabpanel" aria-labelledby="update-info-tab">
-            <form method="post" id="patientForm">
+            <form method="POST" enctype="multipart/form-data" id="patientForm">
+                @csrf
                 <div class="col">
-
                     <div class="row">
                         <div class="col">
                             <label for="customerNumber" class="form-label">Status</label>
@@ -55,17 +58,29 @@
 
                             </select>
                         </div>
+                    </div>
+                    <div class="row">
+
                         <div class="col">
-                            <label for="toothWorkedOn" class="form-label">Tooth/Teeth Worked On</label>
-                            <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                                <option value="AL">Alabama</option>
-                                <option value="WY">Wyoming</option>
-                            </select>
+                            <label for="teethSelect" class="form-label">Select Teeth</label>
+                            <select id="teethSelect" class="form-select" style="min-width: 150px;overflow:hidden"
+                                name="teeth[]" multiple>
+                                <!-- Options will be populated dynamically -->
                             </select>
                         </div>
                     </div>
-                    <br>
 
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enterToothCheckbox" />
+                                <label class="form-check-label" for="enterToothCheckbox">
+                                    Enter Tooth/Teeth Worked On
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
 
                     <div class="row">
                         <div class="mb-3">
@@ -81,7 +96,6 @@
                             <input type="file" class="form-control" id="fileUpload" name="file_upload">
                             <small class="form-text text-muted" id="fileName">No file chosen</small>
                         </div>
-
                     </div>
 
                     <br>
@@ -105,9 +119,9 @@
 
 <script>
     $(function() {
-            initializeSelect2('#selectDoctor', '{{URL('settings/appointment-status/list')}}');
+        initializeSelect2('#selectDoctor', '{{URL('settings/appointment-status/list')}}');
+    });
 
-        });
     document.addEventListener('DOMContentLoaded', function () {
         var updateInfoTab = new bootstrap.Tab(document.getElementById('update-info-tab'));
         updateInfoTab.show();
@@ -118,8 +132,52 @@
         });
     });
 
-    $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
-});
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize select2 for selectedTeeth dropdown
+        $('#selectedTeeth').select2();
+
+        // Open modal when checkbox is clicked
+        document.getElementById('enterToothCheckbox').addEventListener('change', function () {
+            if (this.checked) {
+                const modal = new bootstrap.Modal(document.getElementById('teethModal'));
+                modal.show();
+            }
+        });
+
+        // Handle saving selected teeth
+        document.getElementById('saveTeeth').addEventListener('click', function () {
+            const selectedTeeth = [];
+            document.querySelectorAll('#teethList input:checked').forEach((checkbox) => {
+                selectedTeeth.push({ id: checkbox.id, text: checkbox.value });
+            });
+
+            // Update select2 with selected teeth
+            const selectTeethDropdown = $('#selectedTeeth');
+            selectTeethDropdown.empty(); // Clear existing options
+            selectedTeeth.forEach((tooth) => {
+                const newOption = new Option(tooth.text, tooth.id, true, true);
+                selectTeethDropdown.append(newOption);
+            });
+            selectTeethDropdown.trigger('change'); // Refresh select2
+
+            // Close the modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('teethModal'));
+            modal.hide();
+        });
+    });
+
+    $(document).ready(function () {
+    // Initialize Select2
+    $('#teethSelect').select2({
+        placeholder: "Select Teeth",
+        allowClear: true
+    });
+
+    // Populate options for teeth 1 to 32
+    for (let i = 1; i <= 32; i++) {
+        $('#teethSelect').append(new Option(`Tooth ${i}`, i));
+    }
     
+});
+
 </script>

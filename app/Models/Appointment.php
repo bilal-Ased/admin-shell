@@ -41,4 +41,11 @@ class Appointment extends Model
     {
         return $this->belongsTo(AppointmentStatus::class, 'status_id');
     }
+
+
+
+    public function updates()
+    {
+        return $this->hasMany(AppointmentUpdate::class);
+    }
 }

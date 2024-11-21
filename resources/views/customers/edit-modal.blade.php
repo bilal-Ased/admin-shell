@@ -53,10 +53,10 @@
 
         <div class="mb-3">
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="allergiesCheckbox">
-                <label class="form-check-label" for="allergiesCheckbox">Do you have any allergies?</label>
+                <input type="checkbox" class="form-check-input" id="allergiesCheckboxEdit">
+                <label class="form-check-label" for="allergiesCheckboxEdit">Do you have any allergies?</label>
             </div>
-            <textarea class="form-control allergies-comment" id="allergiesComment" name="allergy"
+            <textarea class="form-control allergies-commentEdit" id="allergiesCommentEdit" name="allergy"
                 placeholder="Please list your allergies here..."></textarea>
         </div>
 
@@ -72,6 +72,8 @@
 <script>
     function getCustomerModal(customer) {
     customer = JSON.parse(customer);
+
+    console.log('customer', customer)
 
     // Populate the form fields with customer data
     $('#customerFirstName').val(customer.first_name || '');
@@ -94,13 +96,14 @@
     initializeSelect2('#insurance', '{{ URL('/settings/insurance/list/search') }}', customer.insurance);
 
     // Set allergy fields
-    if (customer.allergy) {
-        $('#allergiesCheckbox').prop('checked', true);
-        $('.allergies-comment').show();
-        $('#allergiesComment').val(customer.allergy);
+    const allergy = customer.customer_profile?.allergy
+    if (allergy) {
+        $('#allergiesCheckboxEdit').prop('checked', true);
+        $('.allergies-commentEdit').show();
+        $('#allergiesCommentEdit').val(allergy);
     } else {
-        $('#allergiesCheckbox').prop('checked', false);
-        $('.allergies-comment').hide();
+        $('#allergiesCheckboxEdit').prop('checked', false);
+        $('.allergies-commentEdit').hide();
     }
 
     // Update the form action dynamically

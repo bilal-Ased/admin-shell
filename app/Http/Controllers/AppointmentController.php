@@ -6,6 +6,7 @@ use App\DataTables\AppointmentsDataTable;
 use App\DataTables\MyAppointmentsDataTable;
 use App\Mail\AppointmentCreated;
 use App\Models\Appointment;
+use App\Models\AppointmentUpdate;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,10 +90,60 @@ class AppointmentController extends Controller
 
     public function update(Request $request, $appointmentId)
     {
-        $appointment = Appointment::with(['user'])->findOrFail($appointmentId);
-        // $ticket->assigned_to = 3;
-        // $ticket->save();
-
+        $appointment = Appointment::with(['user', 'customer'])->findOrFail($appointmentId);
         return view('appointments.update-appointment', ['appointment' => $appointment]);
+    }
+
+
+
+
+    public function storeUpdate(Request $request, $appointmentId)
+    {
+        $appointment = Appointment::findOrFail($appointmentId);
+
+        $validated = $request->validate([
+            'worked_teeth' => 'nullable|string|max:255',
+            'comments' => 'nullable|string',
+            'files.*' => 'file|max:2048',
+            'status_id' => 'required|integer|exists:statuses,id',
+        ]);
+
+        $files = [];
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $file) {
+                $files[] = $file->store('appointment_updates', 'public');
+            }
+        }
+
+        AppointmentUpdate::create([
+            'appointment_id' => $appointment->id,
+            'user_id' => Auth::id(),
+            'update_date' => now(),
+            'worked_teeth' => $validated['worked_teeth'] ?? null,
+            'comments' => $validated['comments'] ?? null,
+            'files' => !empty($files) ? json_encode($files) : null,
+            'status_id' => $validated['status_id'],
+        ]);
+
+        return $request->wantsJson()
+            ? response()->json(['success' => true], 201)
+            : redirect()->route('appointments.list')->with('success', 'Update added successfully!');
+    }
+
+    public function showEditModal($appointmentId)
+    {
+        return view('appointments.edit-modal', ['appointmentId' => $appointmentId]);
+    }
+
+
+    public function editUpdate(Request $request, $appointmentId, $updateId)
+    {
+        $appointment = Appointment::findOrFail($appointmentId);
+        $update = AppointmentUpdate::where('appointment_id', $appointmentId)->findOrFail($updateId);
+
+        return view('appointments.edit-update', [
+            'appointment' => $appointment,
+            'update' => $update,
+        ]);
     }
 }

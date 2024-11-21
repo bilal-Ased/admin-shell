@@ -167,6 +167,7 @@
         document.addEventListener("DOMContentLoaded", () => {
     flatpickr(".datepicker", {
         defaultDate: new Date(),
+        minDate: "today", // Disables all dates prior to today
         disable: [
             function (date) {
                 return date.getDay() === 0;

@@ -15,6 +15,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my/appointments', [AppointmentController::class, 'getAuthUsersAppointments'])->name('my.appointments');
     Route::get('/my/appointments', [AppointmentController::class, 'getAuthUsersAppointments'])->name('my.appointments');
     Route::get('/update/appointment/{id}', [AppointmentController::class, 'update'])->name('update.appointment');
+    Route::post('appointments/{appointmentId}/updates', [AppointmentController::class, 'storeUpdate'])->name('appointments.updates.store'); // Add a new update
+
 });
 
 

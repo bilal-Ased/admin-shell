@@ -1,10 +1,10 @@
 <?php
-    $encoded_model = json_encode($model)
+    $encoded_model = json_encode($model);
 ?>
 <div class="flex align-items-center list-customer-action">
     <button onclick="updateAppointmentModal(`{{$encoded_model}}`)"
         class="btn btn-sm btn-icon btn-warning list-customer-btn" data-bs-toggle="tooltip" title="Update Appointment"
-        data-href="{{ route('customers.edit', $id) }}">
+        data-href="{{ route('appointments.updates.store', $model['id']) }}">
         <span class="btn-inner">
             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path

@@ -68,7 +68,10 @@ class CustomerDataTable extends DataTable
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', 'customers.action')
-            ->rawColumns(['action', 'status', 'full_name']);
+            ->addColumn('allergies', function ($query) {
+                return "felix aint a good coder";
+            })
+            ->rawColumns(['action', 'status', 'full_name', 'allergies']);
     }
 
     /**
@@ -76,7 +79,7 @@ class CustomerDataTable extends DataTable
      */
     public function query(Customer $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('customerProfile');
     }
 
     /**
@@ -102,6 +105,7 @@ class CustomerDataTable extends DataTable
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
             ['data' => 'phone_number', 'name' => 'phone_number', 'title' => 'Phone Number'],
+            ['data' => 'allergies', 'name' => 'allergies', 'title' => 'Phone'],
             Column::computed('action')->exportable(false)->printable(false)->searchable(false)->addClass('text-center'),
 
         ];

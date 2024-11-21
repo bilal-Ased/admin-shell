@@ -84,18 +84,18 @@ class AppointmentsDataTable extends DataTable
     {
         $query = $model->newQuery()->with('customer', 'user');
 
-    // Check for date range inputs
-    $startDate = request()->get('start_date');
-    $endDate = request()->get('end_date');
+        // Check for date range inputs
+        $startDate = request()->get('start_date');
+        $endDate = request()->get('end_date');
 
-    if ($startDate && $endDate) {
-        $query->whereBetween('appointment_date', [
-            Carbon::parse($startDate)->startOfDay(),
-            Carbon::parse($endDate)->endOfDay()
-        ]);
-    }
+        if ($startDate && $endDate) {
+            $query->whereBetween('appointment_date', [
+                Carbon::parse($startDate)->startOfDay(),
+                Carbon::parse($endDate)->endOfDay()
+            ]);
+        }
 
-    return $query;
+        return $query;
     }
 
     /**
