@@ -50,7 +50,7 @@
         <div class="tab-pane fade show active" id="update-info" role="tabpanel" aria-labelledby="update-info-tab">
             <form method="POST" enctype="multipart/form-data" id="patientForm2">
                 @csrf
-                <input type="text" name="appointment_id">
+                <input type="hidden" name="appointment_id">
                 <div class="col">
                     <div class="row">
                         <div class="col">
@@ -89,7 +89,9 @@
 
                     <br>
 
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
             </form>
         </div>
 

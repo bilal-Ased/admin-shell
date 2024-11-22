@@ -30,15 +30,42 @@
                                     <div class="d-inline-block w-100">
                                         <p>
                                             <strong>Date:</strong> {{
-                                            \Carbon\Carbon::parse($appointment->appointment_date)->format('M d, Y') }}
-                                            <br>
+                                            \Carbon\Carbon::parse($appointment->appointment_date)->format('M d, Y')
+                                            }}<br>
                                             <strong>Time:</strong> {{
-                                            \Carbon\Carbon::parse($appointment->appointment_time)->format('h:i A') }}
-                                            <br>
-                                            <strong>Status:</strong> {{ $appointment->status_id }} <br>
-                                            <!-- Translate this ID to a status name -->
+                                            \Carbon\Carbon::parse($appointment->appointment_time)->format('h:i A')
+                                            }}<br>
+                                            <strong>Status:</strong> {{ $appointment->status_id }}<br>
                                         </p>
                                     </div>
+                                    @if ($appointment->updates->isNotEmpty())
+                                    <div class="updates mt-3">
+                                        <h6>Updates:</h6>
+                                        <ul>
+                                            @foreach ($appointment->updates as $update)
+                                            <li>
+                                                <strong>Date:</strong> {{
+                                                \Carbon\Carbon::parse($update->update_date)->format('M d, Y h:i A')
+                                                }}<br>
+                                                <strong>Status:</strong> {{ $update->status_id }}<br>
+                                                <strong>Worked Teeth:</strong> {{ $update->worked_teeth ?? 'N/A' }}<br>
+                                                <strong>Comments:</strong> {{ $update->comments ?? 'No comments' }}<br>
+                                                @if (!empty($update->files))
+                                                <strong>Files:</strong>
+                                                <ul>
+                                                    @foreach (json_decode($update->files, true) as $file)
+                                                    <li>
+                                                        <a href="{{ Storage::url($file) }}" target="_blank">View
+                                                            File</a>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                                @endif
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
                                 </div>
                             </li>
                             @endforeach

@@ -141,8 +141,20 @@ class CustomerController extends Controller
         $customer = Customer::findOrFail($customerId);
 
         // Update the customer's name
-        $customer->name = $request->input('customer_name');
+        $customer->first_name = $request->input('first_name');
+        $customer->last_name = $request->input('last_name');
+        $customer->phone_number = $request->input('phone_number');
+        $customer->email = $request->input('email');
+        $customer->alternate_number = $request->input('alternate_number');
+        $customer->date_of_birth = $request->input('date_of_birth');
+        $customer->gender = $request->input('gender');
+        $customer->insurance = $request->input('insurance');
+        $customer->allergy = $request->input('allergy'); // Add allergy or other fields as needed
         $customer->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Customer updated successfully');
+
 
         // Redirect back or to a success page
         return redirect()->back()->with('success', 'Customer updated successfully');
@@ -161,9 +173,9 @@ class CustomerController extends Controller
     public function customerActivity($customerId)
     {
         $customer = Customer::findOrFail($customerId);
-        // Assuming you have an Appointment model and a relationship defined
         $appointments = Appointment::where('customer_id', $customerId)
-            ->orderBy('appointment_date', 'desc') // Order by date
+            ->with('updates') // Load updates for each appointment
+            ->orderBy('appointment_date', 'asc')
             ->get();
 
         return view('customers.history', [

@@ -1,5 +1,8 @@
 <div class="modal-body">
     <form method="post" id="editCustomerForm">
+        @csrf
+        <input type="hidden" name="_method" value="PUT"> <!-- Simulate PUT request -->
+
         <div class="row">
             <div class="col">
                 <label for="customerFirstName" class="form-label">First Name</label>
@@ -68,12 +71,11 @@
 </div>
 
 
-
-<script>
+<scrip>
     function getCustomerModal(customer) {
     customer = JSON.parse(customer);
 
-    console.log('customer', customer)
+    console.log('customer', customer);
 
     // Populate the form fields with customer data
     $('#customerFirstName').val(customer.first_name || '');
@@ -83,10 +85,10 @@
     $('#alternateNumber').val(customer.alternate_number || '');
 
     if (customer.date_of_birth) {
-        const formattedDOB = new Date(customer.date_of_birth).toISOString().split('T')[0];
-        $('#dateOfBirth').val(formattedDOB);
+    const formattedDOB = new Date(customer.date_of_birth).toISOString().split('T')[0];
+    $('#dateOfBirth').val(formattedDOB);
     } else {
-        $('#dateOfBirth').val('');
+    $('#dateOfBirth').val('');
     }
 
     // Set gender
@@ -96,24 +98,22 @@
     initializeSelect2('#insurance', '{{ URL('/settings/insurance/list/search') }}', customer.insurance);
 
     // Set allergy fields
-    const allergy = customer.customer_profile?.allergy
+    const allergy = customer.customer_profile?.allergy;
     if (allergy) {
-        $('#allergiesCheckboxEdit').prop('checked', true);
-        $('.allergies-commentEdit').show();
-        $('#allergiesCommentEdit').val(allergy);
+    $('#allergiesCheckboxEdit').prop('checked', true);
+    $('.allergies-commentEdit').show();
+    $('#allergiesCommentEdit').val(allergy);
     } else {
-        $('#allergiesCheckboxEdit').prop('checked', false);
-        $('.allergies-commentEdit').hide();
+    $('#allergiesCheckboxEdit').prop('checked', false);
+    $('.allergies-commentEdit').hide();
     }
 
-    // Update the form action dynamically
-    var url = `{{ url('/customers/update/') }}/${customer.id}`;
+    // Update the form action dynamically to use the correct URL for the update
+    var url = `{{ url('/customers') }}/${customer.id}`; // Correct URL for the update route
     $('#editCustomerForm').attr('action', url);
 
     // Show the modal
     $('#editCustomerModal').modal('show');
-}
+    }
 
-
-
-</script>
+</scrip>

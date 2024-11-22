@@ -28,4 +28,10 @@ class AppointmentUpdate extends Model
     {
         return $this->belongsTo(Appointment::class);
     }
+
+
+    public function status()
+    {
+        return $this->belongsTo(AppointmentStatus::class, 'status_id');
+    }
 }

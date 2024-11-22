@@ -38,7 +38,8 @@ class AppointmentStatusController extends Controller
 
     public function getAppointmentStatus(Request $request)
     {
-        $data = AppointmentStatus::where('id', 1)->where('name', 'like', '%' . $request->searchItem . '%');
+        $data = AppointmentStatus::where('name', 'like', '%' . $request->searchItem . '%');
+
 
         return $data->paginate(10, ['*'], 'page', $request->page);
     }
