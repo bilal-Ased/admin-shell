@@ -65,20 +65,21 @@
 
 
    <script>
-      function updateAppointmentModal(customer) {
-         customer = JSON.parse(customer)
+      function updateAppointmentModal(appointment) {
+         appointment = JSON.parse(appointment)
 // Populate the form fields with customer data
-   $('#customerFirstName').val(customer.first_name);
-   $('#customerLastName').val(customer.last_name);
-   $('#customerPhoneNumber').val(customer.phone_number);
-   $('#customerEmail').val(customer.email);
-   $('#alternateNumber').val(customer.alternate_number || '');
-   $('#dateOfBirth').val(customer.date_of_birth || '');
-   $('#gender').val(customer.gender || '');
+   $('input[name="appointment_id"]').val(appointment.id);
+   $('#customerFirstName').val(appointment.first_name);
+   $('#customerLastName').val(appointment.last_name);
+   $('#customerPhoneNumber').val(appointment.phone_number);
+   $('#customerEmail').val(appointment.email);
+   $('#alternateNumber').val(appointment.alternate_number || '');
+   $('#dateOfBirth').val(appointment.date_of_birth || '');
+   $('#gender').val(appointment.gender || '');
 
 // If you want to update form action dynamically (optional)
 
-var url = `{{ url('/customers/update/') }}/${customer.id}`;
+var url = `{{ url('/customers/update/') }}/${appointment.id}`;
 
 
 $('#editCustomerForm').attr('action',);

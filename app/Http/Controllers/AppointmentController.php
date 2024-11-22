@@ -95,19 +95,20 @@ class AppointmentController extends Controller
     }
 
 
-
-
     public function storeUpdate(Request $request, $appointmentId)
     {
         $appointment = Appointment::findOrFail($appointmentId);
 
+        // Validate input
         $validated = $request->validate([
-            'worked_teeth' => 'nullable|string|max:255',
-            'comments' => 'nullable|string',
-            'files.*' => 'file|max:2048',
-            'status_id' => 'required|integer|exists:statuses,id',
+            'teeth' => 'nullable|array', // Expect an array of teeth IDs
+            'teeth.*' => 'integer',      // Validate each teeth ID is an integer
+            'comment' => 'nullable|string',
+            'files.*' => 'file|mimes:jpg,png,jpeg,gif,svg,pdf|max:2048', // Restrict mime types and size
+            'insurnace_status_id' => 'required|integer',
         ]);
 
+        // Process file uploads
         $files = [];
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
@@ -115,20 +116,23 @@ class AppointmentController extends Controller
             }
         }
 
+        // Create a new appointment update
         AppointmentUpdate::create([
             'appointment_id' => $appointment->id,
             'user_id' => Auth::id(),
             'update_date' => now(),
-            'worked_teeth' => $validated['worked_teeth'] ?? null,
-            'comments' => $validated['comments'] ?? null,
+            'worked_teeth' => implode(',', $validated['teeth'] ?? []), // Save teeth as CSV
+            'comments' => $validated['comment'] ?? null,
             'files' => !empty($files) ? json_encode($files) : null,
-            'status_id' => $validated['status_id'],
+            'status_id' => $validated['insurnace_status_id'],
         ]);
 
+        // Return response
         return $request->wantsJson()
             ? response()->json(['success' => true], 201)
             : redirect()->route('appointments.list')->with('success', 'Update added successfully!');
     }
+
 
     public function showEditModal($appointmentId)
     {

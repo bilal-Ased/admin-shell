@@ -48,13 +48,14 @@
     <!-- Tab Content -->
     <div class="tab-content mt-3" id="modalTabsContent">
         <div class="tab-pane fade show active" id="update-info" role="tabpanel" aria-labelledby="update-info-tab">
-            <form method="POST" enctype="multipart/form-data" id="patientForm">
+            <form method="POST" enctype="multipart/form-data" id="patientForm2">
                 @csrf
+                <input type="text" name="appointment_id">
                 <div class="col">
                     <div class="row">
                         <div class="col">
                             <label for="customerNumber" class="form-label">Status</label>
-                            <select id="selectDoctor" class="form-select" name="insurnace_status_id">
+                            <select name="insurnace_status_id" id="selectDoctor" class="form-select">
 
                             </select>
                         </div>
@@ -63,29 +64,17 @@
 
                         <div class="col">
                             <label for="teethSelect" class="form-label">Select Teeth</label>
-                            <select id="teethSelect" class="form-select" style="min-width: 150px;overflow:hidden"
-                                name="teeth[]" multiple>
+                            <select name="teeth[]" id="teethSelect" class="form-select"
+                                style="min-width: 150px;overflow:hidden" multiple>
                                 <!-- Options will be populated dynamically -->
                             </select>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="enterToothCheckbox" />
-                                <label class="form-check-label" for="enterToothCheckbox">
-                                    Enter Tooth/Teeth Worked On
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-
-                    <div class="row">
                         <div class="mb-3">
                             <label for="comment" class="form-label">Comment</label>
-                            <textarea class="form-control" id="comment" name="comment" rows="3"
+                            <textarea class="form-control" name="comment" id="comment" name="comment" rows="3"
                                 placeholder="Enter Comments here"></textarea>
                         </div>
                     </div>
@@ -93,7 +82,7 @@
                     <div class="row">
                         <div class="mb-3">
                             <label for="fileUpload" class="form-label">Upload File</label>
-                            <input type="file" class="form-control" id="fileUpload" name="file_upload">
+                            <input name="files[]" type="file" class="form-control" id="fileUpload">
                             <small class="form-text text-muted" id="fileName">No file chosen</small>
                         </div>
                     </div>
@@ -120,6 +109,41 @@
 <script>
     $(function() {
         initializeSelect2('#selectDoctor', '{{URL('settings/appointment-status/list')}}');
+
+        $('#patientForm2').on('submit',function(e){
+            e.preventDefault();
+    // Get the form's action attribute
+    const appointmentId = $(this).find('input[name="appointment_id"').val()
+    const action = `{{url('appointments/${appointmentId}/updates')}}`; 
+    
+    $('#patientForm2').on('submit', function(e) {
+    e.preventDefault();
+
+    // Get the form element
+    const form = $(this)[0];
+
+    // Create a FormData object to handle file and text data
+    const formData = new FormData(form);
+
+    // Submit the form using AJAX
+    $.ajax({
+        url: action,               // URL from the form's action attribute
+        type: 'POST',              // HTTP method
+        data: formData,            // FormData object with file and text data
+        processData: false,        // Prevent jQuery from automatically transforming the data into a query string
+        contentType: false,        // Ensure the proper content type is used for FormData
+        success: function(response) {
+            // Handle successful response
+            console.log('Form submitted successfully:', response);
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            console.error('Error submitting form:', status, error);
+        }
+    });
+});
+
+        })
     });
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -179,5 +203,7 @@
     }
     
 });
+
+
 
 </script>
