@@ -1,3 +1,46 @@
+<style>
+    .timeline {
+        position: relative;
+        padding: 2rem 0;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 30px;
+        width: 4px;
+        height: 100%;
+        background: #dee2e6;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin: 2rem 0;
+        padding-left: 60px;
+    }
+
+    .timeline-item .timeline-icon {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        width: 30px;
+        height: 30px;
+        background: #0d6efd;
+        border-radius: 50%;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .timeline-item .timeline-content {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
 <div class="card">
 
     <div class="card-body" id="customerBio">
@@ -54,24 +97,63 @@
 
                 <!-- History Tab Content -->
                 <div class="tab-pane fade" id="profile-history" role="tabpanel">
-                    <div style="overflow: hidden;">
-                        <table class="table table-striped" style="width: 100%; table-layout: fixed;">
-                            <thead>
-                                <tr>
-                                    <th style="width: 33%;">ID</th>
-                                    <th style="width: 33%;">Date</th>
-                                    <th style="width: 34%;">Doctor</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>AP-1010</td>
-                                    <td>System</td>
-                                    <td>Edinburgh</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- Timeline 1 - Bootstrap Brain Component -->
+                    <div class="container py-5">
+                        <div class="timeline">
+                            <!-- Timeline Item 1 -->
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="bi bi-check"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5>Step 1</h5>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt justo
+                                        eget ultricies fringilla.</p>
+                                    <span class="text-muted">Jan 1, 2023</span>
+                                </div>
+                            </div>
+                            <!-- Timeline Item 2 -->
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5>Step 2</h5>
+                                    <p>Aliquam erat volutpat. Praesent accumsan elit at nisi facilisis, non tincidunt
+                                        nulla consequat.</p>
+                                    <span class="text-muted">Feb 15, 2023</span>
+                                </div>
+                            </div>
+                            <!-- Timeline Item 3 -->
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5>Step 3</h5>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                        doloremque laudantium.</p>
+                                    <span class="text-muted">Mar 20, 2023</span>
+                                </div>
+                            </div>
+                            <!-- Timeline Item 4 -->
+                            <div class="timeline-item">
+                                <div class="timeline-icon">
+                                    <i class="bi bi-flag"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h5>Step 4</h5>
+                                    <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil
+                                        molestiae consequatur.</p>
+                                    <span class="text-muted">Apr 30, 2023</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Bootstrap JS and Icons -->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
                 </div>
 
             </div>

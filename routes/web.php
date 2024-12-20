@@ -5,6 +5,7 @@
 use App\Http\Controllers\AppointmentStatusController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IsuranceController;
+use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\Security\PermissionController;
 use App\Http\Controllers\Security\RoleController;
 use App\Http\Controllers\Security\RolePermission;
@@ -51,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     require __DIR__ . '/customers/customer.php';
     require __DIR__ . '/appointments/appointments_routes.php';
     require __DIR__ . '/tickets/tickets_routes.php';
+    require __DIR__  . '/whatsapp/whatsapp_routes.php';
     require __DIR__ . '/settings/settings.php';
 
     Route::get('/appointments/activity', [HomeController::class, 'getUserAppointments']);
@@ -69,6 +71,13 @@ Route::get('/statusChart', [HomeController::class, 'statusChart'])->name('menu-s
 Route::get('/view', [HomeController::class, 'view']);
 Route::get('/status-chart', [HomeController::class, 'statusChartView']);
 Route::get('/appointments-user', [HomeController::class, 'appointmentByUserChart']);
+
+
+Route::get('/user-input', function () {
+    return view('prescription.user_input');
+});
+
+Route::post('/generate-pdf', [PrescriptionController::class, 'generatePdf'])->name('generate-pdf');
 
 //App Details Page => 'special-pages'], function()
 Route::group(['prefix' => 'special-pages'], function () {

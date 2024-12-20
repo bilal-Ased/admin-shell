@@ -8,9 +8,12 @@ use App\Mail\AppointmentCreated;
 use App\Models\Appointment;
 use App\Models\AppointmentUpdate;
 use App\Models\Customer;
+use App\Services\WhatsAppService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
 
 class AppointmentController extends Controller
 {
@@ -29,7 +32,7 @@ class AppointmentController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, WhatsAppService $whatsappService)
     {
         $request->validate([
             'customer_id' => 'required',
@@ -41,16 +44,40 @@ class AppointmentController extends Controller
         $request['created_by'] = Auth::id();
         $request['status_id'] = Appointment::STATUS_Sheduled;
         $appointment = Appointment::create($request->all());
-
-
-
         Mail::to($appointment->user->email)->send(new AppointmentCreated($appointment));
-
-
         if ($request->has('send_email')) {
             // Send email to the customer if the checkbox is checked
             Mail::to($appointment->customer->email)->send(new AppointmentCreated($appointment));
         }
+
+        $phoneNumberUtil = PhoneNumberUtil::getInstance();
+        $formattedPhone = null;
+
+        try {
+            $numberProto = $phoneNumberUtil->parse($appointment->customer->phone_number, 'KE'); // Replace 'KE' with your default country code
+            $formattedPhone = $phoneNumberUtil->format($numberProto, PhoneNumberFormat::E164);
+        } catch (\Exception $e) {
+            \Log::error('Phone number formatting failed: ' . $e->getMessage());
+        }
+
+
+        // Send WhatsApp notification
+        if ($formattedPhone) {
+            try {
+                $whatsappService->sendAppointmentNotification(
+                    $formattedPhone, // Formatted phone number
+                    $appointment->customer->first_name,  // Customer's name
+                    $appointment->appointment_date,  // Customer's name
+                    $appointment->appointment_time   // Customer's name
+                );
+            } catch (\Exception $e) {
+                \Log::error('WhatsApp Notification Failed: ' . $e->getMessage());
+            }
+        } else {
+            \Log::error('Invalid phone number for WhatsApp notification.');
+        }
+
+
 
 
         return redirect()->route('appointments.list')->with('success', 'Appointment Created successfully!');

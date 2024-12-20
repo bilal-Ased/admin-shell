@@ -166,8 +166,9 @@
                                     <thead>
                                         <tr>
                                             <th>Customer Name</th>
+                                            <th>Status</th>
+                                            <th>Doctor</th>
                                             <th>Date</th>
-                                            <th>Created At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -179,11 +180,14 @@
                                                         {{ $fiveUpcomingAppointment->customer->last_name ?? null}}</h6>
                                                 </div>
                                             </td>
-                                            {{-- <td>{{ $topFiveTicket->ticketSources->name }}</td> --}}
+                                            <td>{{ $fiveUpcomingAppointment->status->name }}</td>
+                                            <td>{{ $fiveUpcomingAppointment->user->username }}</td>
+
+
                                             <td>
                                                 @php
                                                 $fiveUpcomingAppointment = new
-                                                DateTime($fiveUpcomingAppointment->created_at);
+                                                DateTime($fiveUpcomingAppointment->date);
                                                 $now = new DateTime();
                                                 $interval = $fiveUpcomingAppointment->diff($now);
 
@@ -208,10 +212,11 @@
 
                                                 echo rtrim($countdown). 'ago';
                                                 @endphp
+
                                             </td>
 
-
                                         </tr>
+
                                         @endforeach
                                     </tbody>
                                 </table>

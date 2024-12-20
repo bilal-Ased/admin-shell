@@ -6,6 +6,7 @@ use App\DataTables\CustomerDataTable;
 use App\Models\Appointment;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -60,7 +61,7 @@ class CustomerController extends Controller
             // Create the customer first
             $customer = Customer::create($customerData);
 
-            // Create the customer profile
+            // Create the customer profile+
             $profile = $customer->customerProfile()->create([
                 'customer_id' => $customer->id,
                 'allergy' => $request->input('allergy'),
@@ -169,18 +170,29 @@ class CustomerController extends Controller
         return redirect()->back()->with('success', 'Status changed successfully!');
     }
 
-
-    public function customerActivity($customerId)
+    public function customerActivity($encryptedCustomerId)
     {
-        $customer = Customer::findOrFail($customerId);
-        $appointments = Appointment::where('customer_id', $customerId)
-            ->with('updates') // Load updates for each appointment
-            ->orderBy('appointment_date', 'asc')
-            ->get();
+        try {
+            // Decrypt the customer ID
+            $customerId = Crypt::decrypt($encryptedCustomerId);
 
-        return view('customers.history', [
-            'customer' => $customer,
-            'appointments' => $appointments,
-        ]);
+            // Fetch the customer data
+            $customer = Customer::findOrFail($customerId);
+
+            // Fetch appointments for the customer
+            $appointments = Appointment::where('customer_id', $customerId)
+                ->with('updates') // Load related updates for appointments
+                ->orderBy('appointment_date', 'asc')
+                ->get();
+
+            // Return the view with data
+            return view('customers.history', [
+                'customer' => $customer,
+                'appointments' => $appointments,
+            ]);
+        } catch (\Exception $e) {
+            // Handle tampered or invalid ID
+            abort(404, 'Invalid customer link.');
+        }
     }
 }

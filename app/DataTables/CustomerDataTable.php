@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Crypt;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -29,7 +30,8 @@ class CustomerDataTable extends DataTable
                 $customerId = $query->id; // Assuming the customer ID is available in the query
 
                 // Create the link to the customer activity page
-                $link = route('customers.activity', ['id' => $customerId]);
+
+                $link = route('customers.activity', ['encryptedId' => Crypt::encrypt($customerId)]);
 
                 return '<div data-fullname="' . $fullName . '">' .
                     '<a href="' . $link . '">' .  // Link only around the avatar
@@ -68,9 +70,7 @@ class CustomerDataTable extends DataTable
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', 'customers.action')
-            ->addColumn('allergies', function ($query) {
-                return "felix aint a good coder";
-            })
+
             ->rawColumns(['action', 'status', 'full_name', 'allergies']);
     }
 
@@ -105,7 +105,6 @@ class CustomerDataTable extends DataTable
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'status', 'name' => 'status', 'title' => 'Status'],
             ['data' => 'phone_number', 'name' => 'phone_number', 'title' => 'Phone Number'],
-            ['data' => 'allergies', 'name' => 'allergies', 'title' => 'Phone'],
             Column::computed('action')->exportable(false)->printable(false)->searchable(false)->addClass('text-center'),
 
         ];

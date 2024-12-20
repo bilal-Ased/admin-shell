@@ -22,6 +22,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
         $userId = Auth::id();
         // $openTickets = Tickets::where('status_id', Tickets::STATUS_OPEN)->count();
         $myAppointments = Appointment::where('user_id', $userId)->count();
@@ -29,7 +30,7 @@ class HomeController extends Controller
         $appointmentsToday = Appointment::where('appointment_date', '=', Carbon::today())->count();
 
         $newCustomerCount = Customer::where('created_at', '>=', Carbon::now()->subDays(30))->count();
-        $fiveUpcomingAppointments = Appointment::with('customer')
+        $fiveUpcomingAppointments = Appointment::with('customer', 'user')
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
