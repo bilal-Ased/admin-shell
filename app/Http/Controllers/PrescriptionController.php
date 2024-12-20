@@ -15,9 +15,8 @@ class PrescriptionController extends Controller
 
         $pdf = Pdf::loadView('prescription.pdf_template', [
             'content' => $content,
-            'userName' => $user->username ?? 'Unknown',
+            'userName' => $user->username ?? 'Not A Doctor',
         ]);
-
         return $pdf->stream('document.pdf');
     }
 }
