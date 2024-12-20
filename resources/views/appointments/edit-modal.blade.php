@@ -42,6 +42,12 @@
                 History Info
             </a>
         </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="prescription-info-tab" data-bs-toggle="tab" href="#prescription-info" role="tab"
+                aria-controls="prescription-info" aria-selected="false">
+                Prescription
+            </a>
+        </li>
     </ul>
     <div style="height: 2px; background-color: #7DAFF1; margin-top: 10px; margin-bottom: 10px;"></div>
 
