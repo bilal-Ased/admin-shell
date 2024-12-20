@@ -4,16 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Customer;
-use App\Models\Material;
-use App\Models\Project;
-use App\Models\Tickets;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PHPUnit\Framework\Attributes\Ticket;
-use Spatie\Analytics\Facades\Analytics;
-use Spatie\Analytics\Period;
+
 
 class HomeController extends Controller
 {
