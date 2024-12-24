@@ -9,6 +9,7 @@ use App\Models\Appointment;
 use App\Models\AppointmentUpdate;
 use App\Models\Customer;
 use App\Services\WhatsAppService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -34,6 +35,8 @@ class AppointmentController extends Controller
 
     public function store(Request $request, WhatsAppService $whatsappService)
     {
+
+        // dd($request);
         $request->validate([
             'customer_id' => 'required',
             'appointment_date' => 'required',
@@ -43,6 +46,7 @@ class AppointmentController extends Controller
 
         $request['created_by'] = Auth::id();
         $request['status_id'] = Appointment::STATUS_Sheduled;
+        $request['appointment_time'] = Carbon::createFromFormat('h:i A', $request['appointment_time'])->format('H:i:s');
         $appointment = Appointment::create($request->all());
         Mail::to($appointment->user->email)->send(new AppointmentCreated($appointment));
         if ($request->has('send_email')) {

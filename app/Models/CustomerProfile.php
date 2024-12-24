@@ -9,7 +9,7 @@ class CustomerProfile extends Model
 {
     use HasFactory;
 
-    public $fillable = ['customer_id', 'allergy'];
+    public $fillable = ['customer_id', 'allergy', 'bleeding', 'heart_disease', 'drug_therapy', 'pregnancy'];
 
 
     public function customer()

@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->dateTime('date_of_birth')->nullable();
-            $table->string('gender')->nullable();
+        Schema::create('prescriptions', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->text('content');
+            $table->string('file_name');
+            $table->timestamps();
         });
     }
 
@@ -22,9 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->dropColumn('date_of_birth')->nullable();
-            $table->dropColumn('gender')->nullable();
-        });
+        Schema::dropIfExists('prescriptions');
     }
 };

@@ -130,7 +130,9 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary start">Submit</button>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary start">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -175,13 +177,16 @@
         ],
     });
 
-
     flatpickr(".timepicker", {
-        enableTime: true,       // Enable time picker
-        noCalendar: true,       // Disable calendar view
-        dateFormat: "H:i",      // 24-hour time format
-        time_24hr: true         // Use 24-hour format
-    });
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "h:i K", // Add 'K' for AM/PM format
+    defaultDate: new Date(), // Set the current time as default
+    time_24hr: false, // Set to false to enable AM/PM
+    minTime: "09:00", // Minimum time is 9:00 AM
+    maxTime: "17:00"  // Maximum time is 5:00 PM
+});
+
 
 });
 

@@ -1,10 +1,11 @@
+<!-- resources/views/prescription/pdf_template.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Document</title>
+    <title>Prescription PDF</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,21 +43,6 @@
             font-size: 14px;
             font-weight: bold;
         }
-
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            margin-right: 20px;
-        }
-
-        .details {
-            flex-grow: 1;
-            text-align: right;
-        }
     </style>
 </head>
 
@@ -73,7 +59,6 @@
     </div>
     <div class="content">
         {!! $content !!}
-        <!-- Render formatted content -->
     </div>
     <div class="footer">
         Dr. {{ $userName }}

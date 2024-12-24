@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->dateTime('date_of_birth')->nullable();
-            $table->string('gender')->nullable();
+        Schema::table('prescriptions', function (Blueprint $table) {
+            $table->unsignedBigInteger('customer_id');
         });
     }
 
@@ -22,9 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->dropColumn('date_of_birth')->nullable();
-            $table->dropColumn('gender')->nullable();
+        Schema::table('prescriptions', function (Blueprint $table) {
+            $table->dropColumn('customer_id');
         });
     }
 };

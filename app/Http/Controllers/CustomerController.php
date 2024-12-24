@@ -32,14 +32,9 @@ class CustomerController extends Controller
                 'regex:/^(?:\+254|0)(?:7|1)[0-9]{8}$/', // Validates Kenyan numbers
                 'unique:customers,phone_number', // Ensure phone number is unique in the 'customers' table
             ],
-            'alternate_number' => [
-                'nullable',
-                'regex:/^(?:\+254|0)(?:7|1)[0-9]{8}$/', // Optional, same Kenyan number validation
-            ],
-            'email' => 'required|email|unique:customers,email', // Email must be unique in the 'customers' table
+            'email' => 'nullable|email|unique:customers,email', // Email must be unique in the 'customers' table
             'status' => 'nullable|string|max:255',
-            'date_of_birth' => 'nullable|date',
-            'gender' => 'nullable', // Assuming gender is limited to specific values
+            'age' => 'nullable|integer',
         ]);
 
         if ($validator->fails()) {
@@ -49,15 +44,19 @@ class CustomerController extends Controller
             'first_name',
             'last_name',
             'phone_number',
-            'alternate_number',
             'email',
             'status',
-            'date_of_birth',
-            'gender'
+            'age',
         ]);
 
         // If allergy information is present, include it in the profile creation process
-        if ($request->filled('allergy')) {
+        if (
+            $request->filled('allergy') ||
+            $request->has('bleeding') ||
+            $request->has('heart_disease') ||
+            $request->has('drug_therapy') ||
+            $request->has('pregnancy')
+        ) {
             // Create the customer first
             $customer = Customer::create($customerData);
 
@@ -65,7 +64,14 @@ class CustomerController extends Controller
             $profile = $customer->customerProfile()->create([
                 'customer_id' => $customer->id,
                 'allergy' => $request->input('allergy'),
+                'bleeding' => $request->has('bleeding') ? 1 : 0, // Default to 0 if not checked
+                'heart_disease' => $request->has('heart_disease') ? 1 : 0,
+                'drug_therapy' => $request->has('drug_therapy') ? 1 : 0,
+                'pregnancy' => $request->has('pregnancy') ? 1 : 0,
             ]);
+
+
+
 
             // Update the customer record with the profile ID
             $customer->update([
@@ -104,8 +110,7 @@ class CustomerController extends Controller
                 $q->where('first_name', 'like', $searchTerm)
                     ->orWhere('last_name', 'like', $searchTerm)
                     ->orWhere('phone_number', 'like', $searchTerm)
-                    ->orWhere('email', 'like', $searchTerm)
-                    ->orWhere('alternate_number', 'like', $searchTerm);
+                    ->orWhere('email', 'like', $searchTerm);
             });
         }
 
@@ -134,6 +139,7 @@ class CustomerController extends Controller
     public function update(Request $request, $customerId)
     {
 
+
         // $request->validate([
         //     'customer_name' => 'required|string|max:255',
         // ]);
@@ -146,10 +152,9 @@ class CustomerController extends Controller
         $customer->last_name = $request->input('last_name');
         $customer->phone_number = $request->input('phone_number');
         $customer->email = $request->input('email');
-        $customer->alternate_number = $request->input('alternate_number');
-        $customer->date_of_birth = $request->input('date_of_birth');
-        $customer->gender = $request->input('gender');
-        $customer->insurance = $request->input('insurance');
+        // $customer->alternate_number = $request->input('alternate_number');
+        $customer->age = $request->input('age');
+        // $customer->gender = $request->input('gender');
         $customer->allergy = $request->input('allergy'); // Add allergy or other fields as needed
         $customer->save();
 

@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dateTime('date_of_birth')->nullable();
-            $table->string('gender')->nullable();
+            $table->dropColumn('date_of_birth');
+            $table->dropColumn('gender');
+            $table->dropColumn('alternate_number');
+            $table->integer('age')->nullable();
         });
     }
 
@@ -23,8 +25,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->dropColumn('date_of_birth')->nullable();
-            $table->dropColumn('gender')->nullable();
+            // Re-add the 'gender' column
+            $table->dateTime('date_of_birth');
+            $table->string('gender')->nullable();
+            $table->string('alternate_number')->nullable();
+            // Rename 'age' back to 'date_of_birth'
+            $table->dropColumn('age')->nullable();
         });
     }
 };

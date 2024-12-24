@@ -180,8 +180,10 @@
         </a>
         <ul class="sub-nav collapse" id="sidebar-table" data-bs-parent="#sidebar">
             <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('table.bootstraptable')) }}"
-                    href="{{ route('table.bootstraptable') }}">
+                {{-- <a class="nav-link {{ activeRoute(route('table.bootstraptable')) }}" --}} <a class="nav-link"
+                    onclick="window.location='/users'" style="cursor: pointer;">
+
+                    {{-- href="{{ route('table.bootstraptable') }}"> --}}
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                             <g>

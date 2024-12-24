@@ -1,37 +1,69 @@
+<!-- resources/views/prescription/form.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Input Form</title>
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <title>Prescription Form</title>
+    <script src="https://cdn.ckeditor.com/4.5.0/standard/ckeditor.js"></script>
     <style>
-        button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
 
-        button:hover {
+        .btn-primary {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
             background-color: #0056b3;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
         }
     </style>
 </head>
 
 <body>
-    <h1>Generate PDF with Formatting</h1>
-    <form action="{{ route('generate-pdf') }}" method="POST" target="_blank">
+    <form action="{{ route('generate-pdf', ['appointment_id' => $appointment_id]) }}" method="POST" target="_blank">
         @csrf
-        <textarea name="content" id="editor" placeholder="Enter your text here..."></textarea>
-        <button type="submit">Generate PDF</button>
+        <textarea name="content" id="editor" placeholder="Enter your prescription here..."></textarea>
+        <br>
+        <div>
+            <button type="submit" class="btn-primary">Save Prescription</button>
+        </div>
     </form>
 
+
+    @if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if($errors->any())
+    <div class="alert alert-danger">{{ $errors->first() }}</div>
+    @endif
+
     <script>
-        // Initialize CKEditor
         CKEDITOR.replace('editor');
     </script>
 </body>

@@ -14,11 +14,9 @@ class Customer extends Model
         'first_name',
         'last_name',
         'phone_number',
-        'alternate_number',
         'email',
         'status',
-        'date_of_birth',
-        'gender',
+        'age',
         'customer_profile_id',
     ];
 

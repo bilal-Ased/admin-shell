@@ -100,6 +100,7 @@ class CustomerDataTable extends DataTable
      */
     public function getColumns(): array
     {
+
         return [
             ['data' => 'full_name', 'name' => 'full_name', 'title' => 'FULL NAME', 'orderable' => true],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],

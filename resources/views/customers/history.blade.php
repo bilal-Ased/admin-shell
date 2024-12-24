@@ -35,7 +35,7 @@
                                             <strong>Time:</strong> {{
                                             \Carbon\Carbon::parse($appointment->appointment_time)->format('h:i A')
                                             }}<br>
-                                            <strong>Status:</strong> {{ $appointment->status_id }}<br>
+                                            <strong>Status:</strong> {{ $appointment->status->name }}<br>
                                         </p>
                                     </div>
                                     @if ($appointment->updates->isNotEmpty())

@@ -54,45 +54,44 @@
         </div>
         <div class="col"><br>
             <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required>
+            <input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
         </div>
     </div>
 
     <div class="row">
-        <div class="col"><br>
-            <label for="alternate_number" class="form-label">Alternate Number</label>
-            <input type="text" class="form-control" id="alternate_number" placeholder="Alternate Number"
-                name="alternate_number">
+        <div class="col-6"><br>
+            <label for="age" class="form-label">Age</label>
+            <input type="number" class="form-control" id="age" name="age">
         </div>
+        <div class="col-6"><br>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="bleedingCheckbox" name="bleeding">
+                <label class="form-check-label" for="bleedingCheckbox">Do you have any bleeding?</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="heartDiseaseCheckbox" name="heart_disease">
+                <label class="form-check-label" for="heartDiseaseCheckbox">Do you have any heart disease?</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="drugTherapyCheckbox" name="drug_therapy">
+                <label class="form-check-label" for="drugTherapyCheckbox">Are you on any Drug Therapy?</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="pregnancyCheckbox" name="pregnancy">
+                <label class="form-check-label" for="pregnancyCheckbox">Pregnancy?</label>
+            </div>
 
-        <div class="col"><br>
-            <label for="date_of_birth" class="form-label">Date of Birth</label>
-            <input type="date" class="form-control" id="customerInputdate" name="date_of_birth">
-        </div>
-    </div>
-
-
-
-    <div class="row">
-        <div class="col"><br>
-            <label for="gender" class="form-label">Gender</label>
-            <select class="form-select mb-3 shadow-none" name="gender">
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-            </select>
-        </div>
-
-        <div class="col"><br>
-            <label for="insurance" class="form-label">Insurance</label>
-            <select class="form-select mb-3 shadow-none" name="insurance" id="insurance"></select>
         </div>
     </div>
+
+
 
     <div class="mb-3">
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="allergiesCheckbox">
             <label class="form-check-label" for="allergiesCheckbox">Do you have any allergies?</label>
         </div>
+
         <textarea class="form-control allergies-comment" id="allergiesComment" name="allergy"
             placeholder="Please list your allergies here..."></textarea>
     </div>

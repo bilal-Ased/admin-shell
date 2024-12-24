@@ -90,10 +90,6 @@
                     </p>
                 </div>
 
-                <!-- Allergies Tab Content -->
-                <div class="tab-pane fade" id="profile-allergies" role="tabpanel">
-                    <p class="cardText">Hello</p>
-                </div>
 
                 <!-- History Tab Content -->
                 <div class="tab-pane fade" id="profile-history" role="tabpanel">
@@ -193,6 +189,9 @@
     } else {
         allergiesList.append('<li>No allergies listed</li>');
     }
+
+  
+
 
 }
 </script>

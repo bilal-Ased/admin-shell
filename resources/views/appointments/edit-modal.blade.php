@@ -42,6 +42,12 @@
                 History Info
             </a>
         </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="prescription-info-tab" data-bs-toggle="tab" href="#prescription-info" role="tab"
+                aria-controls="prescription-info" aria-selected="false">
+                Enter Prescription
+            </a>
+        </li>
     </ul>
     <div style="height: 2px; background-color: #7DAFF1; margin-top: 10px; margin-bottom: 10px;"></div>
 
@@ -104,6 +110,9 @@
             <li class="list-group-item"><b>Email:</b> johndoe@example.com</li>
             <li class="list-group-item"><b>Created At:</b> 2024-11-01</li>
         </ul>
+    </div>
+    <div class="tab-pane fade" id="prescription-info" role="tabpanel" aria-labelledby="prescription-info-tab">
+        @include('prescription.user_input')
     </div>
 </div>
 </div>
