@@ -95,7 +95,7 @@ class ticketsConfigsController extends Controller
     {
         $get_doctor = request()->get_doctor;
         $data = User::where('username', 'like', '%' . $request->searchItem . '%')
-            ->where('user_type', 'doctor') // Still filtering by user_type
+            ->where('user_type', 'Doctor') // Still filtering by user_type
             ->when($get_doctor, function ($q) use ($get_doctor) {
                 $q->where('user_type', $get_doctor); // Use the new variable here
             })->select('users.*', 'users.username as name', 'users.username as text');

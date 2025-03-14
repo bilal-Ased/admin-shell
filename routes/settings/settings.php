@@ -25,4 +25,4 @@ Route::group(['middleware' => 'role:admin'], function () {
 
 Route::get('/settings/all-doctors', [ticketsConfigsController::class, 'getDoctors']);
 Route::get('/settings/insurance/list/search', [IsuranceController::class, 'getInsurnace']);
-Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index'])->name('appointment-status.index');
+Route::get('/settings/appointment/status', [AppointmentStatusController::class, 'index'])->name('appointment-status.list');

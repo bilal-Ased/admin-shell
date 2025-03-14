@@ -51,11 +51,11 @@ class AppointmentsDataTable extends DataTable
                 // Check the status using the 'status_id' field
                 switch ($appointment->status_id) {
                     case 1:
-                        $statusClass = 'info'; // Scheduled
-                        $displayText = 'Scheduled';
+                        $statusClass = 'primary'; // Scheduled
+                        $displayText = 'Booked';
                         break;
                     case 2:
-                        $statusClass = 'success'; // Rescheduled
+                        $statusClass = 'info'; // Rescheduled
                         $displayText = 'Rescheduled';
                         break;
                     case 3:

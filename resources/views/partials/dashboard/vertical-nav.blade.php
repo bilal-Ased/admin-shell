@@ -180,8 +180,7 @@
         </a>
         <ul class="sub-nav collapse" id="sidebar-table" data-bs-parent="#sidebar">
             <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('table.bootstraptable')) }}"
-                    href="{{ route('table.bootstraptable') }}">
+                <a class="nav-link {{ activeRoute(url('/users')) }}" href="{{ url('/users') }}">
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                             <g>
@@ -191,19 +190,6 @@
                     </i>
                     <i class="sidenav-mini-icon"> B </i>
                     <span class="item-name">All Users</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('table.datatable')) }}" href="{{ route('table.datatable') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"> D </i>
-                    <span class="item-name">Datatable</span>
                 </a>
             </li>
         </ul>
@@ -245,7 +231,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('icons.outline')) }}" href="{{ route('icons.outline') }}">
+                <a class="nav-link {{ activeRoute(route('appointment-status.list')) }}" href="{{ route('appointment-status.list') }}">
                     <i class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
                             <g>
@@ -255,19 +241,6 @@
                     </i>
                     <i class="sidenav-mini-icon"> O </i>
                     <span class="item-name">Appointment Status</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ activeRoute(route('icons.dualtone')) }}" href="{{ route('icons.dualtone') }}">
-                    <i class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
-                            <g>
-                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
-                            </g>
-                        </svg>
-                    </i>
-                    <i class="sidenav-mini-icon"> D </i>
-                    <span class="item-name">Dual Tone</span>
                 </a>
             </li>
         </ul>
