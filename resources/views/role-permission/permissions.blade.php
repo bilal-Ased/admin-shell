@@ -3,16 +3,12 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h4 class="card-title mb-0">Role & Permission</h4>
+                    <h4 class="card-title mb-0">Role & Permission Management</h4>
                     <div>
-                        <button class="btn btn-primary" id="add-role-btn" data-bs-toggle="modal"
-                            data-bs-target="#addRoleModal">
-                            Add Role
-                        </button>
-                        <button class="btn btn-primary" id="add-permission-btn" data-bs-toggle="modal"
-                            data-bs-target="#addPermissionModal">
-                            Add Permission
-                        </button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoleModal">Add
+                            Role</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPermissionModal">Add
+                            Permission</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -22,11 +18,7 @@
                                 <tr>
                                     <th>Permission</th>
                                     @foreach ($roles as $role)
-                                    <th class="text-center">
-                                        {{ $role->name }}
-                                        <button class="btn btn-sm btn-warning edit-role-btn" data-id="{{ $role->id }}"
-                                            data-bs-toggle="tooltip" title="Edit Role">Edit</button>
-                                    </th>
+                                    <th class="text-center">{{ $role->name }}</th>
                                     @endforeach
                                 </tr>
                             </thead>
@@ -54,7 +46,9 @@
     <!-- Add Role Modal -->
     <div class="modal fade" id="addRoleModal" tabindex="-1">
         <div class="modal-dialog">
-            <form id="roleForm">
+            <form id="roleForm" method="POST" action="{{ route('role.store') }}">
+                @csrf
+                <!-- Add CSRF Token -->
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Add Role</h5>
@@ -62,6 +56,8 @@
                     <div class="modal-body">
                         <label for="roleName">Role Name</label>
                         <input type="text" class="form-control" id="roleName" name="name" required>
+                        <label for="roleName">Title</label>
+                        <input type="text" class="form-control" id="roleTitle" name="title" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>
@@ -72,10 +68,12 @@
         </div>
     </div>
 
+
     <!-- Add Permission Modal -->
     <div class="modal fade" id="addPermissionModal" tabindex="-1">
         <div class="modal-dialog">
-            <form id="permissionForm">
+            <form id="permissionForm" method="POST" action="{{ route('role.store') }}">
+                @csrf
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Add Permission</h5>
@@ -83,6 +81,10 @@
                     <div class="modal-body">
                         <label for="permissionName">Permission Name</label>
                         <input type="text" class="form-control" id="permissionName" name="name" required>
+                    </div>
+                    <div class="modal-body">
+                        <label for="permissionTitle">Permission Title</label>
+                        <input type="text" class="form-control" id="permissionTitle" name="title" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

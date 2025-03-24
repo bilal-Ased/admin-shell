@@ -25,7 +25,7 @@
     </li>
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
-            <span class="default-icon">Customers</span>
+            <span class="default-icon">Patients</span>
             <span class="mini-icon">-</span>
         </a>
     </li>
@@ -41,7 +41,7 @@
 
 
             </i>
-            <span class="item-name">Customers</span>
+            <span class="item-name">Patients</span>
             <i class="right-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -60,7 +60,7 @@
                         </svg>
                     </i>
                     <i class="sidenav-mini-icon"> B </i>
-                    <span class="item-name">Customers</span>
+                    <span class="item-name">Patients</span>
                 </a>
             </li>
 
@@ -147,6 +147,81 @@
 
 
 
+
+    <li>
+        <hr class="hr-horizontal">
+    </li>
+    <li class="nav-item static-item">
+        <a class="nav-link static-item disabled" href="#" tabindex="-1">
+            <span class="default-icon">Nurse Assessment</span>
+            <span class="mini-icon">-</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse" href="#sidebar-assessment-pages" role="button"
+            aria-expanded="false" aria-controls="sidebar-assessment-pages">
+            <i class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20">
+                    <path
+                        d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z"
+                        fill="currentColor" />
+                </svg>
+
+
+            </i>
+            <span class="item-name">Assessment</span>
+            <i class="right-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </i>
+        </a>
+        <ul class="sub-nav collapse" id="sidebar-assessment-pages" data-bs-parent="#sidebar">
+            <li class=" nav-item">
+                <a class="nav-link {{ activeRoute(route('assessment.create')) }}"
+                    href="{{ route('assessment.create') }}">
+                    <i class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                            <g>
+                                <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                            </g>
+                        </svg>
+                    </i>
+                    <i class="sidenav-mini-icon"> B </i>
+                    <span class="item-name">Create Assessment</span>
+                </a>
+            </li>
+        </ul>
+    <li class=" nav-item">
+        <a class="nav-link {{ activeRoute(route('appointments.list')) }}" href="{{ route('appointments.list') }}">
+            <i class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                    <g>
+                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                    </g>
+                </svg>
+            </i>
+            <i class="sidenav-mini-icon"> B </i>
+            <span class="item-name">Assessments </span>
+        </a>
+    </li>
+
+    <li class=" nav-item">
+        <a class="nav-link {{ activeRoute(route('my.appointments')) }}" href="{{ route('my.appointments') }}">
+            <i class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" viewBox="0 0 24 24" fill="currentColor">
+                    <g>
+                        <circle cx="12" cy="12" r="8" fill="currentColor"></circle>
+                    </g>
+                </svg>
+            </i>
+            <i class="sidenav-mini-icon"> B </i>
+            <span class="item-name">My Assessments</span>
+        </a>
+    </li>
+
+    </li>
     <li class="nav-item static-item">
         <a class="nav-link static-item disabled" href="#" tabindex="-1">
             <span class="default-icon">Settings</span>

@@ -8,7 +8,9 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
@@ -89,7 +91,6 @@ class CustomerController extends Controller
     public function editCustomer($customerId)
     {
         $customer = Customer::findOrFail($customerId);
-
         return view('customers.edit-modal', ['customer' => $customer]);
     }
 
@@ -101,7 +102,7 @@ class CustomerController extends Controller
         $perPage = $request->get('perPage', 10); // Results per page, default to 10
 
         // Initialize query
-        $query = Customer::query()->with('customerProfile'); // Include customer profiles (allergies)
+        $query = Customer::query()->with('customerProfile');
 
         // Search across multiple fields
         if ($searchReq) {
@@ -119,11 +120,7 @@ class CustomerController extends Controller
             ->take($perPage)
             ->get(['id', 'first_name', 'last_name', 'phone_number', 'email', 'created_at']); // Select needed columns
 
-        foreach ($customers as $customer) {
-            $customer->allergies = DB::table('customer_profiles')
-                ->where('customer_id', $customer->id)
-                ->pluck('allergy');
-        }
+
 
         $totalPages = ceil($totalCount / $perPage);
 
@@ -140,30 +137,54 @@ class CustomerController extends Controller
     {
 
 
-        // $request->validate([
-        //     'customer_name' => 'required|string|max:255',
-        // ]);
-
-        // Find the customer by ID
         $customer = Customer::findOrFail($customerId);
 
-        // Update the customer's name
-        $customer->first_name = $request->input('first_name');
-        $customer->last_name = $request->input('last_name');
-        $customer->phone_number = $request->input('phone_number');
-        $customer->email = $request->input('email');
-        // $customer->alternate_number = $request->input('alternate_number');
-        $customer->age = $request->input('age');
-        // $customer->gender = $request->input('gender');
-        $customer->allergy = $request->input('allergy'); // Add allergy or other fields as needed
-        $customer->save();
+        // Validate the input data
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'phone_number' => [
+                'required',
+                'regex:/^(?:\+254|0)(?:7|1)[0-9]{8}$/', // Validates Kenyan numbers
+                Rule::unique('customers', 'phone_number')->ignore($customer->id), // Allow same number for the current customer
+            ],
+            'email' => [
+                'nullable',
+                'email',
+                Rule::unique('customers', 'email')->ignore($customer->id), // Allow same email for the current customer
+            ],
+            'age' => 'nullable|integer',
+            'allergy' => 'nullable|string|max:1000',
+        ]);
 
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $customer->update($request->only(['first_name', 'last_name', 'phone_number', 'email', 'age']));
+
+
+        if ($customer->customerProfile) {
+            $customer->customerProfile->update([
+                'allergy' => $request->input('allergy'),
+                'bleeding' => $request->has('bleeding') ? 1 : 0,
+                'heart_disease' => $request->has('heart_disease') ? 1 : 0,
+                'drug_therapy' => $request->has('drug_therapy') ? 1 : 0,
+                'pregnancy' => $request->has('pregnancy') ? 1 : 0,
+            ]);
+        } else {
+            $customer->customerProfile()->create([
+                'allergy' => $request->input('allergy'),
+                'bleeding' => $request->has('bleeding') ? 1 : 0,
+                'heart_disease' => $request->has('heart_disease') ? 1 : 0,
+                'drug_therapy' => $request->has('drug_therapy') ? 1 : 0,
+                'pregnancy' => $request->has('pregnancy') ? 1 : 0,
+            ]);
+        }
+
+        Log::info('Request Data:', $request->all());
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Customer updated successfully');
-
-
-        // Redirect back or to a success page
-        return redirect()->back()->with('success', 'Customer updated successfully');
+        return redirect()->back()->with('success', 'Customer updated successfully!');
     }
 
     public function changeStatus($id)

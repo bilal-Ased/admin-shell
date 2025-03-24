@@ -47,7 +47,6 @@
         <img src="{{asset('images/brands/appointment.jpg')}}" id="customerBioImageHolder" alt="Image" />
         <div id="customerBioInner" style="display:none;">
             <div id="tabsContainer">
-
                 <ul class="nav nav-tabs" id="modalTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active" data-bs-toggle="tab" href="#profile-bio"" role=" tab"
@@ -87,6 +86,19 @@
                     </p>
                     <p class="cardText">
                         <b>Created At:</b> <span id="customerCreatedAt"></span>
+                    </p>
+
+                    <p class="cardText">
+                        <b>Bleeding:</b> <span id="customerBleedingStatus"></span>
+                    </p>
+                    <p class="cardText">
+                        <b>Heart Disease:</b> <span id="customerHeartDiseaseStatus"></span>
+                    </p>
+                    <p class="cardText">
+                        <b>Drug Therapy:</b> <span id="customerDrugTherapyStatus"></span>
+                    </p>
+                    <p class="cardText">
+                        <b>Pregnant:</b> <span id="customerPregnancyStatus"></span>
                     </p>
                 </div>
 
@@ -151,7 +163,9 @@
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
                 </div>
-
+                <div class="tab-pane fade" id="profile-allergies" role="tabpanel">
+                    <ul id="allergiesList"></ul>
+                </div>
             </div>
 
         </div>
@@ -165,11 +179,12 @@
             customer = JSON.parse(customer)
         }
 
+        console.log(customer);
         const customerBio = $('#customerBio')
         const customerBioImageHolder = customerBio.find('#customerBioImageHolder')
         const customerBioInner = customerBio.find('#customerBioInner')
-        const tabsContainer = $('#tabsContainer') // Select the tabs container
-
+        const tabsContainer = $('#tabsContainer') 
+        
         customerBioImageHolder.hide()
         customerBioInner.show()
         tabsContainer.show() // Show the tabs when a customer is selected
@@ -177,18 +192,34 @@
         customerBioInner.find('#customerName').text(customer.first_name + ' ' + customer.last_name)
         customerBioInner.find('#customerEmail').text(customer.email || 'No Email Address')
         customerBioInner.find('#customerPhone').text(customer.phone_number)
-        customerBioInner.find('#customerCreatedAt').text(customer.created_at)
+        const createdAt = new Date(customer.created_at);
+        const formattedDate = `${createdAt.getDate()} ${createdAt.toLocaleString('en-US', { month: 'long' })} ${createdAt.getFullYear()}`;
+        
+        const statuses = {
+        customerBleedingStatus: customer.customer_profile.bleeding === 1 ? "Yes" : "No",
+        customerHeartDiseaseStatus: customer.customer_profile.heart_disease === 1 ? "Yes" : "No",
+        customerDrugTherapyStatus: customer.customer_profile.drug_therapy === 1 ? "Yes" : "No",
+        customerPregnancyStatus: customer.customer_profile.pregnancy === 1 ? "Yes" : "No",
+    };
+
+        Object.entries(statuses).forEach(([id, status]) => {
+            customerBioInner.find(`#${id}`).text(status);
+        });
+
 
         const allergiesList = $('#profile-allergies');
-    allergiesList.empty(); // Clear previous entries
-
+        allergiesList.empty();
+    
     if (customer.allergies && customer.allergies.length > 0) {
+    
         customer.allergies.forEach(allergy => {
             allergiesList.append(`<li>${allergy}</li>`);
         });
     } else {
         allergiesList.append('<li>No allergies listed</li>');
     }
+
+
 
   
 

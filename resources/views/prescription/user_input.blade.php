@@ -45,7 +45,7 @@
 </head>
 
 <body>
-    <form action="{{ route('generate-pdf', ['appointment_id' => $appointment_id]) }}" method="POST" target="_blank">
+    <form action="{{ route('generate-pdf') }}" method="POST" target="_blank">
         @csrf
         <textarea name="content" id="editor" placeholder="Enter your prescription here..."></textarea>
         <br>

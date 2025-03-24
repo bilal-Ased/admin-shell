@@ -33,74 +33,134 @@
 
 <form action="{{ route('customers.store') }}" method="POST">
     @csrf
-    <div class="mb-3"></div>
+    <div class="modal-body">
+        <!-- Tabs -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="personal-contact-tab" data-toggle="tab" href="#personal-contact"
+                    role="tab" aria-controls="personal-contact" aria-selected="true">Personal & Contact Info</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="additional-tab" data-toggle="tab" href="#additional" role="tab"
+                    aria-controls="additional" aria-selected="false">Additional Info</a>
+            </li>
+        </ul>
 
-    <div class="row">
-        <div class="col">
-            <label for="first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" placeholder="First name" id="first_name" name="first_name" required>
-        </div>
-        <div class="col">
-            <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" placeholder="Last name" name="last_name" required>
+        <!-- Add a stylish line below the tabs -->
+        <hr class="my-4" style="border-top: 2px solid #ddd;">
+
+        <!-- Tab Contents -->
+        <div class="tab-content" id="myTabContent">
+            <!-- Personal & Contact Info Tab -->
+            <div class="tab-pane fade show active" id="personal-contact" role="tabpanel"
+                aria-labelledby="personal-contact-tab">
+                <div class="row">
+                    <div class="col">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" placeholder="First name" id="first_name"
+                            name="first_name" required>
+                    </div>
+                    <div class="col">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" placeholder="Last name" name="last_name"
+                            required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"><br>
+                        <label for="dob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" name="dob">
+                    </div>
+
+                    <div class="col"><br>
+                        <label for="marital_status" class="form-label">Marital Status</label>
+                        <input type="text" class="form-control" id="marital_status" placeholder="Marital Status"
+                            name="marital_status">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"><br>
+                        <label for="phone_number" class="form-label">Phone Number</label>
+                        <input type="number" class="form-control" placeholder="Phone Number" id="phone_number"
+                            name="phone_number" required>
+                    </div>
+                    <div class="col"><br>
+                        <label for="alternate_phone_number" class="form-label">Alternate Phone Number</label>
+                        <input type="number" class="form-control" placeholder="Alternate Phone Number"
+                            id="alternate_phone_number" name="alternate_phone_number">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"><br>
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
+                    </div>
+                    <div class="col-6"><br>
+                        <label for="referral_source" class="form-label">Referral Source</label>
+                        <input type="text" class="form-control" id="referral_source" name="referral_source">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Info Tab -->
+            <div class="tab-pane fade" id="additional" role="tabpanel" aria-labelledby="additional-tab">
+                <div class="row">
+                    <div class="col"><br>
+                        <label for="insurance_provider" class="form-label">Insurance Provider</label>
+                        <input type="text" class="form-control" id="insurance_provider" placeholder="Insurance Provider"
+                            name="insurance_provider">
+                    </div>
+                    <div class="col"><br>
+                        <label for="insurance_policy_number" class="form-label">Insurance Policy Number</label>
+                        <input type="text" class="form-control" id="insurance_policy_number" placeholder="Policy Number"
+                            name="insurance_policy_number">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"><br>
+                        <label for="primary_care_physician" class="form-label">Primary Care Physician</label>
+                        <input type="text" class="form-control" id="primary_care_physician" placeholder="Physician Name"
+                            name="primary_care_physician">
+                    </div>
+                    <div class="col"><br>
+                        <label for="emergency_contact_name" class="form-label">Emergency Contact Name</label>
+                        <input type="text" class="form-control" id="emergency_contact_name"
+                            placeholder="Emergency Contact" name="emergency_contact_name">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col"><br>
+                        <label for="emergency_contact_relation" class="form-label">Emergency Contact Relation</label>
+                        <input type="text" class="form-control" id="emergency_contact_relation" placeholder="Relation"
+                            name="emergency_contact_relation">
+                    </div>
+                    <div class="col"><br>
+                        <label for="emergency_contact_phone" class="form-label">Emergency Contact Phone</label>
+                        <input type="number" class="form-control" id="emergency_contact_phone"
+                            placeholder="Emergency Phone" name="emergency_contact_phone">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col"><br>
-            <label for="customerNumber" class="form-label">Phone Number</label>
-            <input type="number" class="form-control" placeholder="Phone Number" id="customerNumber" name="phone_number"
-                required>
-        </div>
-        <div class="col"><br>
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-6"><br>
-            <label for="age" class="form-label">Age</label>
-            <input type="number" class="form-control" id="age" name="age">
-        </div>
-        <div class="col-6"><br>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="bleedingCheckbox" name="bleeding">
-                <label class="form-check-label" for="bleedingCheckbox">Do you have any bleeding?</label>
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="heartDiseaseCheckbox" name="heart_disease">
-                <label class="form-check-label" for="heartDiseaseCheckbox">Do you have any heart disease?</label>
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="drugTherapyCheckbox" name="drug_therapy">
-                <label class="form-check-label" for="drugTherapyCheckbox">Are you on any Drug Therapy?</label>
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="pregnancyCheckbox" name="pregnancy">
-                <label class="form-check-label" for="pregnancyCheckbox">Pregnancy?</label>
-            </div>
-
-        </div>
-    </div>
-
-
-
-    <div class="mb-3">
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="allergiesCheckbox">
-            <label class="form-check-label" for="allergiesCheckbox">Do you have any allergies?</label>
-        </div>
-
-        <textarea class="form-control allergies-comment" id="allergiesComment" name="allergy"
-            placeholder="Please list your allergies here..."></textarea>
-    </div>
+    <!-- Add a line below the content -->
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
 </form>
+
+<!-- Bootstrap 4 JS (Make sure you include this for tabs to work) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
     $(function() {

@@ -37,6 +37,7 @@
             /* Border color on focus */
             box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25) !important;
             /* Subtle shadow on focus */
+
         }
 
         /* Style for the dropdown items */

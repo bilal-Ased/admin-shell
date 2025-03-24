@@ -38,8 +38,17 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //code here
+        $validated = $request->validate([
+            'name' => 'required|unique:permissions,name|max:255',
+            'title' => 'required|unique:permissions,name|max:255',
+        ]);
+
+        Permission::create([ 'name' => $request->input('name'),
+        'title' => $request->input('title')]);
+
+        return response()->json(['success' => true, 'message' => 'Permission created successfully.']);
     }
+
 
     /**
      * Display the specified resource.
@@ -82,4 +91,5 @@ class PermissionController extends Controller
     {
         //code here
     }
-}
+
+

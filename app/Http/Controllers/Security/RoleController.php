@@ -27,7 +27,7 @@ class RoleController extends Controller
     {
         $data = $request->all();
         $view = view('role-permission.form-role')->render();
-        return response()->json(['data' =>  $view, 'status'=> true]);
+        return response()->json(['data' =>  $view, 'status' => true]);
     }
 
     /**
@@ -38,7 +38,20 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-       //code here
+        $request->validate([
+            'name' => 'required|string|unique:roles,name|max:255',
+            'title' => 'required|string|unique:roles,name|max:255',
+        ]);
+
+        // Create the role
+        $role = Role::create([
+            'name' => $request->input('name'),
+            'title' => $request->input('title'),
+            'guard_name' => $request->input('guard_name', config('auth.defaults.guard')), // Default to guard defined in config
+        ]);
+
+        // Return a response
+        return response()->json(['success' => true, 'role' => $role], 200);
     }
 
     /**
@@ -49,7 +62,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-       //code here
+        //code here
     }
 
     /**
@@ -83,6 +96,6 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-       //code here
+        //code here
     }
 }

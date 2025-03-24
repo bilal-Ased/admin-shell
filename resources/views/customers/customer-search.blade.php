@@ -3,12 +3,12 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div style="position: relative;">
     <label class="form-label" for="customerSearch">Customer:</label>
-    <select id="customerId" name="customer_id" style="width: 100%;" onchange="selectCustomer(this)">
+    <select id="customerId" name="customer_id" style="width: 100%;  overflow-y: auto;" onchange="selectCustomer(this)">
         <!-- Options will be dynamically populated by Select2 -->
     </select>
     <button id="newCustomerBtn" class="btn btn-primary" type="button" style="position: absolute; right: 0; top: 0;"
         data-bs-toggle="modal" data-bs-target="#addCustomerModal">
-        <i class="fa-duotone fa-solid fa-user-plus fa-2xs"></i><!-- Font Awesome icon for adding -->
+        <i class="fa-duotone fa-solid fa-user-plus fa-2xs"></i>
     </button>
 </div>
 

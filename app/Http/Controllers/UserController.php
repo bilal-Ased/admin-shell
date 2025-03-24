@@ -75,6 +75,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // dd('here');
         $data = User::with('userProfile', 'roles')->findOrFail($id);
 
         $profileImage = getSingleMedia($data, 'profile_image');

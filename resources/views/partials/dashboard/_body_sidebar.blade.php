@@ -1,7 +1,7 @@
 <aside class="sidebar sidebar-default navs-rounded-all sidebar-base">
     <div class="sidebar-header d-flex align-items-center justify-content-start">
         <a href="{{route('dashboard')}}" class="navbar-brand">
-            <img src="{{ asset('images/auth/blue_sky_logo.JPG') }}" alt="Description of the image" width="170">
+            <img src="{{ asset('images/auth/logo.png') }}" alt="Description of the image" width="170">
 
 
             {{-- <svg width="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">

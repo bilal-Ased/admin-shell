@@ -11,16 +11,16 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class CustomerDataTable extends DataTable
+class PatientAssmentDataTable extends DataTable
 {
     /**
      * Build DataTable class.
      *
-     * @param  QueryBuilder  $query Results from query() method.
+     * @param QueryBuilder $query Results from query() method.
+     * @return \Yajra\DataTables\EloquentDataTable
      */
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
-
 
         return datatables()
             ->eloquent($query)
@@ -69,13 +69,16 @@ class CustomerDataTable extends DataTable
 
                 return $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->addColumn('action', 'customers.action')
+            ->addColumn('action', 'patient-assessment.action')
 
             ->rawColumns(['action', 'status', 'full_name', 'allergies']);
     }
 
     /**
      * Get query source of dataTable.
+     *
+     * @param \App\Models\PatientAssment $model
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Customer $model): QueryBuilder
     {
@@ -84,23 +87,34 @@ class CustomerDataTable extends DataTable
 
     /**
      * Optional method if you want to use html builder.
+     *
+     * @return \Yajra\DataTables\Html\Builder
      */
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->columns($this->getColumns());
-        // ->parameters([
-        //     'dom'          => 'Bfrtip',
-        //     'buttons'      => ['export'],
-        // ]);
+            ->setTableId('patientassment-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(1)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('create'),
+                Button::make('export'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
      * Get the dataTable columns definition.
+     *
+     * @return array
      */
     public function getColumns(): array
     {
-
         return [
             ['data' => 'full_name', 'name' => 'full_name', 'title' => 'FULL NAME', 'orderable' => true],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
@@ -113,9 +127,11 @@ class CustomerDataTable extends DataTable
 
     /**
      * Get filename for export.
+     *
+     * @return string
      */
     protected function filename(): string
     {
-        return 'Customer_' . date('YmdHis');
+        return 'PatientAssment_' . date('YmdHis');
     }
 }

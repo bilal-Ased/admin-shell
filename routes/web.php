@@ -47,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Users Module
     Route::resource('users', UserController::class);
+    // Route::get('/user/{id}', [UserController::class, 'show']);
+
 
     require __DIR__ . '/dashboard/dashboard.php';
     require __DIR__ . '/customers/customer.php';
@@ -54,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     require __DIR__ . '/tickets/tickets_routes.php';
     require __DIR__  . '/whatsapp/whatsapp_routes.php';
     require __DIR__ . '/settings/settings.php';
+    require __DIR__ . '/patient-assessment/patient-assessment_routes.php';
+    require __DIR__ . '/assessments/assessments.route.php';
 
     Route::get('/appointments/activity', [HomeController::class, 'getUserAppointments']);
 });
